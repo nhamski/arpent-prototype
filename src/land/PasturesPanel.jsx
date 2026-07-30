@@ -25,7 +25,7 @@ export default function PasturesPanel() {
   const [editing, setEditing] = useState(null);
   const [adding, setAdding] = useState(false);
   const [draft, setDraft] = useState(emptyPasture());
-  const [history] = useStoredState('arpent.pastureHistory', []);
+  const [history, setHistory] = useStoredState('arpent.pastureHistory', []);
 
   const list = pastures.length ? pastures : DEFAULT_PASTURES;
 
@@ -41,6 +41,11 @@ export default function PasturesPanel() {
     setAdding(false);
   };
 
+  const recordHistory = (pastureName, action) => {
+    const entry = { pasture: pastureName, action, date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) };
+    setHistory((prev) => [entry, ...prev].slice(0, 50));
+  };
+
   const saveDraft = () => {
     if (!draft.name.trim()) return;
     if (adding) {
@@ -49,8 +54,21 @@ export default function PasturesPanel() {
         DEFAULT_PASTURES.forEach((p) => add(p));
         add(draft);
       }
+      recordHistory(draft.name, 'Added pasture');
     } else if (editing) {
+      const prev = list.find((p) => p.id === editing);
       update(editing, draft);
+      if (prev && prev.resting !== draft.resting) {
+        recordHistory(draft.name, draft.resting ? 'Set to resting' : 'Resumed grazing');
+      } else if (prev && prev.head !== draft.head) {
+        recordHistory(draft.name, `Updated head count: ${prev.head} → ${draft.head}`);
+      } else if (prev && prev.grazeDays !== draft.grazeDays) {
+        recordHistory(draft.name, `Graze day ${draft.grazeDays} of ${draft.totalDays}`);
+      } else if (prev && prev.condition !== draft.condition) {
+        recordHistory(draft.name, `Condition changed to ${draft.condition}`);
+      } else {
+        recordHistory(draft.name, 'Updated');
+      }
     }
     setAdding(false);
     setEditing(null);
@@ -62,12 +80,14 @@ export default function PasturesPanel() {
   };
 
   const deletePasture = (id) => {
+    const target = list.find((p) => p.id === id);
     if (pastures.length === 0) {
       const init = DEFAULT_PASTURES.filter((p) => p.id !== id);
       init.forEach((p) => add(p));
     } else {
       remove(id);
     }
+    if (target) recordHistory(target.name, 'Removed pasture');
     setEditing(null);
   };
 

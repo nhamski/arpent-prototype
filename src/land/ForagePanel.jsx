@@ -3,16 +3,106 @@ import { computeCapacity } from '../engine/capacity.js';
 import { planRotation, seasonFromMonth } from '../engine/rotation.js';
 import { computeDepletion } from '../engine/depletion.js';
 import { recommendSpecies } from '../engine/recommendations.js';
-import { SPECIES_CATALOG } from '../engine/species.js';
+import { SPECIES_CATALOG, speciesIdForScientificName } from '../engine/species.js';
 import { useStoredState } from '../hooks/useStoredState.js';
 import { identifyPlant } from '../data/plantnetApi.js';
-import { speciesIdForScientificName } from '../engine/species.js';
 
 const SPECIES_LIST = Object.values(SPECIES_CATALOG).sort((a, b) => a.name.localeCompare(b.name));
 const num = (v) => { const n = parseFloat(String(v).replace(/,/g, '')); return Number.isFinite(n) && n >= 0 ? n : 0; };
 
 function emptyPoint() {
   return { id: Date.now(), speciesId: 'big_bluestem', height: 8, share: 0.5 };
+}
+
+function DepletionTracker() {
+  const [showDepletion, setShowDepletion] = useState(false);
+  const [entry, setEntry] = useState(2400);
+  const [exit, setExit] = useState(1200);
+  const [depAcres, setDepAcres] = useState(80);
+
+  const depletion = useMemo(() => {
+    if (entry <= 0 || depAcres <= 0) return null;
+    try { return computeDepletion(entry, exit, depAcres); }
+    catch { return null; }
+  }, [entry, exit, depAcres]);
+
+  if (!showDepletion) {
+    return (
+      <div style={{ marginTop: 24 }}>
+        <button className="act-btn outline" style={{ width: '100%', justifyContent: 'center' }} onClick={() => setShowDepletion(true)}>
+          Track Depletion (Entry/Exit)
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ marginTop: 24 }}>
+      <div className="sh">Depletion Tracker</div>
+      <p style={{ font: '400 14px/1.4 var(--sans)', color: 'var(--ink2)', marginBottom: 12 }}>
+        Compare forage standing before and after grazing to measure utilization.
+      </p>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginBottom: 12 }}>
+        <div className="field" style={{ margin: 0 }}>
+          <label>Entry (lb/ac)</label>
+          <input type="number" min="0" value={entry} onChange={(e) => setEntry(parseFloat(e.target.value) || 0)} />
+        </div>
+        <div className="field" style={{ margin: 0 }}>
+          <label>Exit (lb/ac)</label>
+          <input type="number" min="0" value={exit} onChange={(e) => setExit(parseFloat(e.target.value) || 0)} />
+        </div>
+        <div className="field" style={{ margin: 0 }}>
+          <label>Acres</label>
+          <input type="number" min="1" value={depAcres} onChange={(e) => setDepAcres(parseFloat(e.target.value) || 1)} />
+        </div>
+      </div>
+
+      {depletion && (
+        <div className="card" style={{ padding: 16 }}>
+          <div className="stat-row">
+            <div className="stat">
+              <div className="sl">Consumed</div>
+              <div className="sv">{depletion.consumedLbPerAcre.toLocaleString()} <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--ink2)' }}>lb/ac</span></div>
+            </div>
+            <div className="stat">
+              <div className="sl">Utilization</div>
+              <div className="sv" style={{ color: depletion.overTakeHalf ? 'var(--bad)' : 'var(--ok)' }}>
+                {Math.round(depletion.utilizationFraction * 100)}%
+              </div>
+            </div>
+            <div className="stat">
+              <div className="sl">AU-days</div>
+              <div className="sv">{depletion.auDaysConsumed}</div>
+            </div>
+          </div>
+          {depletion.notes.length > 0 && (
+            <div style={{ marginTop: 12 }}>
+              {depletion.notes.map((n, i) => (
+                <div key={i} style={{ font: '400 13px/1.4 var(--sans)', color: depletion.overTakeHalf ? 'var(--warn)' : 'var(--ink2)', marginTop: 4 }}>
+                  {n}
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="progress-bar" style={{ marginTop: 12 }}>
+            <div className="progress-fill" style={{
+              width: `${Math.min(Math.round(depletion.utilizationFraction * 100), 100)}%`,
+              background: depletion.overTakeHalf ? 'var(--bad)' : 'var(--ok)',
+            }} />
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4, font: '400 12px/1 var(--sans)', color: 'var(--ink3)' }}>
+            <span>0% (ungrazed)</span>
+            <span style={{ color: 'var(--warn)' }}>50% take-half</span>
+            <span>100%</span>
+          </div>
+        </div>
+      )}
+
+      <button className="act-btn outline" style={{ width: '100%', justifyContent: 'center', marginTop: 8 }} onClick={() => setShowDepletion(false)}>
+        Hide Depletion
+      </button>
+    </div>
+  );
 }
 
 export default function ForagePanel({ zip }) {
@@ -249,6 +339,8 @@ export default function ForagePanel({ zip }) {
           )}
         </>
       )}
+
+      <DepletionTracker />
 
       <div className="sh" style={{ marginTop: 24 }}>Species Recommendations</div>
       <p style={{ font: '400 14px/1.4 var(--sans)', color: 'var(--ink2)', marginBottom: 12 }}>
