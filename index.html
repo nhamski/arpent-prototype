@@ -44,7 +44,7 @@
 :root{
   --bg:#F6F2EA;--bg2:#FBF8F2;--bg3:#F0EBDF;
   --card:#FFFFFF;--line:#E4DCC9;--line2:#D8CCB4;
-  --ink:#241C14;--ink2:#6B6153;--ink3:#8C7F66;
+  --ink:#241C14;--ink2:#6B6153;--ink3:#635A48;
   --accent:#7A5230;--accent-hover:#5C4322;--rust:#C4763B;
   --ok:#3B4A24;--ok-bg:#E7EEDA;--ok-fill:#55643B;
   --warn:#6B5B32;--warn-bg:#EDE3C8;
@@ -76,7 +76,7 @@
 :root[data-theme="day"]{
   --bg:#F6F2EA;--bg2:#FBF8F2;--bg3:#F0EBDF;
   --card:#FFFFFF;--line:#E4DCC9;--line2:#D8CCB4;
-  --ink:#241C14;--ink2:#6B6153;--ink3:#8C7F66;
+  --ink:#241C14;--ink2:#6B6153;--ink3:#635A48;
   --accent:#7A5230;--accent-hover:#5C4322;--rust:#C4763B;
   --ok:#3B4A24;--ok-bg:#E7EEDA;--ok-fill:#55643B;
   --warn:#6B5B32;--warn-bg:#EDE3C8;
@@ -101,10 +101,10 @@ input,select{font:inherit}
   padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));
   background:var(--nav-bg);flex-shrink:0;position:relative;z-index:100}
 .topbar .brand{font:600 20px/1 var(--serif);color:#F6F2EA;letter-spacing:.02em}
-.topbar .proto{font:500 9px/1 var(--sans);color:var(--nav-muted);letter-spacing:.08em;
+.topbar .proto{font:500 11px/1 var(--sans);color:var(--nav-muted);letter-spacing:.08em;
   text-transform:uppercase;margin-left:10px;opacity:.7}
 .topbar .right{display:flex;align-items:center;gap:12px}
-.topbar .theme-btn{width:36px;height:36px;border-radius:50%;
+.topbar .theme-btn{width:44px;height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   color:var(--nav-text);transition:background .16s}
 .topbar .theme-btn:active{background:var(--nav-line)}
@@ -140,18 +140,18 @@ input,select{font:inherit}
   padding:8px 4px 4px;color:var(--nav-text);transition:color .16s}
 .bnav button.on{color:#F6F2EA}
 .bnav button.on .nav-dot{opacity:1}
-.bnav svg.ni{width:24px;height:24px;flex-shrink:0}
-.bnav .nl{font:600 10px/1 var(--sans);letter-spacing:.02em}
-.nav-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);
+.bnav svg.ni{width:26px;height:26px;flex-shrink:0}
+.bnav .nl{font:600 13px/1 var(--sans);letter-spacing:.02em}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
   opacity:0;transition:opacity .16s;margin-top:-1px}
 
 /* ── Components ── */
 /* Tiles */
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
 .tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
-.tile .tl{font:500 11px/1 var(--sans);color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.tile .tl{font:500 13px/1 var(--sans);color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
 .tile .tv{font:600 24px/1 var(--serif);color:var(--ink)}
-.tile .ts{font:400 12px/1.3 var(--sans);color:var(--ink2);margin-top:4px}
+.tile .ts{font:400 14px/1.3 var(--sans);color:var(--ink2);margin-top:4px}
 .tile-dark{background:var(--nav-bg);border-color:var(--nav-line)}
 .tile-dark .tl{color:var(--nav-muted)}
 .tile-dark .tv{color:#F6F2EA}
@@ -161,15 +161,15 @@ input,select{font:inherit}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   padding:16px 18px;margin-bottom:12px}
 .card-title{font:600 16px/1.2 var(--serif);color:var(--ink);margin-bottom:8px}
-.card-sub{font:400 13px/1.4 var(--sans);color:var(--ink2)}
+.card-sub{font:400 15px/1.4 var(--sans);color:var(--ink2)}
 
 /* Section headers */
 .sh{font:600 18px/1.2 var(--serif);color:var(--ink);margin:24px 0 12px}
 .sh:first-child{margin-top:0}
 
 /* Badges/pills */
-.pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;
-  font:600 11px/1 var(--sans);letter-spacing:.02em}
+.pill{display:inline-flex;align-items:center;padding:6px 12px;border-radius:20px;
+  font:600 13px/1 var(--sans);letter-spacing:.02em}
 .pill-ok{background:var(--ok-bg);color:var(--ok)}
 .pill-warn{background:var(--warn-bg);color:var(--warn)}
 .pill-bad{background:var(--bad-bg);color:var(--bad)}
@@ -191,8 +191,8 @@ input,select{font:inherit}
 .feed-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
 .feed-item:last-child{border-bottom:none}
 .feed-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0}
-.feed-text{font:400 13.5px/1.5 var(--sans);color:var(--ink)}
-.feed-time{font:400 12px/1 var(--sans);color:var(--ink3);margin-top:4px}
+.feed-text{font:400 15px/1.5 var(--sans);color:var(--ink)}
+.feed-time{font:400 14px/1 var(--sans);color:var(--ink3);margin-top:4px}
 
 /* Animal rows */
 .animal-row{display:flex;align-items:center;gap:12px;padding:14px 16px;
@@ -200,13 +200,13 @@ input,select{font:inherit}
 .animal-avatar{width:40px;height:40px;border-radius:8px;background:var(--bg3);flex-shrink:0;
   display:flex;align-items:center;justify-content:center;font:600 14px/1 var(--sans);color:var(--ink3)}
 .animal-info{flex:1;min-width:0}
-.animal-tag{font:600 14px/1.2 var(--sans);color:var(--ink)}
-.animal-meta{font:400 12px/1.3 var(--sans);color:var(--ink2);margin-top:2px}
+.animal-tag{font:600 15px/1.2 var(--sans);color:var(--ink)}
+.animal-meta{font:400 14px/1.3 var(--sans);color:var(--ink2);margin-top:2px}
 .animal-badge{flex-shrink:0}
 
 /* Filter chips */
 .filters{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
-.filt{padding:7px 14px;border-radius:20px;font:500 13px/1 var(--sans);
+.filt{padding:12px 20px;border-radius:20px;font:600 16px/1 var(--sans);
   background:var(--card);color:var(--ink2);border:1px solid var(--line);transition:all .16s}
 .filt.on{background:var(--accent);color:#F6F2EA;border-color:var(--accent)}
 
@@ -215,13 +215,13 @@ input,select{font:inherit}
   padding:18px;margin-bottom:12px}
 .pasture-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
 .pasture-name{font:600 17px/1.2 var(--serif);color:var(--ink)}
-.pasture-detail{font:400 13px/1.4 var(--sans);color:var(--ink2);margin-bottom:8px}
-.progress-bar{height:6px;border-radius:3px;background:var(--bg3);overflow:hidden;margin:10px 0}
-.progress-fill{height:100%;border-radius:3px;background:var(--ok-fill);transition:width .3s}
+.pasture-detail{font:400 15px/1.4 var(--sans);color:var(--ink2);margin-bottom:8px}
+.progress-bar{height:10px;border-radius:5px;background:var(--bg3);overflow:hidden;margin:10px 0}
+.progress-fill{height:100%;border-radius:5px;background:var(--ok-fill);transition:width .3s}
 
 /* Hero result card */
 .hero-card{background:var(--nav-bg);border-radius:12px;padding:24px;text-align:center;margin-bottom:20px}
-.hero-label{font:500 11px/1 var(--sans);color:var(--nav-muted);text-transform:uppercase;letter-spacing:.5px}
+.hero-label{font:500 14px/1 var(--sans);color:var(--nav-muted);text-transform:uppercase;letter-spacing:.5px}
 .hero-value{font:600 42px/1.1 var(--serif);color:#F6F2EA;margin:8px 0}
 .hero-sub{font:400 14px/1.3 var(--sans);color:var(--nav-text)}
 .hero-value .unit{font-size:20px;font-weight:400;color:var(--nav-text);margin-left:2px}
@@ -235,7 +235,7 @@ input,select{font:inherit}
 /* Stat row */
 .stat-row{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
 .stat{flex:1;min-width:80px}
-.stat .sl{font:500 11px/1 var(--sans);color:var(--ink3);text-transform:uppercase;letter-spacing:.4px}
+.stat .sl{font:500 13px/1 var(--sans);color:var(--ink3);text-transform:uppercase;letter-spacing:.4px}
 .stat .sv{font:600 18px/1 var(--serif);color:var(--ink);margin-top:4px}
 
 /* Scan steps */
@@ -244,8 +244,8 @@ input,select{font:inherit}
 .scan-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#F6F2EA;
   display:flex;align-items:center;justify-content:center;font:700 13px/1 var(--sans);flex-shrink:0}
 .scan-body{flex:1}
-.scan-title{font:600 14px/1.2 var(--sans);color:var(--ink);margin-bottom:4px}
-.scan-desc{font:400 13px/1.4 var(--sans);color:var(--ink2)}
+.scan-title{font:600 15px/1.2 var(--sans);color:var(--ink);margin-bottom:4px}
+.scan-desc{font:400 15px/1.4 var(--sans);color:var(--ink2)}
 
 /* Capture button */
 .capture-btn{width:100%;padding:20px;border-radius:var(--r);border:2px dashed var(--line2);
@@ -258,25 +258,25 @@ input,select{font:inherit}
 .lot-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   padding:14px 16px;margin-bottom:10px}
 .lot-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.lot-num{font:600 14px/1 var(--sans);color:var(--ink)}
-.lot-detail{font:400 13px/1.3 var(--sans);color:var(--ink2)}
-.lot-result{font:600 13px/1 var(--sans);margin-top:8px}
+.lot-num{font:600 15px/1 var(--sans);color:var(--ink)}
+.lot-detail{font:400 15px/1.3 var(--sans);color:var(--ink2)}
+.lot-result{font:600 15px/1 var(--sans);margin-top:8px}
 
 /* Timing heatmap table */
 .timing-table{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   overflow:hidden;margin-bottom:16px}
 .timing-thead{display:flex;justify-content:space-between;padding:10px 16px;
-  border-bottom:1px solid var(--line);font:500 10px/1 var(--sans);
+  border-bottom:1px solid var(--line);font:500 13px/1 var(--sans);
   color:var(--ink3);text-transform:uppercase;letter-spacing:.5px}
 .timing-row{padding:12px 16px;border-bottom:1px solid var(--line)}
 .timing-row:last-child{border-bottom:none}
-.timing-row-name{font:500 13px/1 var(--sans);color:var(--ink);margin-bottom:8px}
+.timing-row-name{font:500 15px/1 var(--sans);color:var(--ink);margin-bottom:8px}
 .timing-row-data{display:flex;flex-direction:column;gap:8px}
 .timing-heatmap{display:flex;gap:2px;flex:1;min-width:0}
 .hm{flex:1;height:24px;border-radius:3px;min-width:0;position:relative}
-.timing-heatmap{padding-bottom:16px}
-.hm::after{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
-  font:500 9px/1 var(--sans);color:var(--ink3)}
+.timing-heatmap{padding-bottom:20px}
+.hm::after{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);
+  font:500 12px/1 var(--sans);color:var(--ink3)}
 .hm:nth-child(1)::after{content:'J'}.hm:nth-child(2)::after{content:'F'}
 .hm:nth-child(3)::after{content:'M'}.hm:nth-child(4)::after{content:'A'}
 .hm:nth-child(5)::after{content:'M'}.hm:nth-child(6)::after{content:'J'}
@@ -286,38 +286,38 @@ input,select{font:inherit}
 .hm-1{background:#9E5040}.hm-2{background:#C4876E}
 .hm-3{background:#C5B99E}.hm-4{background:#97A472}.hm-5{background:#5E7038}
 .timing-signals{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.pill-sell{background:var(--ok-bg);color:var(--ok);font:600 10px/1 var(--sans);
-  padding:4px 8px;border-radius:4px;white-space:nowrap}
-.pill-buy{background:var(--bad-bg);color:var(--bad);font:600 10px/1 var(--sans);
-  padding:4px 8px;border-radius:4px;white-space:nowrap}
-.timing-now{font:500 11px/1 var(--sans);color:var(--ink2);white-space:nowrap}
+.pill-sell{background:var(--ok-bg);color:var(--ok);font:600 14px/1 var(--sans);
+  padding:6px 12px;border-radius:6px;white-space:nowrap}
+.pill-buy{background:var(--bad-bg);color:var(--bad);font:600 14px/1 var(--sans);
+  padding:6px 12px;border-radius:6px;white-space:nowrap}
+.timing-now{font:500 14px/1 var(--sans);color:var(--ink2);white-space:nowrap}
 .timing-now-hi{color:var(--ok)}
 .timing-now-lo{color:var(--bad)}
-.timing-disc{font:400 12px/1.5 var(--sans);color:var(--ink3);margin:16px 0}
+.timing-disc{font:400 14px/1.5 var(--sans);color:var(--ink3);margin:16px 0}
 
 /* Timing category */
 .timing-cat{display:flex;align-items:center;gap:8px;margin:18px 0 10px}
 .timing-cat:first-of-type{margin-top:0}
-.timing-cat-label{font:600 15px/1 var(--sans);color:var(--ink)}
+.timing-cat-label{font:600 17px/1 var(--sans);color:var(--ink)}
 
 /* Barn card */
 .barn-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   padding:14px 16px;margin-bottom:10px}
-.barn-name{font:600 15px/1.2 var(--sans);color:var(--ink)}
-.barn-meta{font:400 13px/1.3 var(--sans);color:var(--ink2);margin-top:4px}
+.barn-name{font:600 16px/1.2 var(--sans);color:var(--ink)}
+.barn-meta{font:400 15px/1.3 var(--sans);color:var(--ink2);margin-top:4px}
 
 /* Budget bar */
 .budget{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   padding:16px;margin-bottom:16px}
 .budget-header{display:flex;justify-content:space-between;margin-bottom:8px}
-.budget-label{font:500 12px/1 var(--sans);color:var(--ink2);text-transform:uppercase;letter-spacing:.4px}
-.budget-val{font:600 14px/1 var(--sans);color:var(--ink)}
-.budget-bar{height:8px;border-radius:4px;background:var(--bg3);overflow:hidden}
+.budget-label{font:500 14px/1 var(--sans);color:var(--ink2);text-transform:uppercase;letter-spacing:.4px}
+.budget-val{font:600 15px/1 var(--sans);color:var(--ink)}
+.budget-bar{height:10px;border-radius:5px;background:var(--bg3);overflow:hidden}
 .budget-fill{height:100%;border-radius:4px;background:var(--ok-fill);transition:width .3s}
 
 /* Cost summary */
 .cost-row{display:flex;justify-content:space-between;padding:12px 0;
-  border-bottom:1px solid var(--line);font:400 14px/1 var(--sans)}
+  border-bottom:1px solid var(--line);font:400 15px/1 var(--sans)}
 .cost-row:last-child{border-bottom:none}
 .cost-label{color:var(--ink2)}
 .cost-val{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
@@ -326,15 +326,15 @@ input,select{font:inherit}
 .health-entry{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   padding:14px 16px;margin-bottom:10px}
 .health-head{display:flex;justify-content:space-between;align-items:flex-start}
-.health-animal{font:600 14px/1.2 var(--sans);color:var(--ink)}
-.health-treatment{font:400 13px/1.3 var(--sans);color:var(--ink2);margin-top:4px}
-.health-date{font:400 12px/1 var(--sans);color:var(--ink3);margin-top:6px}
+.health-animal{font:600 15px/1.2 var(--sans);color:var(--ink)}
+.health-treatment{font:400 15px/1.3 var(--sans);color:var(--ink2);margin-top:4px}
+.health-date{font:400 14px/1 var(--sans);color:var(--ink3);margin-top:6px}
 
 /* Breeding */
 .breed-entry{display:flex;align-items:center;gap:12px;background:var(--card);
   border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-bottom:10px}
 .breed-date-box{width:48px;text-align:center;flex-shrink:0}
-.breed-month{font:600 11px/1 var(--sans);color:var(--accent);text-transform:uppercase}
+.breed-month{font:600 13px/1 var(--sans);color:var(--accent);text-transform:uppercase}
 .breed-day{font:600 22px/1 var(--serif);color:var(--ink)}
 .breed-info{flex:1}
 
@@ -345,7 +345,7 @@ input,select{font:inherit}
 
 /* Input fields */
 .field{margin-bottom:14px}
-.field label{display:block;font:500 12px/1 var(--sans);color:var(--ink2);
+.field label{display:block;font:500 14px/1 var(--sans);color:var(--ink2);
   text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
 .field input,.field select{width:100%;min-height:48px;padding:10px 12px;
   border:1px solid var(--line2);border-radius:var(--r-sm);font-size:16px;
@@ -354,16 +354,16 @@ input,select{font:inherit}
 /* Condition cards */
 .cond-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   padding:16px 18px;margin-bottom:12px}
-.cond-label{font:500 11px/1 var(--sans);color:var(--ink3);text-transform:uppercase;
+.cond-label{font:500 14px/1 var(--sans);color:var(--ink3);text-transform:uppercase;
   letter-spacing:.5px;margin-bottom:6px}
 .cond-value{font:600 20px/1.2 var(--serif);color:var(--ink)}
-.cond-note{font:400 13px/1.3 var(--sans);color:var(--ink2);margin-top:6px}
+.cond-note{font:400 15px/1.3 var(--sans);color:var(--ink2);margin-top:6px}
 
 /* Rotation display */
 .rot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
 .rot-stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px;text-align:center}
 .rot-num{font:600 28px/1 var(--serif);color:var(--accent)}
-.rot-label{font:500 11px/1 var(--sans);color:var(--ink3);text-transform:uppercase;
+.rot-label{font:500 14px/1 var(--sans);color:var(--ink3);text-transform:uppercase;
   letter-spacing:.4px;margin-top:6px}
 
 /* Month selector */
@@ -371,7 +371,7 @@ input,select{font:inherit}
   padding:2px 0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   padding:4px}
 .month-sel::-webkit-scrollbar{display:none}
-.month-btn{flex:1;padding:8px 4px;border-radius:7px;font:600 11px/1 var(--sans);
+.month-btn{flex:1;padding:12px 6px;border-radius:7px;font:600 13px/1 var(--sans);
   color:var(--ink3);background:transparent;border:none;min-width:0;text-align:center;
   transition:all .15s ease}
 .month-btn:active{transform:scale(.95)}
@@ -454,7 +454,7 @@ input,select{font:inherit}
       </div>
 
       <div class="tile-dark card" style="margin-bottom:20px;padding:18px 20px">
-        <div class="tl" style="color:var(--nav-muted);font:500 11px/1 var(--sans);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Market Position</div>
+        <div class="tl" style="color:var(--nav-muted);font:500 13px/1 var(--sans);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Market Position</div>
         <div style="display:flex;align-items:baseline;gap:8px">
           <span style="font:600 28px/1 var(--serif);color:#F6F2EA">$192</span>
           <span style="font:400 14px/1 var(--sans);color:var(--nav-text)">/cwt</span>
@@ -550,7 +550,7 @@ input,select{font:inherit}
         </div>
         <span class="pill pill-ok">Active</span>
       </div>
-      <div style="text-align:center;padding:16px;color:var(--ink3);font:400 13px/1 var(--sans)">Showing 5 of 281 · scroll for more</div>
+      <div style="text-align:center;padding:16px;color:var(--ink3);font:400 15px/1 var(--sans)">Showing 5 of 281 · scroll for more</div>
     </section>
 
     <!-- ═══ HERD: HEALTH ═══ -->
@@ -658,8 +658,8 @@ input,select{font:inherit}
         <div class="pasture-detail">80 acres · 45 head · Condition: Good</div>
         <div class="progress-bar"><div class="progress-fill" style="width:86%"></div></div>
         <div style="display:flex;gap:8px;margin-top:10px">
-          <button class="act-btn" style="padding:8px 16px;font-size:13px;flex:1">Move Herd</button>
-          <button class="act-btn outline" style="padding:8px 16px;font-size:13px;flex:1" onclick="go('land','scan')">Scan</button>
+          <button class="act-btn" style="padding:12px 16px;font-size:15px;flex:1">Move Herd</button>
+          <button class="act-btn outline" style="padding:12px 16px;font-size:15px;flex:1" onclick="go('land','scan')">Scan</button>
         </div>
       </div>
       <div class="pasture-card">
@@ -691,7 +691,7 @@ input,select{font:inherit}
     <!-- ═══ LAND: SCAN ═══ -->
     <section class="scr" id="land-scan">
       <div class="sh" style="margin-top:0">Grazing Plan</div>
-      <p style="font:400 14px/1.5 var(--sans);color:var(--ink2);margin-bottom:16px">
+      <p style="font:400 15px/1.5 var(--sans);color:var(--ink2);margin-bottom:16px">
         Photograph a pasture, tap to measure, get a conservative grazing capacity analysis.
       </p>
 
@@ -730,9 +730,9 @@ input,select{font:inherit}
       </div>
 
       <div class="stat-row">
-        <div class="stat"><div class="sl">Usable forage</div><div class="sv">1,840 <span style="font-size:12px;font-weight:400;color:var(--ink2)">lb/ac</span></div></div>
+        <div class="stat"><div class="sl">Usable forage</div><div class="sv">1,840 <span style="font-size:14px;font-weight:400;color:var(--ink2)">lb/ac</span></div></div>
         <div class="stat"><div class="sl">AU-days/acre</div><div class="sv">70</div></div>
-        <div class="stat"><div class="sl">Drought</div><div class="sv">D1 <span style="font-size:12px;font-weight:400;color:var(--ink2)">−10%</span></div></div>
+        <div class="stat"><div class="sl">Drought</div><div class="sv">D1 <span style="font-size:14px;font-weight:400;color:var(--ink2)">−10%</span></div></div>
       </div>
 
       <div class="card" style="margin-top:12px">
@@ -745,7 +745,7 @@ input,select{font:inherit}
         </div>
       </div>
 
-      <p style="font:400 12px/1.4 var(--sans);color:var(--ink3);margin-top:16px;text-align:center">
+      <p style="font:400 14px/1.4 var(--sans);color:var(--ink3);margin-top:16px;text-align:center">
         Conservative by design — numbers round down and apply a safety buffer.
       </p>
     </section>
@@ -753,7 +753,7 @@ input,select{font:inherit}
     <!-- ═══ LAND: ROTATION ═══ -->
     <section class="scr" id="land-rotation">
       <div class="sh" style="margin-top:0">Rotation Planner</div>
-      <p style="font:400 14px/1.5 var(--sans);color:var(--ink2);margin-bottom:16px">
+      <p style="font:400 15px/1.5 var(--sans);color:var(--ink2);margin-bottom:16px">
         Plan paddock rotations from known forage data — no photo needed.
       </p>
       <div class="field">
@@ -785,7 +785,7 @@ input,select{font:inherit}
       <div class="card" style="margin-top:4px">
         <div style="display:flex;align-items:center;gap:8px">
           <span class="pill pill-ok">Feasible</span>
-          <span style="font:400 13px/1 var(--sans);color:var(--ink2)">Each paddock feeds 45 AU for 5 days</span>
+          <span style="font:400 15px/1 var(--sans);color:var(--ink2)">Each paddock feeds 45 AU for 5 days</span>
         </div>
       </div>
     </section>
@@ -793,7 +793,7 @@ input,select{font:inherit}
     <!-- ═══ LAND: CONDITIONS ═══ -->
     <section class="scr" id="land-conditions">
       <div class="sh" style="margin-top:0">Conditions</div>
-      <p style="font:400 13px/1.4 var(--sans);color:var(--ink2);margin-bottom:16px">Logan County, KS · ZIP 67646</p>
+      <p style="font:400 15px/1.4 var(--sans);color:var(--ink2);margin-bottom:16px">Logan County, KS · ZIP 67646</p>
 
       <div class="cond-card">
         <div class="cond-label">Drought Status</div>
@@ -819,7 +819,7 @@ input,select{font:inherit}
       </div>
 
       <div class="card" style="background:var(--warn-bg);border-color:transparent">
-        <div style="font:600 13px/1.3 var(--sans);color:var(--warn)">
+        <div style="font:600 15px/1.3 var(--sans);color:var(--warn)">
           Below-average rainfall may tighten grazing capacity beyond the drought category alone. Consider conservative stocking.
         </div>
       </div>
@@ -830,9 +830,9 @@ input,select{font:inherit}
       <div class="sh" style="margin-top:0">Cost of Ownership</div>
 
       <div class="tile-dark card" style="padding:20px;margin-bottom:16px">
-        <div class="tl" style="color:var(--nav-muted);font:500 11px/1 var(--sans);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Daily Cost Per Head</div>
+        <div class="tl" style="color:var(--nav-muted);font:500 13px/1 var(--sans);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Daily Cost Per Head</div>
         <div style="font:600 36px/1 var(--serif);color:#F6F2EA">$1.42</div>
-        <div style="font:400 13px/1 var(--sans);color:var(--nav-text);margin-top:6px">$42.60/month · $518/year</div>
+        <div style="font:400 15px/1 var(--sans);color:var(--nav-text);margin-top:6px">$42.60/month · $518/year</div>
       </div>
 
       <div class="card">
@@ -905,8 +905,8 @@ input,select{font:inherit}
         </div>
         <div class="budget-bar"><div class="budget-fill" style="width:77%"></div></div>
         <div style="display:flex;justify-content:space-between;margin-top:6px">
-          <span style="font:400 12px/1 var(--sans);color:var(--ink2)">Spent: $38,640</span>
-          <span style="font:600 12px/1 var(--sans);color:var(--ok)">$11,360 left</span>
+          <span style="font:400 14px/1 var(--sans);color:var(--ink2)">Spent: $38,640</span>
+          <span style="font:600 14px/1 var(--sans);color:var(--ok)">$11,360 left</span>
         </div>
       </div>
 
@@ -1027,13 +1027,13 @@ input,select{font:inherit}
 
       <div class="tile-dark card" style="padding:20px;margin-top:4px;border-color:var(--nav-line)">
         <div style="font:600 16px/1.3 var(--serif);color:#F6F2EA">Analyze my herds against the seasonal window</div>
-        <div style="font:400 13px/1.4 var(--sans);color:var(--nav-text);margin-top:6px">Projects each herd's weight class and timing against the seasonal index and your breakeven.</div>
+        <div style="font:400 15px/1.4 var(--sans);color:var(--nav-text);margin-top:6px">Projects each herd's weight class and timing against the seasonal index and your breakeven.</div>
         <button class="act-btn" style="margin-top:12px;background:var(--accent);color:#F6F2EA;width:100%;justify-content:center">Analyze my herds</button>
       </div>
 
       <div style="border-top:1px solid var(--line);margin:24px 0 0"></div>
       <div class="sh">Nearby Barns</div>
-      <p style="font:400 13px/1.4 var(--sans);color:var(--ink2);margin-bottom:16px">Within 100 miles of Logan, KS</p>
+      <p style="font:400 15px/1.4 var(--sans);color:var(--ink2);margin-bottom:16px">Within 100 miles of Logan, KS</p>
 
       <div class="barn-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
