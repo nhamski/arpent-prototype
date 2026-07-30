@@ -1,0 +1,18 @@
+.bnav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: var(--nav-bg); display: flex;
+  padding-bottom: max(6px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--nav-line);
+}
+.bnav button {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 4px 4px; color: var(--nav-text); transition: color .16s;
+}
+.bnav button.on { color: #F6F2EA; }
+.bnav button.on .nav-dot { opacity: 1; }
+.bnav svg.ni { width: 26px; height: 26px; flex-shrink: 0; }
+.bnav .nl { font: 600 13px/1 var(--sans); letter-spacing: .02em; }
+.nav-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  opacity: 0; transition: opacity .16s; margin-top: -1px;
+}

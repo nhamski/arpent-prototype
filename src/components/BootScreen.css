@@ -1,0 +1,58 @@
+.boot {
+  position: fixed; inset: 0; z-index: 9000;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(120% 120% at 50% 38%, #241a0f 0%, #18120a 60%, #120d07 100%);
+  transition: opacity .42s ease;
+}
+.boot.out { opacity: 0; pointer-events: none; }
+.boot-inner { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.boot svg { width: 56px; height: 56px; }
+.boot rect {
+  stroke: #c79a4e; stroke-width: 1.2; fill: none; rx: 2.2;
+  transform-origin: center; transform: scale(.4); opacity: 0;
+  animation: bootIn .5s cubic-bezier(.2,.9,.3,1) forwards;
+}
+.boot .ctr { fill: #d8a54e; stroke: #e8bd6e; }
+.boot rect:nth-child(1) { animation-delay: .02s; }
+.boot rect:nth-child(2) { animation-delay: .06s; }
+.boot rect:nth-child(3) { animation-delay: .10s; }
+.boot rect:nth-child(4) { animation-delay: .12s; }
+.boot rect:nth-child(5) { animation-delay: .16s; }
+.boot rect:nth-child(6) { animation-delay: .20s; }
+.boot rect:nth-child(7) { animation-delay: .18s; }
+.boot rect:nth-child(8) { animation-delay: .24s; }
+.boot rect:nth-child(9) { animation-delay: .28s; }
+
+@keyframes bootIn { to { transform: scale(1); opacity: 1; } }
+
+.boot-yr {
+  font: 600 48px/1 var(--serif); color: #e9d6a6;
+  letter-spacing: .06em; opacity: 0; transform: translateY(8px);
+  animation: bootFadeUp .5s .18s ease forwards;
+  text-shadow: 0 1px 8px rgba(201,154,78,.18);
+}
+.boot-nm {
+  font: 600 11px/1 var(--sans); color: #96835d;
+  letter-spacing: .28em; text-transform: uppercase;
+  opacity: 0; animation: bootFadeIn .4s .34s ease forwards;
+}
+.boot-bar {
+  width: 96px; height: 2px; border-radius: 1px;
+  background: rgba(201,154,78,.16); overflow: hidden;
+  opacity: 0; animation: bootFadeIn .3s .3s ease forwards;
+}
+.boot-bar span {
+  display: block; width: 40%; height: 100%; border-radius: 1px;
+  background: linear-gradient(90deg, transparent, #d8a54e, transparent);
+  animation: bootShimmer 1.1s ease-in-out infinite;
+}
+
+@keyframes bootFadeUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes bootFadeIn { to { opacity: 1; } }
+@keyframes bootShimmer { 0% { transform: translateX(-120%); } 100% { transform: translateX(300%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .boot rect { animation: bootFadeIn .3s ease forwards; }
+  .boot-yr { animation: bootFadeIn .3s ease forwards; }
+  .boot-bar span { animation: none; }
+}

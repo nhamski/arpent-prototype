@@ -1,0 +1,6 @@
+[submodule "legacy/estive"]
+	path = legacy/estive
+	url = https://github.com/nhamski/estive
+[submodule "legacy/encan"]
+	path = legacy/encan
+	url = https://github.com/nhamski/ENCAN

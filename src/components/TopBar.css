@@ -1,0 +1,15 @@
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; padding-top: max(12px, env(safe-area-inset-top));
+  background: var(--nav-bg); flex-shrink: 0; position: relative; z-index: 100;
+}
+.topbar-left { display: flex; align-items: baseline; }
+.topbar-brand { font: 600 20px/1 var(--serif); color: #F6F2EA; letter-spacing: .02em; }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.topbar-theme-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--nav-text); transition: background .16s;
+}
+.topbar-theme-btn:active { background: var(--nav-line); }
+.topbar-theme-btn svg { width: 18px; height: 18px; }
