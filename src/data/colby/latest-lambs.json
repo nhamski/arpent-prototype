@@ -1,0 +1,107 @@
+{
+  "source": "Colby Livestock Auction — operator-maintained weekly report",
+  "weekEnding": "2026-07-09",
+  "yearAgoTarget": "2025-07-09",
+  "unit": "$/cwt (range)",
+  "lambs": [
+    {
+      "low": 255,
+      "high": 355,
+      "mid": 305,
+      "weight": "40-59#",
+      "yearAgoMid": 299,
+      "changePct": 2
+    },
+    {
+      "low": 235,
+      "high": 260,
+      "mid": 247.5,
+      "weight": "60-79#",
+      "yearAgoMid": 238.5,
+      "changePct": 3.8
+    },
+    {
+      "low": 225,
+      "high": 260,
+      "mid": 242.5,
+      "weight": "80-99#",
+      "yearAgoMid": 214.5,
+      "changePct": 13.1
+    },
+    {
+      "low": 235,
+      "high": 300,
+      "mid": 267.5,
+      "weight": "100+#",
+      "yearAgoMid": 180,
+      "changePct": 48.6
+    }
+  ],
+  "ewes": {
+    "low": 110,
+    "high": 160,
+    "mid": 135,
+    "yearAgoMid": 103.5,
+    "changePct": 30.4
+  },
+  "rams": {
+    "low": 75,
+    "high": 140,
+    "mid": 107.5,
+    "yearAgoMid": 105.5,
+    "changePct": 1.9
+  },
+  "slaughter12mo": {
+    "weight": "100+#",
+    "months": [
+      {
+        "label": "Aug",
+        "avg": 181.25
+      },
+      {
+        "label": "Sep",
+        "avg": 183.5
+      },
+      {
+        "label": "Oct",
+        "avg": 197.8
+      },
+      {
+        "label": "Nov",
+        "avg": 200
+      },
+      {
+        "label": "Dec",
+        "avg": 216.17
+      },
+      {
+        "label": "Jan",
+        "avg": 213.88
+      },
+      {
+        "label": "Feb",
+        "avg": 247.13
+      },
+      {
+        "label": "Mar",
+        "avg": 257.13
+      },
+      {
+        "label": "Apr",
+        "avg": 309.7
+      },
+      {
+        "label": "May",
+        "avg": 283.13
+      },
+      {
+        "label": "Jun",
+        "avg": 266.25
+      },
+      {
+        "label": "Jul",
+        "avg": 258.75
+      }
+    ]
+  }
+}

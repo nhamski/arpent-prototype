@@ -1,0 +1,18 @@
+.subtab-bar {
+  background: var(--bg); border-bottom: 1px solid var(--line); flex-shrink: 0;
+  overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  padding: 0 16px; display: flex; scroll-snap-type: x proximity;
+}
+.subtab-bar::-webkit-scrollbar { display: none; }
+.subtab-bar::after { content: ''; flex-shrink: 0; width: 16px; }
+.subtab-chip {
+  flex-shrink: 0; padding: 14px 26px; margin: 10px 4px;
+  border-radius: 12px; font: 600 20px/1 var(--sans); white-space: nowrap;
+  border: 1px solid var(--line); color: var(--ink2); background: var(--card);
+  transition: all .16s ease; scroll-snap-align: center;
+}
+.subtab-chip:active { transform: scale(.97); }
+.subtab-chip.on {
+  background: var(--accent); color: #F6F2EA; border-color: var(--accent);
+  box-shadow: 0 1px 4px rgba(122,82,48,.25);
+}

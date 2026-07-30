@@ -1,0 +1,31 @@
+{
+  "source": "USDA AMS sheep/goat auction reports 1899 (Fort Collins CO), 1833 (Missouri), 2014 (San Angelo TX)",
+  "category": "Slaughter lambs, Per Cwt (Hair Breeds + Wooled & Shorn, under 150 lb)",
+  "note": "Latest weekly weighted-average price per market, with a trailing-12-month average for the seasonal comparison. Markets are kept separate — never averaged. Public domain (USDA).",
+  "markets": [
+    {
+      "region": "Fort Collins, CO",
+      "slug": 1899,
+      "weekEnding": "2026-07-15",
+      "pricePerCwt": 262.79,
+      "headCount": 599,
+      "trailing12moAvg": 285.56
+    },
+    {
+      "region": "Missouri",
+      "slug": 1833,
+      "weekEnding": "2026-07-11",
+      "pricePerCwt": 266.12,
+      "headCount": 1760,
+      "trailing12moAvg": 307.2
+    },
+    {
+      "region": "San Angelo, TX",
+      "slug": 2014,
+      "weekEnding": "2026-07-14",
+      "pricePerCwt": 257.64,
+      "headCount": 2096,
+      "trailing12moAvg": 331.28
+    }
+  ]
+}

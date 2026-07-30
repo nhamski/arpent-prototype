@@ -1,0 +1,41 @@
+name: Capture market history
+
+# Accrue USDA Kansas auction reports weekly, so the app builds its own multi-year
+# price history over time. Public-domain data, no API key. Runs on GitHub's cron
+# (free, no server) and commits any new weekly reports.
+
+on:
+  schedule:
+    - cron: '0 12 * * 6' # Saturdays 12:00 UTC — after the week's auctions post
+  workflow_dispatch: {} # allow a manual run from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install poppler (pdftotext)
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: Capture this week's reports
+        run: node tools/capture-market.mjs
+
+      - name: Commit any new captures
+        run: |
+          git config user.name  "arpent-market-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -n "$(git status --porcelain src/data/market-history)" ]; then
+            git add src/data/market-history
+            git commit -m "Accrue market history $(date -u +%Y-%m-%d)"
+            git push
+          else
+            echo "No new reports this run."
+          fi

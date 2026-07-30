@@ -1,0 +1,50 @@
+# Live daily price — pulls the latest Kansas auction prices each morning and
+# commits them so Sell Timing's "Live · Kansas" overlay stays current.
+#
+# Needs the AMS_API_KEY repo secret (Settings > Secrets and variables > Actions).
+# Reuses the existing tools: pull-mars.mjs fetches report 1895 with the key;
+# build-live.mjs extracts the latest week + trailing average into
+# src/data/live/kansas-latest.json. The 73 MB raw pull lands in .cache/ (gitignored).
+
+name: Live daily price
+
+on:
+  schedule:
+    - cron: '0 13 * * *' # every day 13:00 UTC — after the morning reports post
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pull latest Kansas cattle + regional lamb prices
+        env:
+          AMS_API_KEY: ${{ secrets.AMS_API_KEY }}
+        run: |
+          node tools/pull-mars.mjs 1895 .cache/mars-1895.json
+          node tools/build-live.mjs .cache/mars-1895.json
+          node tools/pull-mars.mjs 1899 .cache/mars-1899.json
+          node tools/pull-mars.mjs 1833 .cache/mars-1833.json
+          node tools/pull-mars.mjs 2014 .cache/mars-2014.json
+          node tools/build-live-sheep.mjs .cache/mars-1899.json .cache/mars-1833.json .cache/mars-2014.json
+
+      - name: Commit if the prices changed
+        run: |
+          git config user.name  "arpent-market-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -n "$(git status --porcelain src/data/live)" ]; then
+            git add src/data/live
+            git commit -m "Live price update $(date -u +%Y-%m-%d)"
+            git push
+          else
+            echo "No price change this run."
+          fi

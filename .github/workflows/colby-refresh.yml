@@ -1,0 +1,29 @@
+name: Refresh Colby data
+
+on:
+  schedule:
+    - cron: '0 14 * * 5' # Fridays 14:00 UTC — after Thursday's Colby sale posts
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Pull Colby weekly reports from the sheet
+        run: node tools/pull-colby.mjs
+      - name: Commit if changed
+        run: |
+          git config user.name "arpent-market-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -n "$(git status --porcelain src/data/colby)" ]; then
+            git add src/data/colby
+            git commit -m "Refresh Colby data $(date -u +%Y-%m-%d)"
+            git push
+          fi

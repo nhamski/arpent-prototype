@@ -1,0 +1,140 @@
+/* Arpent — consolidated design tokens.
+   Day (light) is default. Field (dark) via data-theme="field" or prefers-color-scheme. */
+
+:root {
+  --bg: #F6F2EA;
+  --bg2: #FBF8F2;
+  --bg3: #F0EBDF;
+  --card: #FFFFFF;
+  --line: #E4DCC9;
+  --line2: #D8CCB4;
+  --ink: #241C14;
+  --ink2: #6B6153;
+  --ink3: #635A48;
+  --accent: #7A5230;
+  --accent-hover: #5C4322;
+  --rust: #C4763B;
+  --ok: #3B4A24;
+  --ok-bg: #E7EEDA;
+  --ok-fill: #55643B;
+  --warn: #6B5B32;
+  --warn-bg: #EDE3C8;
+  --bad: #7A2E20;
+  --bad-bg: #F0DEDA;
+  --destructive: #A83E2C;
+  --nav-bg: #241C14;
+  --nav-line: #3A2F22;
+  --nav-muted: #A08F72;
+  --nav-text: #CFC3AC;
+
+  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --r: 10px;
+  --r-sm: 8px;
+  --tap-min: 48px;
+  --input-min: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="day"]) {
+    --bg: #241C14;
+    --bg2: #2E241A;
+    --bg3: #1C1610;
+    --card: #3A2F22;
+    --line: #4A3D2E;
+    --line2: #5A4C3A;
+    --ink: #F6F2EA;
+    --ink2: #C5B99E;
+    --ink3: #A08F72;
+    --accent: #A56B3E;
+    --accent-hover: #C48555;
+    --rust: #D4854A;
+    --ok: #8DA06A;
+    --ok-bg: #2E3322;
+    --ok-fill: #8DA06A;
+    --warn: #C4A84E;
+    --warn-bg: #3A3220;
+    --bad: #D4715A;
+    --bad-bg: #3A2420;
+  }
+}
+
+:root[data-theme="field"] {
+  --bg: #241C14;
+  --bg2: #2E241A;
+  --bg3: #1C1610;
+  --card: #3A2F22;
+  --line: #4A3D2E;
+  --line2: #5A4C3A;
+  --ink: #F6F2EA;
+  --ink2: #C5B99E;
+  --ink3: #A08F72;
+  --accent: #A56B3E;
+  --accent-hover: #C48555;
+  --rust: #D4854A;
+  --ok: #8DA06A;
+  --ok-bg: #2E3322;
+  --ok-fill: #8DA06A;
+  --warn: #C4A84E;
+  --warn-bg: #3A3220;
+  --bad: #D4715A;
+  --bad-bg: #3A2420;
+}
+
+:root[data-theme="day"] {
+  --bg: #F6F2EA;
+  --bg2: #FBF8F2;
+  --bg3: #F0EBDF;
+  --card: #FFFFFF;
+  --line: #E4DCC9;
+  --line2: #D8CCB4;
+  --ink: #241C14;
+  --ink2: #6B6153;
+  --ink3: #635A48;
+  --accent: #7A5230;
+  --accent-hover: #5C4322;
+  --rust: #C4763B;
+  --ok: #3B4A24;
+  --ok-bg: #E7EEDA;
+  --ok-fill: #55643B;
+  --warn: #6B5B32;
+  --warn-bg: #EDE3C8;
+  --bad: #7A2E20;
+  --bad-bg: #F0DEDA;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+  overflow: hidden;
+  height: 100dvh;
+}
+
+::selection { background: #E4D3BE; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input, select { font: inherit; }
+
+.num, input[inputmode="decimal"], input[inputmode="numeric"] {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+h1, h2, h3, .hero-figure {
+  font-family: var(--serif);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+a { color: var(--accent); text-underline-offset: 2px; }
