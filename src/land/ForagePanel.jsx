@@ -197,23 +197,6 @@ export default function ForagePanel({ zip }) {
     }
   }, [pastures, setSelectedPasture]);
 
-  const handleSaveAnalysis = useCallback(() => {
-    if (!selectedPasture || !capacity) return;
-    saveAnalysis(selectedPasture, {
-      droughtCategory: droughtCat,
-      droughtReduction,
-      usableForageLbPerAcre: capacity.usableForageLbPerAcre,
-      standingLbPerAcre: capacity.standingLbPerAcre || 0,
-      cattleAUDaysPerAcre: capacity.cattleAUDaysPerAcre,
-      recommendedMaxHerdAU: rotation?.recommendedMaxHerdAU || null,
-      forageFeasible: rotation?.forageFeasible ?? null,
-      acres,
-      herdAU,
-    });
-    setSavedFeedback(Date.now());
-    setTimeout(() => setSavedFeedback(null), 2000);
-  }, [selectedPasture, capacity, rotation, droughtCat, droughtReduction, acres, herdAU]);
-
   const droughtReduction = { NONE: 0, D0: 0.05, D1: 0.10, D2: 0.15, D3: 0.25, D4: 0.40 }[droughtCat] || 0;
 
   const measured = useMemo(() =>
@@ -245,6 +228,23 @@ export default function ForagePanel({ zip }) {
       });
     } catch { return null; }
   }, [capacity, acres, herdAU, measured]);
+
+  const handleSaveAnalysis = useCallback(() => {
+    if (!selectedPasture || !capacity) return;
+    saveAnalysis(selectedPasture, {
+      droughtCategory: droughtCat,
+      droughtReduction,
+      usableForageLbPerAcre: capacity.usableForageLbPerAcre,
+      standingLbPerAcre: capacity.standingLbPerAcre || 0,
+      cattleAUDaysPerAcre: capacity.cattleAUDaysPerAcre,
+      recommendedMaxHerdAU: rotation?.recommendedMaxHerdAU || null,
+      forageFeasible: rotation?.forageFeasible ?? null,
+      acres,
+      herdAU,
+    });
+    setSavedFeedback(Date.now());
+    setTimeout(() => setSavedFeedback(null), 2000);
+  }, [selectedPasture, capacity, rotation, droughtCat, droughtReduction, acres, herdAU]);
 
   const recs = useMemo(() => {
     try { return recommendSpecies({ droughtCategory: droughtCat, preferNative: true }, 5); }
