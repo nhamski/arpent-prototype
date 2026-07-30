@@ -1,0 +1,184 @@
+{
+  "source": "usda-dodge-city",
+  "label": "Dodge City, KS — Livestock Auction Weighted Average",
+  "week": "7/22/2026",
+  "weekEnding": "2026-07-22",
+  "capturedFrom": "https://www.ams.usda.gov/mnreports/ams_1889.pdf",
+  "rows": [
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 6,
+      "wtRange": "904",
+      "avgWt": 904,
+      "priceRange": "315.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 3,
+      "wtRange": "585",
+      "avgWt": 585,
+      "priceRange": "403.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 4,
+      "wtRange": "990",
+      "avgWt": 990,
+      "priceRange": "286.00"
+    },
+    {
+      "section": "STEERS Large 1",
+      "head": 31,
+      "wtRange": "1011",
+      "avgWt": 1011,
+      "priceRange": "295.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 6,
+      "wtRange": "505",
+      "avgWt": 505,
+      "priceRange": "370.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 5,
+      "wtRange": "655",
+      "avgWt": 655,
+      "priceRange": "337.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 3,
+      "wtRange": "430",
+      "avgWt": 430,
+      "priceRange": "407.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 3,
+      "wtRange": "611",
+      "avgWt": 611,
+      "priceRange": "339.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 2,
+      "wtRange": "907",
+      "avgWt": 907,
+      "priceRange": "301.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 5,
+      "wtRange": "550",
+      "avgWt": 550,
+      "priceRange": "373.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 11,
+      "wtRange": "681-685",
+      "avgWt": 683,
+      "priceRange": "348.00-353.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1-2",
+      "head": 2,
+      "wtRange": "530",
+      "avgWt": 530,
+      "priceRange": "400.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1-2",
+      "head": 3,
+      "wtRange": "771",
+      "avgWt": 771,
+      "priceRange": "325.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1-2",
+      "head": 6,
+      "wtRange": "867",
+      "avgWt": 867,
+      "priceRange": "280.00"
+    },
+    {
+      "section": "COWS Breaker 75-80%",
+      "head": 2,
+      "wtRange": "1510-1775",
+      "avgWt": 1643,
+      "priceRange": "171.00-177.00"
+    },
+    {
+      "section": "COWS Boner 80-85%",
+      "head": 23,
+      "wtRange": "910-1460",
+      "avgWt": 1190,
+      "priceRange": "156.00-182.00"
+    },
+    {
+      "section": "COWS Boner 80-85%",
+      "head": 2,
+      "wtRange": "1187",
+      "avgWt": 1187,
+      "priceRange": "185.00"
+    },
+    {
+      "section": "COWS Lean 85-90%",
+      "head": 28,
+      "wtRange": "760-1505",
+      "avgWt": 1264,
+      "priceRange": "135.00-158.00"
+    },
+    {
+      "section": "COWS Lean 85-90%",
+      "head": 4,
+      "wtRange": "1325-1530",
+      "avgWt": 1419,
+      "priceRange": "162.00-165.00"
+    },
+    {
+      "section": "COWS Lean 85-90%",
+      "head": 27,
+      "wtRange": "940-1495",
+      "avgWt": 1142,
+      "priceRange": "122.50-132.50"
+    },
+    {
+      "section": "COWS Lean 85-90%",
+      "head": 17,
+      "wtRange": "915-1720",
+      "avgWt": 1235,
+      "priceRange": "95.00-115.00"
+    },
+    {
+      "section": "BULLS 1-2",
+      "head": 14,
+      "wtRange": "1135-2150",
+      "avgWt": 1809,
+      "priceRange": "212.00-228.00"
+    },
+    {
+      "section": "BULLS 1-2",
+      "head": 1,
+      "wtRange": "1010",
+      "avgWt": 1010,
+      "priceRange": "300.00"
+    },
+    {
+      "section": "BULLS 1-2",
+      "head": 2,
+      "wtRange": "1185-2095",
+      "avgWt": 1640,
+      "priceRange": "232.50-233.00"
+    },
+    {
+      "section": "BULLS 1-2",
+      "head": 3,
+      "wtRange": "1225-1895",
+      "avgWt": 1507,
+      "priceRange": "201.00-206.00"
+    }
+  ]
+}

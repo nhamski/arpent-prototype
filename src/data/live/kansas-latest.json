@@ -1,0 +1,78 @@
+{
+  "source": "USDA AMS report 1895 — Kansas Weekly Cattle Auction Summary (Dodge City, Pratt, Salina)",
+  "region": "Kansas",
+  "weekEnding": "2026-07-25",
+  "note": "Latest weekly weighted-average auction prices, with a trailing-12-month average for the seasonal comparison. Public domain (USDA). Refreshed daily by the live-price GitHub Action.",
+  "prices": [
+    {
+      "sex": "steer",
+      "weightClass": "400-500 lb",
+      "pricePerCwt": 469.23,
+      "headCount": 15,
+      "trailing12moAvg": 532.94
+    },
+    {
+      "sex": "steer",
+      "weightClass": "500-600 lb",
+      "pricePerCwt": 434.49,
+      "headCount": 119,
+      "trailing12moAvg": 470.07
+    },
+    {
+      "sex": "steer",
+      "weightClass": "600-700 lb",
+      "pricePerCwt": 407.92,
+      "headCount": 523,
+      "trailing12moAvg": 412.98
+    },
+    {
+      "sex": "steer",
+      "weightClass": "700-800 lb",
+      "pricePerCwt": 366.59,
+      "headCount": 802,
+      "trailing12moAvg": 377.49
+    },
+    {
+      "sex": "steer",
+      "weightClass": "800-900 lb",
+      "pricePerCwt": 347.94,
+      "headCount": 1884,
+      "trailing12moAvg": 354.98
+    },
+    {
+      "sex": "heifer",
+      "weightClass": "400-500 lb",
+      "pricePerCwt": 446.06,
+      "headCount": 76,
+      "trailing12moAvg": 473.12
+    },
+    {
+      "sex": "heifer",
+      "weightClass": "500-600 lb",
+      "pricePerCwt": 396.8,
+      "headCount": 102,
+      "trailing12moAvg": 417.44
+    },
+    {
+      "sex": "heifer",
+      "weightClass": "600-700 lb",
+      "pricePerCwt": 365,
+      "headCount": 492,
+      "trailing12moAvg": 374.37
+    },
+    {
+      "sex": "heifer",
+      "weightClass": "700-800 lb",
+      "pricePerCwt": 336.1,
+      "headCount": 956,
+      "trailing12moAvg": 346.85
+    },
+    {
+      "sex": "heifer",
+      "weightClass": "800-900 lb",
+      "pricePerCwt": 322.47,
+      "headCount": 646,
+      "trailing12moAvg": 326.99
+    }
+  ]
+}

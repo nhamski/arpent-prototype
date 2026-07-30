@@ -3,9 +3,11 @@ import { computeCapacity } from '../engine/capacity.js';
 import { planRotation, seasonFromMonth } from '../engine/rotation.js';
 import { computeDepletion } from '../engine/depletion.js';
 import { recommendSpecies } from '../engine/recommendations.js';
+import { buildBuyCullReport, renderBuyCullText } from '../engine/buyCull.js';
 import { SPECIES_CATALOG, speciesIdForScientificName } from '../engine/species.js';
 import { useStoredState } from '../hooks/useStoredState.js';
 import { identifyPlant } from '../data/plantnetApi.js';
+import PhotoMeasure from '../components/PhotoMeasure.jsx';
 
 const SPECIES_LIST = Object.values(SPECIES_CATALOG).sort((a, b) => a.name.localeCompare(b.name));
 const num = (v) => { const n = parseFloat(String(v).replace(/,/g, '')); return Number.isFinite(n) && n >= 0 ? n : 0; };
@@ -101,6 +103,61 @@ function DepletionTracker() {
       <button className="act-btn outline" style={{ width: '100%', justifyContent: 'center', marginTop: 8 }} onClick={() => setShowDepletion(false)}>
         Hide Depletion
       </button>
+    </div>
+  );
+}
+
+function BuyCullReport({ rotation, herdAU }) {
+  const [showText, setShowText] = useState(false);
+  const report = useMemo(() => {
+    try { return buildBuyCullReport(rotation, herdAU, { auPerHead: 1 }); }
+    catch { return null; }
+  }, [rotation, herdAU]);
+
+  if (!report) return null;
+
+  const text = renderBuyCullText(report);
+  const color = report.decision === 'cull' ? 'var(--bad)' : report.decision === 'room_to_add' ? 'var(--ok)' : 'var(--ink2)';
+  const label = report.decision === 'cull' ? 'Cull' : report.decision === 'room_to_add' ? 'Room to Add' : 'At Capacity';
+
+  return (
+    <div className="card" style={{ marginTop: 12 }}>
+      <div className="card-title">Stocking Verdict</div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
+        <span style={{ font: '600 18px/1 var(--sans)', color }}>{label}</span>
+        {report.recommendedChangeHead != null && (
+          <span style={{ font: '600 15px/1 var(--sans)', color }}>
+            {report.decision === 'cull' ? `−${Math.abs(report.recommendedChangeHead)}` : `+${report.recommendedChangeHead}`} head
+          </span>
+        )}
+      </div>
+      <div style={{ font: '400 13px/1.4 var(--sans)', color: 'var(--ink2)', marginTop: 6 }}>
+        Running {report.currentHerdAU.toFixed(1)} AU · Max {report.recommendedMaxHerdAU.toFixed(1)} AU
+      </div>
+      {report.notes.length > 0 && (
+        <div style={{ marginTop: 8 }}>
+          {report.notes.map((n, i) => (
+            <div key={i} style={{ font: '400 13px/1.4 var(--sans)', color: 'var(--warn)', marginTop: 2 }}>• {n}</div>
+          ))}
+        </div>
+      )}
+      <button
+        className="act-btn outline"
+        style={{ width: '100%', justifyContent: 'center', marginTop: 8, fontSize: 13 }}
+        onClick={() => {
+          if (showText) { setShowText(false); return; }
+          setShowText(true);
+        }}
+      >
+        {showText ? 'Hide' : 'Copy Report Text'}
+      </button>
+      {showText && (
+        <div style={{ marginTop: 8 }}>
+          <pre style={{ font: '400 13px/1.5 var(--sans)', color: 'var(--ink2)', whiteSpace: 'pre-wrap', background: 'var(--line)', padding: 10, borderRadius: 6, userSelect: 'all' }}>
+            {text}
+          </pre>
+        </div>
+      )}
     </div>
   );
 }
@@ -339,6 +396,12 @@ export default function ForagePanel({ zip }) {
           )}
         </>
       )}
+
+      {rotation && (
+        <BuyCullReport rotation={rotation} herdAU={herdAU} />
+      )}
+
+      <PhotoMeasure />
 
       <DepletionTracker />
 

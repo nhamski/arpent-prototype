@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { useStoredState } from './hooks/useStoredState';
 import { cachedUser, signIn, signOut, resumeRedirect } from './auth/auth.js';
 import { isApprovedEmail, getUserByEmail } from './auth/users.js';
+import { friendlyError } from './lib/errors.js';
 import BootScreen from './components/BootScreen';
 import TopBar from './components/TopBar';
 import SubTabs from './components/SubTabs';
@@ -58,8 +59,8 @@ export default function App() {
         return;
       }
       setUser(u);
-    } catch {
-      setAuthError('Sign-in failed. Try again.');
+    } catch (err) {
+      setAuthError(friendlyError(err));
     }
   }, []);
 

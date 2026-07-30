@@ -36,3 +36,18 @@ export function buildBuyCullReport(rotationPlan, currentHerdAU, { auPerHead = nu
     notes,
   };
 }
+
+export function renderBuyCullText(report) {
+  const lines = [];
+  if (report.decision === 'cull') {
+    lines.push(`Cull ${report.recommendedChangeHead != null ? `${Math.abs(report.recommendedChangeHead)} head` : `${Math.abs(report.recommendedChangeAU).toFixed(1)} AU`} to reach target stocking rate.`);
+  } else if (report.decision === 'room_to_add') {
+    lines.push(`Room to add ${report.recommendedChangeHead != null ? `${report.recommendedChangeHead} head` : `${report.recommendedChangeAU.toFixed(1)} AU`}.`);
+  } else {
+    lines.push('Herd is at capacity — hold.');
+  }
+  lines.push(`Current: ${report.currentHerdAU.toFixed(1)} AU · Recommended max: ${report.recommendedMaxHerdAU.toFixed(1)} AU`);
+  if (!report.forageFeasible) lines.push('⚠ Rotation is not forage-feasible — treat as a floor, not a ceiling.');
+  for (const n of report.notes) lines.push(`• ${n}`);
+  return lines.join('\n');
+}
