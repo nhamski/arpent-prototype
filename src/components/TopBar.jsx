@@ -1,6 +1,13 @@
+import { useState } from 'react';
 import './TopBar.css';
 
-export default function TopBar({ theme, onToggleTheme }) {
+export default function TopBar({ theme, onToggleTheme, user, onSignIn, onSignOut, authError }) {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const initials = user?.name
+    ? user.name.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2)
+    : '?';
+
   return (
     <header className="topbar">
       <div className="topbar-left">
@@ -19,7 +26,35 @@ export default function TopBar({ theme, onToggleTheme }) {
             </svg>
           )}
         </button>
+
+        {user ? (
+          <div style={{ position: 'relative' }}>
+            <button
+              className="topbar-avatar"
+              onClick={() => setShowMenu((p) => !p)}
+              aria-label="Account menu"
+            >
+              {initials}
+            </button>
+            {showMenu && (
+              <div className="topbar-menu">
+                <div className="topbar-menu-name">{user.name || user.email}</div>
+                <div className="topbar-menu-email">{user.email}</div>
+                <button className="topbar-menu-btn" onClick={() => { setShowMenu(false); onSignOut?.(); }}>
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button className="topbar-signin" onClick={onSignIn}>
+            Sign In
+          </button>
+        )}
       </div>
+      {authError && (
+        <div className="topbar-error">{authError}</div>
+      )}
     </header>
   );
 }

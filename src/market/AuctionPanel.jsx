@@ -1,6 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { evaluate, verdict as bidVerdict } from '../engine/maxBid.js';
 import { makeLot, saleTotals, budgetState, lotMargin, underCeiling } from '../engine/sale.js';
+import { fetchColbyResults, parseColbyResults, avgPriceByClass } from '../data/colbyScraper.js';
 import { useStore } from '../hooks/useStore.js';
 import { useStoredState } from '../hooks/useStoredState.js';
 
@@ -51,6 +52,28 @@ export default function AuctionPanel({ zip, onZipChange }) {
   const [showLogForm, setShowLogForm] = useState(false);
   const [draft, setDraft] = useState({ lotNo: '', head: 1, weight: 0, priceCwt: 0 });
   const [setupDraft, setSetupDraft] = useState(null);
+
+  const [colbyResults, setColbyResults] = useState(null);
+  const [colbyLoading, setColbyLoading] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    setColbyLoading(true);
+    fetchColbyResults().then((raw) => {
+      if (cancelled) return;
+      if (raw) {
+        const parsed = parseColbyResults(raw);
+        setColbyResults(parsed);
+      }
+      setColbyLoading(false);
+    }).catch(() => { if (!cancelled) setColbyLoading(false); });
+    return () => { cancelled = true; };
+  }, []);
+
+  const colbyAvgs = useMemo(() => {
+    if (!colbyResults?.length) return [];
+    return avgPriceByClass(colbyResults);
+  }, [colbyResults]);
 
   const setup = setups[activeSetup] || setups[0] || DEFAULT_SETUPS[0];
 
@@ -138,6 +161,29 @@ export default function AuctionPanel({ zip, onZipChange }) {
           <div className="barn-meta">{b.meta2}</div>
         </div>
       ))}
+
+      {colbyAvgs.length > 0 && (
+        <>
+          <div style={{ borderTop: '1px solid var(--line)', margin: '24px 0 0' }} />
+          <div className="sh">Recent Sale Results</div>
+          <p style={{ font: '400 14px/1.4 var(--sans)', color: 'var(--ink2)', marginBottom: 12 }}>
+            Colby Livestock — avg price by class
+          </p>
+          <div className="card" style={{ marginBottom: 16 }}>
+            {colbyAvgs.map((c, i) => (
+              <div key={i} className="cost-row">
+                <span className="cost-label" style={{ textTransform: 'capitalize' }}>{c.species} {c.weightClass}</span>
+                <span className="cost-val">${c.avgCwt.toFixed(2)}/cwt <span style={{ fontWeight: 400, color: 'var(--ink3)' }}>({c.totalHead} hd)</span></span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+      {colbyLoading && (
+        <p style={{ font: '400 14px/1.4 var(--sans)', color: 'var(--ink3)', textAlign: 'center', padding: 8 }}>
+          Loading sale results...
+        </p>
+      )}
 
       <div style={{ borderTop: '1px solid var(--line)', margin: '24px 0 0' }} />
       <div className="sh">Max Bid</div>

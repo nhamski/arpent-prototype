@@ -1,5 +1,7 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useStoredState } from './hooks/useStoredState';
+import { cachedUser, signIn, signOut, resumeRedirect } from './auth/auth.js';
+import { isApprovedEmail, getUserByEmail } from './auth/users.js';
 import BootScreen from './components/BootScreen';
 import TopBar from './components/TopBar';
 import SubTabs from './components/SubTabs';
@@ -38,6 +40,34 @@ export default function App() {
   const [subs, setSubs] = useStoredState('arpent.subs', DEFAULT_SUBS);
   const [theme, setTheme] = useStoredState('arpent.theme', 'day');
   const [zip, setZip] = useStoredState('arpent.zip', '67646');
+  const [user, setUser] = useState(() => cachedUser());
+  const [authError, setAuthError] = useState(null);
+
+  useEffect(() => {
+    resumeRedirect().then((u) => { if (u) setUser(u); });
+  }, []);
+
+  const handleSignIn = useCallback(async () => {
+    setAuthError(null);
+    try {
+      const u = await signIn();
+      if (!u) return;
+      if (!isApprovedEmail(u.email)) {
+        await signOut();
+        setAuthError('Not on the approved list. Contact the admin to request access.');
+        return;
+      }
+      setUser(u);
+    } catch {
+      setAuthError('Sign-in failed. Try again.');
+    }
+  }, []);
+
+  const handleSignOut = useCallback(async () => {
+    await signOut();
+    setUser(null);
+    setAuthError(null);
+  }, []);
 
   const toggleTheme = useCallback(() => {
     const next = theme === 'day' ? 'field' : 'day';
@@ -65,7 +95,14 @@ export default function App() {
     <>
       {!booted && <BootScreen onDone={() => setBooted(true)} />}
       <div className={`app-shell ${booted ? 'ready' : ''}`}>
-        <TopBar theme={theme} onToggleTheme={toggleTheme} />
+        <TopBar
+          theme={theme}
+          onToggleTheme={toggleTheme}
+          user={user}
+          onSignIn={handleSignIn}
+          onSignOut={handleSignOut}
+          authError={authError}
+        />
         {subTabs && (
           <SubTabs tabs={subTabs} active={activeSub} onChange={handleSubChange} />
         )}
