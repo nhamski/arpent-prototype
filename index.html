@@ -113,16 +113,17 @@ input,select{font:inherit}
 /* Sub-tab bar */
 .subtab-bar{background:var(--bg);border-bottom:1px solid var(--line);flex-shrink:0;
   overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
-  padding:0 12px;display:none;justify-content:center}
+  padding:0 16px;display:none;scroll-snap-type:x proximity}
 .subtab-bar.on{display:flex}
 .subtab-bar::-webkit-scrollbar{display:none}
 .subtab-bar .chip{flex-shrink:0;padding:14px 26px;margin:10px 4px;
   border-radius:12px;font:600 20px/1 var(--sans);white-space:nowrap;
   border:1px solid var(--line);color:var(--ink2);background:var(--card);
-  transition:all .16s ease}
+  transition:all .16s ease;scroll-snap-align:center}
 .subtab-bar .chip:active{transform:scale(.97)}
 .subtab-bar .chip.on{background:var(--accent);color:#F6F2EA;border-color:var(--accent);
   box-shadow:0 1px 4px rgba(122,82,48,.25)}
+.subtab-bar::after{content:'';flex-shrink:0;width:16px}
 
 /* Content area */
 .content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
