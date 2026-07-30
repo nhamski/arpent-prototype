@@ -261,38 +261,34 @@ input,select{font:inherit}
 .lot-detail{font:400 13px/1.3 var(--sans);color:var(--ink2)}
 .lot-result{font:600 13px/1 var(--sans);margin-top:8px}
 
-/* Season card */
-.season-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-  padding:14px 16px;margin-bottom:10px}
-.season-top{display:flex;justify-content:space-between;align-items:flex-start}
-.season-info{flex:1}
-.season-class{font:600 14px/1.2 var(--sans);color:var(--ink)}
-.season-weight{font:400 12px/1 var(--sans);color:var(--ink2);margin-top:2px}
-.season-price{font:600 20px/1 var(--serif);color:var(--ink);margin-top:10px}
-.season-price .season-unit{font:400 13px/1 var(--sans);color:var(--ink2);margin-left:2px}
-.season-bar-wrap{margin-top:10px}
-.season-bar-label{display:flex;justify-content:space-between;font:400 11px/1 var(--sans);color:var(--ink3);margin-bottom:4px}
-.season-bar{height:6px;border-radius:3px;background:var(--bg3);position:relative;overflow:visible}
-.season-bar-fill{height:100%;border-radius:3px;position:absolute;left:0;top:0}
-.season-bar-marker{width:10px;height:10px;border-radius:50%;border:2px solid var(--card);
-  position:absolute;top:-2px;transform:translateX(-50%);box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.season-change{font:500 12px/1 var(--sans);margin-top:6px;display:flex;align-items:center;gap:4px}
-.season-change svg{width:12px;height:12px}
+/* Timing heatmap table */
+.timing-table{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;margin-bottom:16px}
+.timing-thead{display:flex;justify-content:space-between;padding:10px 16px;
+  border-bottom:1px solid var(--line);font:500 10px/1 var(--sans);
+  color:var(--ink3);text-transform:uppercase;letter-spacing:.5px}
+.timing-row{padding:12px 16px;border-bottom:1px solid var(--line)}
+.timing-row:last-child{border-bottom:none}
+.timing-row-name{font:500 13px/1 var(--sans);color:var(--ink);margin-bottom:8px}
+.timing-row-data{display:flex;align-items:center;gap:10px}
+.timing-heatmap{display:flex;gap:2px;flex:1;min-width:0}
+.hm{flex:1;height:24px;border-radius:3px;min-width:0}
+.hm-1{background:#9E5040}.hm-2{background:#C4876E}
+.hm-3{background:#C5B99E}.hm-4{background:#97A472}.hm-5{background:#5E7038}
+.timing-signals{display:flex;flex-direction:column;gap:4px;flex-shrink:0;align-items:flex-end}
+.pill-sell{background:var(--ok-bg);color:var(--ok);font:600 10px/1 var(--sans);
+  padding:4px 8px;border-radius:4px;white-space:nowrap}
+.pill-buy{background:var(--bad-bg);color:var(--bad);font:600 10px/1 var(--sans);
+  padding:4px 8px;border-radius:4px;white-space:nowrap}
+.timing-now{font:500 11px/1 var(--sans);color:var(--ink2);white-space:nowrap}
+.timing-now-hi{color:var(--ok)}
+.timing-now-lo{color:var(--bad)}
+.timing-disc{font:400 12px/1.5 var(--sans);color:var(--ink3);margin:16px 0}
 
 /* Timing category */
 .timing-cat{display:flex;align-items:center;gap:8px;margin:18px 0 10px}
+.timing-cat:first-of-type{margin-top:0}
 .timing-cat-label{font:600 15px/1 var(--sans);color:var(--ink)}
-.timing-cat-count{font:400 12px/1 var(--sans);color:var(--ink3)}
-
-/* Timing hero */
-.timing-hero{background:var(--ok-bg);border:1px solid var(--ok);border-radius:var(--r);
-  padding:16px;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px}
-.timing-hero-icon{width:36px;height:36px;border-radius:50%;background:var(--ok);color:var(--ok-bg);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.timing-hero-icon svg{width:18px;height:18px}
-.timing-hero-text{flex:1}
-.timing-hero-title{font:600 14px/1.3 var(--sans);color:var(--ok)}
-.timing-hero-sub{font:400 13px/1.4 var(--sans);color:var(--ok);opacity:.8;margin-top:2px}
 
 /* Barn card */
 .barn-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
@@ -933,126 +929,96 @@ input,select{font:inherit}
     <section class="scr" id="market-sell">
       <div class="sh" style="margin-top:0">Sell Timing</div>
 
-      <div class="month-sel">
-        <button class="month-btn">J</button><button class="month-btn">F</button>
-        <button class="month-btn">M</button><button class="month-btn">A</button>
-        <button class="month-btn">M</button><button class="month-btn">J</button>
-        <button class="month-btn">J</button><button class="month-btn on">A</button>
-        <button class="month-btn">S</button><button class="month-btn">O</button>
-        <button class="month-btn">N</button><button class="month-btn">D</button>
-      </div>
-
-      <div class="timing-hero">
-        <div class="timing-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-        <div class="timing-hero-text">
-          <div class="timing-hero-title">Good month to sell feeder steers</div>
-          <div class="timing-hero-sub">500–600 lb class at seasonal high · 3 sources agree</div>
-        </div>
-      </div>
-
       <div class="timing-cat">
         <span class="timing-cat-label">Steers</span>
-        <span class="timing-cat-count">2 classes tracked</span>
       </div>
-      <div class="season-card">
-        <div class="season-top">
-          <div class="season-info">
-            <div class="season-class">Steers 500–600 lb</div>
-            <div class="season-weight">Feeder weight · 3 sources</div>
-          </div>
-          <span class="pill pill-ok">Seasonal High</span>
-        </div>
-        <div class="season-price">$268<span class="season-unit">/cwt</span></div>
-        <div class="season-bar-wrap">
-          <div class="season-bar-label"><span>$218 low</span><span>$274 high</span></div>
-          <div class="season-bar">
-            <div class="season-bar-fill" style="width:89%;background:var(--ok)"></div>
-            <div class="season-bar-marker" style="left:89%;background:var(--ok)"></div>
+      <div class="timing-table">
+        <div class="timing-thead"><span>Jan → Dec</span><span>Best / Worst</span></div>
+        <div class="timing-row">
+          <div class="timing-row-name">Str Calves 300–400#</div>
+          <div class="timing-row-data">
+            <div class="timing-heatmap"><span class="hm hm-3"></span><span class="hm hm-4"></span><span class="hm hm-5"></span><span class="hm hm-4"></span><span class="hm hm-3"></span><span class="hm hm-2"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-2"></span><span class="hm hm-3"></span><span class="hm hm-3"></span></div>
+            <div class="timing-signals"><span class="pill-sell">SELL ▲ Mar</span><span class="pill-buy">BUY ▼ Sep</span><span class="timing-now timing-now-lo">Now 95 · near low</span></div>
           </div>
         </div>
-        <div class="season-change" style="color:var(--ok)"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l4 5H7v5H5V6H2z"/></svg> +$14/cwt vs. last month</div>
-      </div>
-      <div class="season-card">
-        <div class="season-top">
-          <div class="season-info">
-            <div class="season-class">Steers 700–800 lb</div>
-            <div class="season-weight">Feeder weight · 4 sources</div>
-          </div>
-          <span class="pill pill-ok">Above Avg</span>
-        </div>
-        <div class="season-price">$232<span class="season-unit">/cwt</span></div>
-        <div class="season-bar-wrap">
-          <div class="season-bar-label"><span>$195 low</span><span>$248 high</span></div>
-          <div class="season-bar">
-            <div class="season-bar-fill" style="width:70%;background:var(--ok)"></div>
-            <div class="season-bar-marker" style="left:70%;background:var(--ok)"></div>
+        <div class="timing-row">
+          <div class="timing-row-name">Str Calves 500–600#</div>
+          <div class="timing-row-data">
+            <div class="timing-heatmap"><span class="hm hm-3"></span><span class="hm hm-4"></span><span class="hm hm-5"></span><span class="hm hm-5"></span><span class="hm hm-4"></span><span class="hm hm-3"></span><span class="hm hm-2"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-2"></span><span class="hm hm-3"></span><span class="hm hm-3"></span></div>
+            <div class="timing-signals"><span class="pill-sell">SELL ▲ Mar</span><span class="pill-buy">BUY ▼ Sep</span><span class="timing-now timing-now-lo">Now 95 · near low</span></div>
           </div>
         </div>
-        <div class="season-change" style="color:var(--ok)"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l4 5H7v5H5V6H2z"/></svg> +$8/cwt vs. last month</div>
+        <div class="timing-row">
+          <div class="timing-row-name">Fdr Steers 600–700#</div>
+          <div class="timing-row-data">
+            <div class="timing-heatmap"><span class="hm hm-3"></span><span class="hm hm-3"></span><span class="hm hm-4"></span><span class="hm hm-5"></span><span class="hm hm-4"></span><span class="hm hm-3"></span><span class="hm hm-2"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-2"></span><span class="hm hm-3"></span><span class="hm hm-3"></span></div>
+            <div class="timing-signals"><span class="pill-sell">SELL ▲ Apr</span><span class="pill-buy">BUY ▼ Sep</span><span class="timing-now">Now 99</span></div>
+          </div>
+        </div>
+        <div class="timing-row">
+          <div class="timing-row-name">Fdr Steers 700–800#</div>
+          <div class="timing-row-data">
+            <div class="timing-heatmap"><span class="hm hm-3"></span><span class="hm hm-3"></span><span class="hm hm-4"></span><span class="hm hm-5"></span><span class="hm hm-5"></span><span class="hm hm-3"></span><span class="hm hm-2"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-2"></span><span class="hm hm-3"></span><span class="hm hm-3"></span></div>
+            <div class="timing-signals"><span class="pill-sell">SELL ▲ Apr</span><span class="pill-buy">BUY ▼ Sep</span><span class="timing-now">Now 100</span></div>
+          </div>
+        </div>
       </div>
 
       <div class="timing-cat">
         <span class="timing-cat-label">Heifers</span>
-        <span class="timing-cat-count">1 class tracked</span>
       </div>
-      <div class="season-card">
-        <div class="season-top">
-          <div class="season-info">
-            <div class="season-class">Heifers 400–500 lb</div>
-            <div class="season-weight">Calf weight · 3 sources</div>
-          </div>
-          <span class="pill pill-warn">Average</span>
-        </div>
-        <div class="season-price">$242<span class="season-unit">/cwt</span></div>
-        <div class="season-bar-wrap">
-          <div class="season-bar-label"><span>$210 low</span><span>$266 high</span></div>
-          <div class="season-bar">
-            <div class="season-bar-fill" style="width:57%;background:var(--warn)"></div>
-            <div class="season-bar-marker" style="left:57%;background:var(--warn)"></div>
+      <div class="timing-table">
+        <div class="timing-thead"><span>Jan → Dec</span><span>Best / Worst</span></div>
+        <div class="timing-row">
+          <div class="timing-row-name">Hfr Calves 300–400#</div>
+          <div class="timing-row-data">
+            <div class="timing-heatmap"><span class="hm hm-3"></span><span class="hm hm-4"></span><span class="hm hm-5"></span><span class="hm hm-4"></span><span class="hm hm-3"></span><span class="hm hm-2"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-2"></span><span class="hm hm-3"></span><span class="hm hm-3"></span></div>
+            <div class="timing-signals"><span class="pill-sell">SELL ▲ Mar</span><span class="pill-buy">BUY ▼ Sep</span><span class="timing-now">Now 98</span></div>
           </div>
         </div>
-        <div class="season-change" style="color:var(--ink3)"><svg viewBox="0 0 12 12" fill="currentColor"><rect x="2" y="5" width="8" height="2" rx="1"/></svg> Flat vs. last month</div>
+        <div class="timing-row">
+          <div class="timing-row-name">Hfr Calves 400–500#</div>
+          <div class="timing-row-data">
+            <div class="timing-heatmap"><span class="hm hm-3"></span><span class="hm hm-4"></span><span class="hm hm-5"></span><span class="hm hm-4"></span><span class="hm hm-3"></span><span class="hm hm-2"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-2"></span><span class="hm hm-3"></span><span class="hm hm-3"></span></div>
+            <div class="timing-signals"><span class="pill-sell">SELL ▲ Mar</span><span class="pill-buy">BUY ▼ Jul</span><span class="timing-now timing-now-lo">Now 95 · near low</span></div>
+          </div>
+        </div>
       </div>
 
       <div class="timing-cat">
         <span class="timing-cat-label">Sheep</span>
-        <span class="timing-cat-count">2 classes tracked</span>
       </div>
-      <div class="season-card">
-        <div class="season-top">
-          <div class="season-info">
-            <div class="season-class">Feeder Lambs 60–90 lb</div>
-            <div class="season-weight">2 sources</div>
-          </div>
-          <span class="pill pill-bad">Below Avg</span>
-        </div>
-        <div class="season-price">$172<span class="season-unit">/cwt</span></div>
-        <div class="season-bar-wrap">
-          <div class="season-bar-label"><span>$155 low</span><span>$210 high</span></div>
-          <div class="season-bar">
-            <div class="season-bar-fill" style="width:31%;background:var(--bad)"></div>
-            <div class="season-bar-marker" style="left:31%;background:var(--bad)"></div>
+      <div class="timing-table">
+        <div class="timing-thead"><span>Jan → Dec</span><span>Best / Worst</span></div>
+        <div class="timing-row">
+          <div class="timing-row-name">Fdr Lambs 60–90#</div>
+          <div class="timing-row-data">
+            <div class="timing-heatmap"><span class="hm hm-2"></span><span class="hm hm-2"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-2"></span><span class="hm hm-3"></span><span class="hm hm-4"></span><span class="hm hm-5"></span><span class="hm hm-4"></span><span class="hm hm-3"></span></div>
+            <div class="timing-signals"><span class="pill-sell">SELL ▲ Oct</span><span class="pill-buy">BUY ▼ Jun</span><span class="timing-now timing-now-lo">Now 97 · near low</span></div>
           </div>
         </div>
-        <div class="season-change" style="color:var(--bad)"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 11l4-5H7V1H5v5H2z"/></svg> -$18/cwt vs. last month</div>
+        <div class="timing-row">
+          <div class="timing-row-name">Slaughter Lambs</div>
+          <div class="timing-row-data">
+            <div class="timing-heatmap"><span class="hm hm-3"></span><span class="hm hm-3"></span><span class="hm hm-4"></span><span class="hm hm-4"></span><span class="hm hm-5"></span><span class="hm hm-4"></span><span class="hm hm-3"></span><span class="hm hm-2"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-2"></span><span class="hm hm-3"></span></div>
+            <div class="timing-signals"><span class="pill-sell">SELL ▲ May</span><span class="pill-buy">BUY ▼ Oct</span><span class="timing-now">Now 101</span></div>
+          </div>
+        </div>
+        <div class="timing-row">
+          <div class="timing-row-name">Cull Ewes</div>
+          <div class="timing-row-data">
+            <div class="timing-heatmap"><span class="hm hm-2"></span><span class="hm hm-3"></span><span class="hm hm-4"></span><span class="hm hm-5"></span><span class="hm hm-5"></span><span class="hm hm-5"></span><span class="hm hm-4"></span><span class="hm hm-3"></span><span class="hm hm-2"></span><span class="hm hm-1"></span><span class="hm hm-1"></span><span class="hm hm-1"></span></div>
+            <div class="timing-signals"><span class="pill-sell">SELL ▲ Jun</span><span class="pill-buy">BUY ▼ Dec</span><span class="timing-now timing-now-hi">Now 107 · near peak</span></div>
+          </div>
+        </div>
       </div>
-      <div class="season-card">
-        <div class="season-top">
-          <div class="season-info">
-            <div class="season-class">Slaughter Lambs 110+ lb</div>
-            <div class="season-weight">2 sources</div>
-          </div>
-          <span class="pill pill-warn">Average</span>
-        </div>
-        <div class="season-price">$148<span class="season-unit">/cwt</span></div>
-        <div class="season-bar-wrap">
-          <div class="season-bar-label"><span>$128 low</span><span>$178 high</span></div>
-          <div class="season-bar">
-            <div class="season-bar-fill" style="width:40%;background:var(--warn)"></div>
-            <div class="season-bar-marker" style="left:40%;background:var(--warn)"></div>
-          </div>
-        </div>
-        <div class="season-change" style="color:var(--ink3)"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 11l4-5H7V1H5v5H2z"/></svg> -$4/cwt vs. last month</div>
+
+      <p class="timing-disc">Seasonal indices are directional multi-year averages, not a forecast — basis, weather, and CME futures move the actual number.</p>
+
+      <div class="tile-dark card" style="padding:20px;margin-top:4px;border-color:var(--nav-line)">
+        <div style="font:600 16px/1.3 var(--serif);color:#F6F2EA">Analyze my herds against the seasonal window</div>
+        <div style="font:400 13px/1.4 var(--sans);color:var(--nav-text);margin-top:6px">Projects each herd's weight class and timing against the seasonal index and your breakeven.</div>
+        <button class="act-btn" style="margin-top:12px;background:var(--accent);color:#F6F2EA;width:100%;justify-content:center">Analyze my herds</button>
       </div>
 
       <div style="border-top:1px solid var(--line);margin:24px 0 0"></div>
