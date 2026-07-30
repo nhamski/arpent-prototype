@@ -1,61 +1,49 @@
-const CACHE_KEY = 'arpent.colby';
-const CACHE_TTL = 6 * 60 * 60 * 1000;
+let historyCache = null;
 
-function cached(key) {
+async function loadHistory() {
+  if (historyCache) return historyCache;
   try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return null;
-    const { ts, data } = JSON.parse(raw);
-    if (Date.now() - ts > CACHE_TTL) return null;
-    return data;
+    const mod = await import('./colby/history.json');
+    historyCache = mod.default;
+    return historyCache;
   } catch { return null; }
 }
 
-function cache(key, data) {
-  try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data })); }
-  catch { /* quota */ }
-}
-
 export async function fetchColbyResults() {
-  const proxyBase = import.meta.env.VITE_PROXY_BASE;
-  if (!proxyBase) return null;
-
-  const cacheKey = `${CACHE_KEY}.results`;
-  const hit = cached(cacheKey);
-  if (hit) return hit;
-
-  try {
-    const res = await fetch(`${proxyBase}/api/colby-results`, {
-      signal: AbortSignal.timeout(15000),
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    cache(cacheKey, data);
-    return data;
-  } catch {
-    return null;
-  }
+  const data = await loadHistory();
+  if (!data?.weeks?.length) return null;
+  const latest = data.weeks[data.weeks.length - 1];
+  return {
+    lots: latest.prices.map((p) => ({
+      lot_number: null,
+      head_count: 1,
+      species: categorizeSpecies(p.category),
+      weight_class: p.weight || p.category,
+      avg_weight: parseAvgWeight(p.weight),
+      price_cwt: p.mid,
+      price_head: null,
+      buyer: null,
+      sale_date: latest.weekEnding,
+    })),
+  };
 }
 
-export async function fetchBarnSchedule(barnId) {
-  const proxyBase = import.meta.env.VITE_PROXY_BASE;
-  if (!proxyBase) return null;
+function categorizeSpecies(category) {
+  if (['STRS', 'HFRS', 'WT COWS', 'WT BULLS', 'BABY CALVES', 'BRED COWS'].includes(category)) return 'cattle';
+  if (['LAMBS', 'EWES', 'RAMS', 'WETHERS', 'BABY LAMBS', 'BREEDING EWES', 'SHEEP FAMILIES'].includes(category)) return 'sheep';
+  if (['BILLIES', 'NANNIES', 'KID GOATS', 'BABY KID GOATS', 'GOAT FAMILIES'].includes(category)) return 'goat';
+  if (['SOWS', 'FEEDER PIGS', 'FAT HOGS'].includes(category)) return 'hog';
+  return 'other';
+}
 
-  const cacheKey = `${CACHE_KEY}.schedule.${barnId}`;
-  const hit = cached(cacheKey);
-  if (hit) return hit;
+function parseAvgWeight(weight) {
+  if (!weight) return 0;
+  const m = weight.match(/(\d+)-(\d+)/);
+  return m ? Math.round((parseInt(m[1]) + parseInt(m[2])) / 2) : 0;
+}
 
-  try {
-    const res = await fetch(`${proxyBase}/api/barn-schedule/${barnId}`, {
-      signal: AbortSignal.timeout(15000),
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    cache(cacheKey, data);
-    return data;
-  } catch {
-    return null;
-  }
+export async function fetchBarnSchedule() {
+  return null;
 }
 
 export function parseColbyResults(raw) {
