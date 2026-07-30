@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useStore } from '../hooks/useStore.js';
 import { useStoredState } from '../hooks/useStoredState.js';
+import { getLatestAnalysis, getAnalyses, getProductivityTrend } from '../data/analysisStore.js';
 
 const DEFAULT_PASTURES = [
   { id: 'p1', name: 'North 80', acres: 80, head: 45, species: 'cattle', condition: 'Good', grazeDays: 18, totalDays: 21, resting: false, notes: '' },
@@ -18,6 +19,59 @@ function initPastures() {
 
 function emptyPasture() {
   return { id: `p-${Date.now()}`, name: '', acres: 0, head: 0, species: 'cattle', condition: 'Good', grazeDays: 0, totalDays: 21, resting: false, notes: '' };
+}
+
+function PastureAnalyses({ pastureId }) {
+  const analyses = getAnalyses(pastureId);
+  if (!analyses.length) return null;
+
+  const trend = getProductivityTrend(pastureId);
+  const maxCap = trend.length ? Math.max(...trend.map((t) => t.avgCapacity)) : 0;
+
+  return (
+    <div className="card" style={{ marginBottom: 16, padding: 16 }}>
+      <div className="card-title">Forage History ({analyses.length})</div>
+      {trend.length >= 2 && (
+        <div style={{ marginBottom: 12 }}>
+          <div style={{ font: '400 12px/1 var(--sans)', color: 'var(--ink3)', marginBottom: 6 }}>Capacity trend (lb/ac avg)</div>
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 2, height: 40 }}>
+            {trend.map((t) => {
+              const h = maxCap > 0 ? Math.round((t.avgCapacity / maxCap) * 36) : 0;
+              return (
+                <div key={t.month} style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ width: '80%', height: h, background: 'var(--ok)', borderRadius: '2px 2px 0 0', minHeight: 2, opacity: 0.7 }} />
+                </div>
+              );
+            })}
+          </div>
+          <div style={{ display: 'flex', gap: 2, marginTop: 2 }}>
+            {trend.map((t) => (
+              <div key={t.month} style={{ flex: 1, textAlign: 'center', font: '400 9px/1.2 var(--sans)', color: 'var(--ink3)' }}>
+                {t.month.slice(5)}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {analyses.slice(0, 10).map((a) => {
+        const d = new Date(a.date);
+        return (
+          <div key={a.id} className="cost-row">
+            <span className="cost-label">
+              {d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              {a.droughtCategory && a.droughtCategory !== 'NONE' ? ` · ${a.droughtCategory}` : ''}
+            </span>
+            <span className="cost-val">{a.usableForageLbPerAcre?.toLocaleString()} lb/ac</span>
+          </div>
+        );
+      })}
+      {analyses.length > 10 && (
+        <div style={{ font: '400 13px/1.4 var(--sans)', color: 'var(--ink3)', marginTop: 8, textAlign: 'center' }}>
+          +{analyses.length - 10} older
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function PasturesPanel() {
@@ -187,6 +241,7 @@ export default function PasturesPanel() {
       <div className="sh" style={{ marginTop: 0 }}>Pastures</div>
 
       {(adding || editing) && form}
+      {editing && <PastureAnalyses pastureId={editing} />}
 
       {list.map((p) => (
         <div
@@ -202,6 +257,16 @@ export default function PasturesPanel() {
           <div className="pasture-detail">
             {p.acres} acres · {p.head} head{p.species === 'sheep' ? ' (sheep)' : ''} · Condition: {p.condition}
           </div>
+          {(() => {
+            const latest = getLatestAnalysis(p.id);
+            if (!latest) return null;
+            const d = new Date(latest.date);
+            return (
+              <div style={{ font: '400 12px/1.3 var(--sans)', color: 'var(--ink3)', marginTop: 4 }}>
+                Last scan: {d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} · {latest.usableForageLbPerAcre?.toLocaleString()} lb/ac
+              </div>
+            );
+          })()}
           <div className="progress-bar">
             <div
               className="progress-fill"

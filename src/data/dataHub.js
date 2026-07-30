@@ -3,6 +3,7 @@ import { fetchFeederCattlePrices, fetchSheepPrices, parseFeederPrices } from './
 import { getForecast, getAlerts, parseForecastPeriods } from './noaaApi.js';
 import { fetchCountyDrought, parseDroughtCategory, droughtReduction, DROUGHT_LABELS, DROUGHT_COLORS } from './usdmApi.js';
 import { fetchColbyResults, parseColbyResults, avgPriceByClass } from './colbyScraper.js';
+import { fetchRainfallHistory } from './rainfallApi.js';
 
 export async function fetchMarketData() {
   const [cattle, sheep] = await Promise.allSettled([
@@ -20,10 +21,11 @@ export async function fetchLocalConditions(zip) {
   const location = await zipToFips(zip);
   if (!location) return null;
 
-  const [drought, forecast, alerts] = await Promise.allSettled([
+  const [drought, forecast, alerts, rainfall] = await Promise.allSettled([
     fetchCountyDrought(location.fips),
     getForecast(location.lat, location.lon),
     getAlerts(location.state),
+    fetchRainfallHistory(location.lat, location.lon),
   ]);
 
   const droughtStats = drought.status === 'fulfilled' ? drought.value : null;
@@ -48,6 +50,7 @@ export async function fetchLocalConditions(zip) {
           expires: a.properties.expires,
         }))
       : [],
+    rainfall: rainfall.status === 'fulfilled' ? rainfall.value : null,
   };
 }
 

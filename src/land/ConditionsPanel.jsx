@@ -14,9 +14,9 @@ export default function ConditionsPanel({ zip }) {
   const forecast = conditions?.forecast || [];
   const alerts = conditions?.alerts || [];
 
-  const effectiveReduction = override != null ? override : (drought?.reduction ?? 0);
+  const rainfall = conditions?.rainfall;
 
-  const rainPeriods = forecast.filter((p) => p.detailedForecast?.toLowerCase().includes('rain'));
+  const effectiveReduction = override != null ? override : (drought?.reduction ?? 0);
 
   return (
     <section className="screen on">
@@ -124,19 +124,47 @@ export default function ConditionsPanel({ zip }) {
         </div>
       )}
 
-      {!loading && !conditions && (
-        <>
-          <div className="cond-card">
-            <div className="cond-label">Growing Season Rainfall</div>
-            <div className="cond-value">—</div>
-            <div className="cond-note">Enter a valid ZIP code to load weather data</div>
-          </div>
-          <div className="card" style={{ background: 'var(--warn-bg)', borderColor: 'transparent' }}>
-            <div style={{ font: '600 15px/1.3 var(--sans)', color: 'var(--warn)' }}>
-              No weather data available. Cached data will appear when a network connection is restored.
+      {rainfall && (
+        <div className="cond-card">
+          <div className="cond-label">Rainfall</div>
+          <div style={{ display: 'flex', gap: 20, marginBottom: 12 }}>
+            <div>
+              <div className="cond-value">{rainfall.growingSeasonInches != null ? `${rainfall.growingSeasonInches.toFixed(1)}"` : '—'}</div>
+              <div className="cond-note">Growing season {rainfall.growingSeasonYear} (Apr–Sep)</div>
+            </div>
+            <div>
+              <div className="cond-value">{rainfall.avgAnnualInches != null ? `${rainfall.avgAnnualInches.toFixed(1)}"` : '—'}</div>
+              <div className="cond-note">{rainfall.yearsUsed}-yr avg annual</div>
             </div>
           </div>
-        </>
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 2, height: 56 }}>
+            {rainfall.normals.map((n) => {
+              const maxVal = Math.max(...rainfall.normals.map((x) => x.inches));
+              const h = maxVal > 0 ? Math.round((n.inches / maxVal) * 52) : 0;
+              return (
+                <div key={n.month} style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ width: '80%', height: h, background: 'var(--accent)', borderRadius: '3px 3px 0 0', minHeight: n.inches > 0 ? 2 : 0, opacity: 0.75 }} />
+                </div>
+              );
+            })}
+          </div>
+          <div style={{ display: 'flex', gap: 2, marginTop: 3 }}>
+            {rainfall.normals.map((n) => (
+              <div key={n.month} style={{ flex: 1, textAlign: 'center', font: '400 10px/1.2 var(--sans)', color: 'var(--ink3)' }}>{n.label}</div>
+            ))}
+          </div>
+          <div style={{ font: '400 12px/1.4 var(--sans)', color: 'var(--ink3)', marginTop: 8 }}>
+            Source: {rainfall.source}
+          </div>
+        </div>
+      )}
+
+      {!loading && !conditions && (
+        <div className="card" style={{ background: 'var(--warn-bg)', borderColor: 'transparent' }}>
+          <div style={{ font: '600 15px/1.3 var(--sans)', color: 'var(--warn)' }}>
+            {zip ? 'No weather data available. Cached data will appear when a network connection is restored.' : 'Enter a ZIP code to view conditions.'}
+          </div>
+        </div>
       )}
     </section>
   );

@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef, useCallback } from 'react';
 import { computeCapacity } from '../engine/capacity.js';
 import { planRotation, seasonFromMonth } from '../engine/rotation.js';
 import { computeDepletion } from '../engine/depletion.js';
@@ -8,6 +8,7 @@ import { SPECIES_CATALOG, speciesIdForScientificName } from '../engine/species.j
 import { useStoredState } from '../hooks/useStoredState.js';
 import { identifyPlant } from '../data/plantnetApi.js';
 import PhotoMeasure from '../components/PhotoMeasure.jsx';
+import { saveAnalysis, getAnalyses } from '../data/analysisStore.js';
 
 const SPECIES_LIST = Object.values(SPECIES_CATALOG).sort((a, b) => a.name.localeCompare(b.name));
 const num = (v) => { const n = parseFloat(String(v).replace(/,/g, '')); return Number.isFinite(n) && n >= 0 ? n : 0; };
@@ -171,6 +172,47 @@ export default function ForagePanel({ zip }) {
   const [identifying, setIdentifying] = useState(false);
   const fileRef = useRef(null);
   const [idTarget, setIdTarget] = useState(null);
+  const [selectedPasture, setSelectedPasture] = useStoredState('arpent.foragePasture', null);
+  const [savedFeedback, setSavedFeedback] = useState(null);
+
+  const pastures = useMemo(() => {
+    try {
+      const raw = localStorage.getItem('arpent.pastures');
+      return raw ? JSON.parse(raw) : [];
+    } catch { return []; }
+  }, []);
+
+  const selectedPastureObj = pastures.find((p) => p.id === selectedPasture) || null;
+  const analysisCount = useMemo(() => selectedPasture ? getAnalyses(selectedPasture).length : 0, [selectedPasture, savedFeedback]);
+
+  const handlePastureChange = useCallback((id) => {
+    setSelectedPasture(id || null);
+    if (id) {
+      const p = pastures.find((x) => x.id === id);
+      if (p) {
+        setAcres(p.acres || 80);
+        const auFactor = p.species === 'sheep' ? 0.2 : 1;
+        setHerdAU(Math.round(p.head * auFactor) || 45);
+      }
+    }
+  }, [pastures, setSelectedPasture]);
+
+  const handleSaveAnalysis = useCallback(() => {
+    if (!selectedPasture || !capacity) return;
+    saveAnalysis(selectedPasture, {
+      droughtCategory: droughtCat,
+      droughtReduction,
+      usableForageLbPerAcre: capacity.usableForageLbPerAcre,
+      standingLbPerAcre: capacity.standingLbPerAcre || 0,
+      cattleAUDaysPerAcre: capacity.cattleAUDaysPerAcre,
+      recommendedMaxHerdAU: rotation?.recommendedMaxHerdAU || null,
+      forageFeasible: rotation?.forageFeasible ?? null,
+      acres,
+      herdAU,
+    });
+    setSavedFeedback(Date.now());
+    setTimeout(() => setSavedFeedback(null), 2000);
+  }, [selectedPasture, capacity, rotation, droughtCat, droughtReduction, acres, herdAU]);
 
   const droughtReduction = { NONE: 0, D0: 0.05, D1: 0.10, D2: 0.15, D3: 0.25, D4: 0.40 }[droughtCat] || 0;
 
@@ -255,6 +297,27 @@ export default function ForagePanel({ zip }) {
       </p>
 
       <input ref={fileRef} type="file" accept="image/*" capture="environment" style={{ display: 'none' }} onChange={onFileSelected} />
+
+      {pastures.length > 0 && (
+        <div className="field" style={{ marginBottom: 16 }}>
+          <label>Link to Pasture</label>
+          <select
+            value={selectedPasture || ''}
+            onChange={(e) => handlePastureChange(e.target.value)}
+            style={{ width: '100%', fontSize: 16, padding: '10px 12px', background: 'var(--card)', color: 'var(--ink)', border: '1px solid var(--line)', borderRadius: 8 }}
+          >
+            <option value="">None (standalone)</option>
+            {pastures.map((p) => (
+              <option key={p.id} value={p.id}>{p.name} ({p.acres} ac)</option>
+            ))}
+          </select>
+          {selectedPasture && analysisCount > 0 && (
+            <div style={{ font: '400 13px/1.4 var(--sans)', color: 'var(--ink3)', marginTop: 4 }}>
+              {analysisCount} saved {analysisCount === 1 ? 'analysis' : 'analyses'} for this pasture
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="sh">Intercept Points</div>
       {points.map((p, i) => (
@@ -399,6 +462,20 @@ export default function ForagePanel({ zip }) {
 
       {rotation && (
         <BuyCullReport rotation={rotation} herdAU={herdAU} />
+      )}
+
+      {capacity && selectedPasture && (
+        <button
+          className="act-btn"
+          style={{
+            width: '100%', justifyContent: 'center', marginTop: 12,
+            background: savedFeedback ? 'var(--ok)' : 'var(--accent)', color: '#F6F2EA',
+          }}
+          onClick={handleSaveAnalysis}
+          disabled={!!savedFeedback}
+        >
+          {savedFeedback ? 'Saved' : `Save to ${selectedPastureObj?.name || 'Pasture'}`}
+        </button>
       )}
 
       <PhotoMeasure />
