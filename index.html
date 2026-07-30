@@ -425,16 +425,14 @@ input,select{font:inherit}
   </div>
   <div class="subtab-bar" data-for="land">
     <button class="chip on" data-sub="pastures">Pastures</button>
-    <button class="chip" data-sub="scan">Scan</button>
+    <button class="chip" data-sub="scan">Forage</button>
     <button class="chip" data-sub="rotation">Rotation</button>
     <button class="chip" data-sub="conditions">Conditions</button>
   </div>
   <div class="subtab-bar" data-for="market">
     <button class="chip on" data-sub="costs">Costs</button>
-    <button class="chip" data-sub="bid">Max Bid</button>
-    <button class="chip" data-sub="saleday">Sale Day</button>
-    <button class="chip" data-sub="timing">Timing</button>
-    <button class="chip" data-sub="barns">Barns</button>
+    <button class="chip" data-sub="auction">Auction</button>
+    <button class="chip" data-sub="sell">Sell</button>
   </div>
 
   <!-- Content -->
@@ -851,8 +849,8 @@ input,select{font:inherit}
       </div>
     </section>
 
-    <!-- ═══ MARKET: BID ═══ -->
-    <section class="scr" id="market-bid">
+    <!-- ═══ MARKET: AUCTION ═══ -->
+    <section class="scr" id="market-auction">
       <div class="sh" style="margin-top:0">Max Bid</div>
 
       <div class="hero-card">
@@ -888,13 +886,11 @@ input,select{font:inherit}
       </div>
 
       <button class="act-btn" style="width:100%;justify-content:center;margin-top:16px;background:var(--ok-fill)">
-        Bought It — Log to Sale Day
+        Bought It — Log Purchase
       </button>
-    </section>
 
-    <!-- ═══ MARKET: SALE DAY ═══ -->
-    <section class="scr" id="market-saleday">
-      <div class="sh" style="margin-top:0">Sale Day</div>
+      <div style="border-top:1px solid var(--line);margin:24px 0 0"></div>
+      <div class="sh">Today's Purchases</div>
 
       <div class="budget">
         <div class="budget-header">
@@ -933,8 +929,8 @@ input,select{font:inherit}
       </div>
     </section>
 
-    <!-- ═══ MARKET: TIMING ═══ -->
-    <section class="scr" id="market-timing">
+    <!-- ═══ MARKET: SELL ═══ -->
+    <section class="scr" id="market-sell">
       <div class="sh" style="margin-top:0">Sell Timing</div>
 
       <div class="month-sel">
@@ -1058,17 +1054,23 @@ input,select{font:inherit}
         </div>
         <div class="season-change" style="color:var(--ink3)"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 11l4-5H7V1H5v5H2z"/></svg> -$4/cwt vs. last month</div>
       </div>
-    </section>
 
-    <!-- ═══ MARKET: BARNS ═══ -->
-    <section class="scr" id="market-barns">
-      <div class="sh" style="margin-top:0">Sale Barns</div>
+      <div style="border-top:1px solid var(--line);margin:24px 0 0"></div>
+      <div class="sh">Nearby Barns</div>
       <p style="font:400 13px/1.4 var(--sans);color:var(--ink2);margin-bottom:16px">Within 100 miles of Logan, KS</p>
 
       <div class="barn-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="barn-name">Colby Livestock</div>
+          <span class="pill pill-accent">42 mi</span>
+        </div>
+        <div class="barn-meta">Next sale: Aug 9 · Avg last month: $183/cwt</div>
+        <div class="barn-meta">Saturday sales · Cattle, sheep, & goats</div>
+      </div>
+      <div class="barn-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
           <div class="barn-name">Pratt Livestock</div>
-          <span class="pill pill-accent">62 mi</span>
+          <span class="pill pill-muted">62 mi</span>
         </div>
         <div class="barn-meta">Next sale: Aug 12 · Avg last month: $188/cwt</div>
         <div class="barn-meta">Tuesday sales · Cattle & sheep</div>
@@ -1088,14 +1090,6 @@ input,select{font:inherit}
         </div>
         <div class="barn-meta">Next sale: Aug 14 · Avg last month: $191/cwt</div>
         <div class="barn-meta">Thursday sales · Cattle & sheep</div>
-      </div>
-      <div class="barn-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div class="barn-name">Colby Livestock</div>
-          <span class="pill pill-muted">42 mi</span>
-        </div>
-        <div class="barn-meta">Next sale: Aug 9 · Avg last month: $183/cwt</div>
-        <div class="barn-meta">Saturday sales · Cattle, sheep, & goats</div>
       </div>
     </section>
 
