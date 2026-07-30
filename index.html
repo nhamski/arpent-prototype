@@ -1,0 +1,1129 @@
+<title>Arpent</title>
+<style>
+/* ── Boot Screen ── */
+#b1656{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(120% 120% at 50% 38%,#241a0f 0%,#18120a 60%,#120d07 100%);
+  transition:opacity .42s ease}
+#b1656.out{opacity:0;pointer-events:none}
+#b1656 .in{display:flex;flex-direction:column;align-items:center;gap:10px}
+#b1656 svg{width:56px;height:56px}
+#b1656 rect{stroke:#c79a4e;stroke-width:1.2;fill:none;rx:2.2;
+  transform-origin:center;transform:scale(.4);opacity:0;
+  animation:gIn .5s cubic-bezier(.2,.9,.3,1) forwards}
+#b1656 .ctr{fill:#d8a54e;stroke:#e8bd6e}
+#b1656 rect:nth-child(1){animation-delay:.02s}
+#b1656 rect:nth-child(2){animation-delay:.06s}
+#b1656 rect:nth-child(3){animation-delay:.10s}
+#b1656 rect:nth-child(4){animation-delay:.12s}
+#b1656 rect:nth-child(5){animation-delay:.16s}
+#b1656 rect:nth-child(6){animation-delay:.20s}
+#b1656 rect:nth-child(7){animation-delay:.18s}
+#b1656 rect:nth-child(8){animation-delay:.24s}
+#b1656 rect:nth-child(9){animation-delay:.28s}
+@keyframes gIn{to{transform:scale(1);opacity:1}}
+#b1656 .yr{font:600 48px/1 "Iowan Old Style","Palatino Linotype",Georgia,serif;
+  color:#e9d6a6;letter-spacing:.06em;opacity:0;transform:translateY(8px);
+  animation:fadeUp .5s .18s ease forwards;text-shadow:0 1px 8px rgba(201,154,78,.18)}
+#b1656 .nm{font:600 11px/1 system-ui,sans-serif;color:#96835d;
+  letter-spacing:.28em;text-transform:uppercase;opacity:0;animation:fadeIn .4s .34s ease forwards}
+#b1656 .bar{width:96px;height:2px;border-radius:1px;background:rgba(201,154,78,.16);
+  overflow:hidden;opacity:0;animation:fadeIn .3s .3s ease forwards}
+#b1656 .bar span{display:block;width:40%;height:100%;border-radius:1px;
+  background:linear-gradient(90deg,transparent,#d8a54e,transparent);
+  animation:shimmer 1.1s ease-in-out infinite}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes shimmer{0%{transform:translateX(-120%)}100%{transform:translateX(300%)}}
+@media(prefers-reduced-motion:reduce){
+  #b1656 rect{animation:fadeIn .3s ease forwards}
+  #b1656 .yr{animation:fadeIn .3s ease forwards}
+  #b1656 .bar span{animation:none}
+}
+
+/* ── Tokens: Light ── */
+:root{
+  --bg:#F6F2EA;--bg2:#FBF8F2;--bg3:#F0EBDF;
+  --card:#FFFFFF;--line:#E4DCC9;--line2:#D8CCB4;
+  --ink:#241C14;--ink2:#6B6153;--ink3:#8C7F66;
+  --accent:#7A5230;--accent-hover:#5C4322;--rust:#C4763B;
+  --ok:#3B4A24;--ok-bg:#E7EEDA;--ok-fill:#55643B;
+  --warn:#6B5B32;--warn-bg:#EDE3C8;
+  --bad:#7A2E20;--bad-bg:#F0DEDA;
+  --nav-bg:#241C14;--nav-line:#3A2F22;--nav-muted:#A08F72;--nav-text:#CFC3AC;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:10px;--r-sm:8px;
+}
+/* ── Tokens: Dark (Field) ── */
+@media(prefers-color-scheme:dark){:root:not([data-theme="day"]){
+  --bg:#241C14;--bg2:#2E241A;--bg3:#1C1610;
+  --card:#3A2F22;--line:#4A3D2E;--line2:#5A4C3A;
+  --ink:#F6F2EA;--ink2:#C5B99E;--ink3:#A08F72;
+  --accent:#A56B3E;--accent-hover:#C48555;--rust:#D4854A;
+  --ok:#8DA06A;--ok-bg:#2E3322;--ok-fill:#8DA06A;
+  --warn:#C4A84E;--warn-bg:#3A3220;
+  --bad:#D4715A;--bad-bg:#3A2420;
+}}
+:root[data-theme="field"]{
+  --bg:#241C14;--bg2:#2E241A;--bg3:#1C1610;
+  --card:#3A2F22;--line:#4A3D2E;--line2:#5A4C3A;
+  --ink:#F6F2EA;--ink2:#C5B99E;--ink3:#A08F72;
+  --accent:#A56B3E;--accent-hover:#C48555;--rust:#D4854A;
+  --ok:#8DA06A;--ok-bg:#2E3322;--ok-fill:#8DA06A;
+  --warn:#C4A84E;--warn-bg:#3A3220;
+  --bad:#D4715A;--bad-bg:#3A2420;
+}
+:root[data-theme="day"]{
+  --bg:#F6F2EA;--bg2:#FBF8F2;--bg3:#F0EBDF;
+  --card:#FFFFFF;--line:#E4DCC9;--line2:#D8CCB4;
+  --ink:#241C14;--ink2:#6B6153;--ink3:#8C7F66;
+  --accent:#7A5230;--accent-hover:#5C4322;--rust:#C4763B;
+  --ok:#3B4A24;--ok-bg:#E7EEDA;--ok-fill:#55643B;
+  --warn:#6B5B32;--warn-bg:#EDE3C8;
+  --bad:#7A2E20;--bad-bg:#F0DEDA;
+}
+
+/* ── Base ── */
+*,*::before,*::after{box-sizing:border-box;margin:0}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overscroll-behavior:none;overflow:hidden;height:100dvh}
+::selection{background:#E4D3BE}
+button{font:inherit;cursor:pointer;border:none;background:none;-webkit-tap-highlight-color:transparent}
+input,select{font:inherit}
+
+/* ── App Shell ── */
+#app{display:flex;flex-direction:column;height:100dvh;opacity:0;transition:opacity .3s .1s ease}
+#app.ready{opacity:1}
+
+/* Top bar */
+.topbar{display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));
+  background:var(--nav-bg);flex-shrink:0;position:relative;z-index:100}
+.topbar .brand{font:600 20px/1 var(--serif);color:#F6F2EA;letter-spacing:.02em}
+.topbar .proto{font:500 9px/1 var(--sans);color:var(--nav-muted);letter-spacing:.08em;
+  text-transform:uppercase;margin-left:10px;opacity:.7}
+.topbar .right{display:flex;align-items:center;gap:12px}
+.topbar .theme-btn{width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--nav-text);transition:background .16s}
+.topbar .theme-btn:active{background:var(--nav-line)}
+.topbar .theme-btn svg{width:18px;height:18px}
+
+/* Sub-tab bar */
+.subtab-bar{background:var(--bg);border-bottom:1px solid var(--line);flex-shrink:0;
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  padding:0 12px;display:none}
+.subtab-bar.on{display:flex}
+.subtab-bar::-webkit-scrollbar{display:none}
+.subtab-bar .chip{flex-shrink:0;padding:8px 16px;margin:8px 3px;
+  border-radius:9px;font:600 13px/1 var(--sans);white-space:nowrap;
+  border:1px solid var(--line);color:var(--ink2);background:var(--card);
+  transition:all .16s ease}
+.subtab-bar .chip:active{transform:scale(.97)}
+.subtab-bar .chip.on{background:var(--accent);color:#F6F2EA;border-color:var(--accent);
+  box-shadow:0 1px 4px rgba(122,82,48,.25)}
+
+/* Content area */
+.content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
+  padding-bottom:calc(68px + max(8px,env(safe-area-inset-bottom)))}
+.scr{display:none;padding:20px 16px 28px;max-width:640px;margin:0 auto}
+.scr.on{display:block}
+
+/* Bottom nav */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:var(--nav-bg);display:flex;
+  padding-bottom:max(6px,env(safe-area-inset-bottom));
+  border-top:1px solid var(--nav-line)}
+.bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:8px 4px 4px;color:var(--nav-text);transition:color .16s}
+.bnav button.on{color:#F6F2EA}
+.bnav button.on .nav-dot{opacity:1}
+.bnav svg.ni{width:24px;height:24px;flex-shrink:0}
+.bnav .nl{font:600 10px/1 var(--sans);letter-spacing:.02em}
+.nav-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);
+  opacity:0;transition:opacity .16s;margin-top:-1px}
+
+/* ── Components ── */
+/* Tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.tile .tl{font:500 11px/1 var(--sans);color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.tile .tv{font:600 24px/1 var(--serif);color:var(--ink)}
+.tile .ts{font:400 12px/1.3 var(--sans);color:var(--ink2);margin-top:4px}
+.tile-dark{background:var(--nav-bg);border-color:var(--nav-line)}
+.tile-dark .tl{color:var(--nav-muted)}
+.tile-dark .tv{color:#F6F2EA}
+.tile-dark .ts{color:var(--nav-text)}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px 18px;margin-bottom:12px}
+.card-title{font:600 16px/1.2 var(--serif);color:var(--ink);margin-bottom:8px}
+.card-sub{font:400 13px/1.4 var(--sans);color:var(--ink2)}
+
+/* Section headers */
+.sh{font:600 18px/1.2 var(--serif);color:var(--ink);margin:24px 0 12px}
+.sh:first-child{margin-top:0}
+
+/* Badges/pills */
+.pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;
+  font:600 11px/1 var(--sans);letter-spacing:.02em}
+.pill-ok{background:var(--ok-bg);color:var(--ok)}
+.pill-warn{background:var(--warn-bg);color:var(--warn)}
+.pill-bad{background:var(--bad-bg);color:var(--bad)}
+.pill-accent{background:var(--accent);color:#F6F2EA}
+.pill-muted{background:var(--bg3);color:var(--ink3)}
+
+/* Quick actions */
+.actions{display:flex;gap:10px;margin-bottom:24px;overflow-x:auto;scrollbar-width:none;
+  padding-bottom:2px}
+.actions::-webkit-scrollbar{display:none}
+.act-btn{flex-shrink:0;display:flex;align-items:center;gap:8px;
+  padding:12px 18px;border-radius:var(--r-sm);font:600 14px/1 var(--sans);
+  background:var(--accent);color:#F6F2EA;min-height:48px;
+  transition:all .16s;white-space:nowrap}
+.act-btn:active{transform:scale(.97);opacity:.9}
+.act-btn.outline{background:var(--card);color:var(--accent);border:1px solid var(--accent)}
+
+/* Activity feed */
+.feed-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.feed-item:last-child{border-bottom:none}
+.feed-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.feed-text{font:400 13.5px/1.5 var(--sans);color:var(--ink)}
+.feed-time{font:400 12px/1 var(--sans);color:var(--ink3);margin-top:4px}
+
+/* Animal rows */
+.animal-row{display:flex;align-items:center;gap:12px;padding:14px 16px;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:8px}
+.animal-avatar{width:40px;height:40px;border-radius:8px;background:var(--bg3);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font:600 14px/1 var(--sans);color:var(--ink3)}
+.animal-info{flex:1;min-width:0}
+.animal-tag{font:600 14px/1.2 var(--sans);color:var(--ink)}
+.animal-meta{font:400 12px/1.3 var(--sans);color:var(--ink2);margin-top:2px}
+.animal-badge{flex-shrink:0}
+
+/* Filter chips */
+.filters{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.filt{padding:7px 14px;border-radius:20px;font:500 13px/1 var(--sans);
+  background:var(--card);color:var(--ink2);border:1px solid var(--line);transition:all .16s}
+.filt.on{background:var(--accent);color:#F6F2EA;border-color:var(--accent)}
+
+/* Pasture cards */
+.pasture-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:18px;margin-bottom:12px}
+.pasture-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.pasture-name{font:600 17px/1.2 var(--serif);color:var(--ink)}
+.pasture-detail{font:400 13px/1.4 var(--sans);color:var(--ink2);margin-bottom:8px}
+.progress-bar{height:6px;border-radius:3px;background:var(--bg3);overflow:hidden;margin:10px 0}
+.progress-fill{height:100%;border-radius:3px;background:var(--ok-fill);transition:width .3s}
+
+/* Hero result card */
+.hero-card{background:var(--nav-bg);border-radius:12px;padding:24px;text-align:center;margin-bottom:20px}
+.hero-label{font:500 11px/1 var(--sans);color:var(--nav-muted);text-transform:uppercase;letter-spacing:.5px}
+.hero-value{font:600 42px/1.1 var(--serif);color:#F6F2EA;margin:8px 0}
+.hero-sub{font:400 14px/1.3 var(--sans);color:var(--nav-text)}
+.hero-value .unit{font-size:20px;font-weight:400;color:var(--nav-text);margin-left:2px}
+
+/* Verdict */
+.verdict{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--r);
+  font:700 18px/1 var(--sans);margin:12px 0}
+.verdict-bid{background:var(--ok-bg);color:var(--ok)}
+.verdict-pass{background:var(--bad-bg);color:var(--bad)}
+
+/* Stat row */
+.stat-row{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.stat{flex:1;min-width:80px}
+.stat .sl{font:500 11px/1 var(--sans);color:var(--ink3);text-transform:uppercase;letter-spacing:.4px}
+.stat .sv{font:600 18px/1 var(--serif);color:var(--ink);margin-top:4px}
+
+/* Scan steps */
+.scan-step{display:flex;gap:14px;padding:16px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px}
+.scan-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#F6F2EA;
+  display:flex;align-items:center;justify-content:center;font:700 13px/1 var(--sans);flex-shrink:0}
+.scan-body{flex:1}
+.scan-title{font:600 14px/1.2 var(--sans);color:var(--ink);margin-bottom:4px}
+.scan-desc{font:400 13px/1.4 var(--sans);color:var(--ink2)}
+
+/* Capture button */
+.capture-btn{width:100%;padding:20px;border-radius:var(--r);border:2px dashed var(--line2);
+  background:var(--bg2);display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:var(--accent);margin:16px 0}
+.capture-btn svg{width:40px;height:40px;opacity:.7}
+.capture-btn span{font:600 15px/1 var(--sans)}
+
+/* Lot card */
+.lot-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 16px;margin-bottom:10px}
+.lot-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.lot-num{font:600 14px/1 var(--sans);color:var(--ink)}
+.lot-detail{font:400 13px/1.3 var(--sans);color:var(--ink2)}
+.lot-result{font:600 13px/1 var(--sans);margin-top:8px}
+
+/* Season card */
+.season-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.season-info{flex:1}
+.season-class{font:600 14px/1.2 var(--sans);color:var(--ink)}
+.season-weight{font:400 12px/1 var(--sans);color:var(--ink2);margin-top:2px}
+
+/* Barn card */
+.barn-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 16px;margin-bottom:10px}
+.barn-name{font:600 15px/1.2 var(--sans);color:var(--ink)}
+.barn-meta{font:400 13px/1.3 var(--sans);color:var(--ink2);margin-top:4px}
+
+/* Budget bar */
+.budget{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px;margin-bottom:16px}
+.budget-header{display:flex;justify-content:space-between;margin-bottom:8px}
+.budget-label{font:500 12px/1 var(--sans);color:var(--ink2);text-transform:uppercase;letter-spacing:.4px}
+.budget-val{font:600 14px/1 var(--sans);color:var(--ink)}
+.budget-bar{height:8px;border-radius:4px;background:var(--bg3);overflow:hidden}
+.budget-fill{height:100%;border-radius:4px;background:var(--ok-fill);transition:width .3s}
+
+/* Cost summary */
+.cost-row{display:flex;justify-content:space-between;padding:12px 0;
+  border-bottom:1px solid var(--line);font:400 14px/1 var(--sans)}
+.cost-row:last-child{border-bottom:none}
+.cost-label{color:var(--ink2)}
+.cost-val{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* Health log */
+.health-entry{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 16px;margin-bottom:10px}
+.health-head{display:flex;justify-content:space-between;align-items:flex-start}
+.health-animal{font:600 14px/1.2 var(--sans);color:var(--ink)}
+.health-treatment{font:400 13px/1.3 var(--sans);color:var(--ink2);margin-top:4px}
+.health-date{font:400 12px/1 var(--sans);color:var(--ink3);margin-top:6px}
+
+/* Breeding */
+.breed-entry{display:flex;align-items:center;gap:12px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-bottom:10px}
+.breed-date-box{width:48px;text-align:center;flex-shrink:0}
+.breed-month{font:600 11px/1 var(--sans);color:var(--accent);text-transform:uppercase}
+.breed-day{font:600 22px/1 var(--serif);color:var(--ink)}
+.breed-info{flex:1}
+
+/* Drought badge */
+.drought{display:flex;align-items:center;gap:8px;padding:14px 16px;border-radius:var(--r);
+  background:var(--card);border:1px solid var(--line);margin-bottom:10px}
+.drought-indicator{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+/* Input fields */
+.field{margin-bottom:14px}
+.field label{display:block;font:500 12px/1 var(--sans);color:var(--ink2);
+  text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+.field input,.field select{width:100%;min-height:48px;padding:10px 12px;
+  border:1px solid var(--line2);border-radius:var(--r-sm);font-size:16px;
+  background:var(--bg2);color:var(--ink)}
+
+/* Condition cards */
+.cond-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px 18px;margin-bottom:12px}
+.cond-label{font:500 11px/1 var(--sans);color:var(--ink3);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:6px}
+.cond-value{font:600 20px/1.2 var(--serif);color:var(--ink)}
+.cond-note{font:400 13px/1.3 var(--sans);color:var(--ink2);margin-top:6px}
+
+/* Rotation display */
+.rot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.rot-stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px;text-align:center}
+.rot-num{font:600 28px/1 var(--serif);color:var(--accent)}
+.rot-label{font:500 11px/1 var(--sans);color:var(--ink3);text-transform:uppercase;
+  letter-spacing:.4px;margin-top:6px}
+
+/* Month selector */
+.month-sel{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-bottom:16px;padding:2px 0}
+.month-sel::-webkit-scrollbar{display:none}
+.month-btn{flex-shrink:0;padding:8px 12px;border-radius:8px;font:600 12px/1 var(--sans);
+  color:var(--ink2);background:var(--card);border:1px solid var(--line);min-width:40px;text-align:center}
+.month-btn.on{background:var(--accent);color:#F6F2EA;border-color:var(--accent)}
+
+/* Empty state */
+.empty{text-align:center;padding:40px 20px;color:var(--ink3)}
+.empty svg{width:48px;height:48px;margin-bottom:12px;opacity:.4}
+.empty p{font:400 14px/1.5 var(--sans)}
+</style>
+
+<!-- ── Boot Screen ── -->
+<div id="b1656" role="presentation" aria-hidden="true">
+  <div class="in">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="12" height="12"/>
+      <rect x="18" y="2" width="12" height="12"/>
+      <rect x="34" y="2" width="12" height="12"/>
+      <rect x="2" y="18" width="12" height="12"/>
+      <rect x="18" y="18" width="12" height="12" class="ctr"/>
+      <rect x="34" y="18" width="12" height="12"/>
+      <rect x="2" y="34" width="12" height="12"/>
+      <rect x="18" y="34" width="12" height="12"/>
+      <rect x="34" y="34" width="12" height="12"/>
+    </svg>
+    <div class="yr">1656</div>
+    <div class="nm">A R P E N T</div>
+    <div class="bar"><span></span></div>
+  </div>
+</div>
+
+<!-- ── App ── -->
+<div id="app">
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div style="display:flex;align-items:baseline">
+      <span class="brand">Arpent</span>
+      <span class="proto">Prototype</span>
+    </div>
+    <div class="right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Sub-tab bars -->
+  <div class="subtab-bar" data-for="herd">
+    <button class="chip on" data-sub="animals">Animals</button>
+    <button class="chip" data-sub="health">Health</button>
+    <button class="chip" data-sub="breeding">Breeding</button>
+  </div>
+  <div class="subtab-bar" data-for="land">
+    <button class="chip on" data-sub="pastures">Pastures</button>
+    <button class="chip" data-sub="scan">Scan</button>
+    <button class="chip" data-sub="rotation">Rotation</button>
+    <button class="chip" data-sub="conditions">Conditions</button>
+  </div>
+  <div class="subtab-bar" data-for="market">
+    <button class="chip on" data-sub="costs">Costs</button>
+    <button class="chip" data-sub="bid">Max Bid</button>
+    <button class="chip" data-sub="saleday">Sale Day</button>
+    <button class="chip" data-sub="timing">Timing</button>
+    <button class="chip" data-sub="barns">Barns</button>
+  </div>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- ═══ HOME ═══ -->
+    <section class="scr on" id="home">
+      <div class="tiles">
+        <div class="tile"><div class="tl">Cattle</div><div class="tv">247</div><div class="ts">head</div></div>
+        <div class="tile"><div class="tl">Sheep</div><div class="tv">34</div><div class="ts">head</div></div>
+        <div class="tile"><div class="tl">Daily Cost</div><div class="tv">$1.42</div><div class="ts">per head</div></div>
+        <div class="tile"><div class="tl">Breakeven</div><div class="tv">$186</div><div class="ts">per cwt</div></div>
+      </div>
+
+      <div class="tile-dark card" style="margin-bottom:20px;padding:18px 20px">
+        <div class="tl" style="color:var(--nav-muted);font:500 11px/1 var(--sans);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Market Position</div>
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <span style="font:600 28px/1 var(--serif);color:#F6F2EA">$192</span>
+          <span style="font:400 14px/1 var(--sans);color:var(--nav-text)">/cwt</span>
+          <span class="pill pill-ok" style="margin-left:auto">+$6 margin</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="act-btn" onclick="go('land','scan')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/><circle cx="18" cy="6" r="1.5" fill="currentColor"/></svg>
+          Scan Pasture
+        </button>
+        <button class="act-btn outline" onclick="go('market','bid')">Check Bid</button>
+        <button class="act-btn outline" onclick="go('herd','health')">Log Treatment</button>
+      </div>
+
+      <div class="sh">Recent Activity</div>
+      <div class="feed-item">
+        <div class="feed-dot" style="background:var(--ok-fill)"></div>
+        <div>
+          <div class="feed-text"><strong>North 80</strong> — moved 45 head, Day 18 of 21</div>
+          <div class="feed-time">2 hours ago</div>
+        </div>
+      </div>
+      <div class="feed-item">
+        <div class="feed-dot" style="background:var(--rust)"></div>
+        <div>
+          <div class="feed-text"><strong>Tag #422</strong> — Draxxin treatment logged, 38-day withdrawal</div>
+          <div class="feed-time">Yesterday</div>
+        </div>
+      </div>
+      <div class="feed-item">
+        <div class="feed-dot" style="background:var(--accent)"></div>
+        <div>
+          <div class="feed-text"><strong>Pratt sale</strong> — bought 12 hd @ $174/cwt, $43 under ceiling</div>
+          <div class="feed-time">3 days ago</div>
+        </div>
+      </div>
+      <div class="feed-item">
+        <div class="feed-dot" style="background:var(--ok-fill)"></div>
+        <div>
+          <div class="feed-text"><strong>East Pasture</strong> — scan: 1,840 lb/ac usable, room to run</div>
+          <div class="feed-time">4 days ago</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ HERD: ANIMALS ═══ -->
+    <section class="scr" id="herd-animals">
+      <div class="sh" style="margin-top:0">Herd</div>
+      <div class="filters">
+        <button class="filt on">All (281)</button>
+        <button class="filt">Cattle (247)</button>
+        <button class="filt">Sheep (34)</button>
+      </div>
+      <div class="animal-row">
+        <div class="animal-avatar">422</div>
+        <div class="animal-info">
+          <div class="animal-tag">Tag #422</div>
+          <div class="animal-meta">Black Angus Cow · 1,180 lb · North 80</div>
+        </div>
+        <span class="pill pill-ok">Active</span>
+      </div>
+      <div class="animal-row">
+        <div class="animal-avatar">388</div>
+        <div class="animal-info">
+          <div class="animal-tag">Tag #388</div>
+          <div class="animal-meta">Angus Steer · 650 lb · South Creek</div>
+        </div>
+        <span class="pill pill-warn">On feed</span>
+      </div>
+      <div class="animal-row">
+        <div class="animal-avatar">401</div>
+        <div class="animal-info">
+          <div class="animal-tag">Tag #401</div>
+          <div class="animal-meta">Crossbred Heifer · 580 lb · Highway</div>
+        </div>
+        <span class="pill pill-ok">Active</span>
+      </div>
+      <div class="animal-row">
+        <div class="animal-avatar">215</div>
+        <div class="animal-info">
+          <div class="animal-tag">Tag #215</div>
+          <div class="animal-meta">Angus Cow · 1,240 lb · North 80</div>
+        </div>
+        <span class="pill pill-ok">Active</span>
+      </div>
+      <div class="animal-row">
+        <div class="animal-avatar" style="font-size:11px">LOT</div>
+        <div class="animal-info">
+          <div class="animal-tag">Spring Lambs</div>
+          <div class="animal-meta">Suffolk Cross · 34 hd · ~85 lb avg · East Pasture</div>
+        </div>
+        <span class="pill pill-ok">Active</span>
+      </div>
+      <div style="text-align:center;padding:16px;color:var(--ink3);font:400 13px/1 var(--sans)">Showing 5 of 281 · scroll for more</div>
+    </section>
+
+    <!-- ═══ HERD: HEALTH ═══ -->
+    <section class="scr" id="herd-health">
+      <div class="sh" style="margin-top:0">Health & Records</div>
+      <div class="health-entry">
+        <div class="health-head">
+          <div>
+            <div class="health-animal">Tag #422 — Draxxin</div>
+            <div class="health-treatment">1.1 mL subcutaneous · Respiratory</div>
+          </div>
+          <span class="pill pill-bad">34 days</span>
+        </div>
+        <div class="health-date">Jul 26, 2026 · Withdrawal clears Aug 29</div>
+      </div>
+      <div class="health-entry">
+        <div class="health-head">
+          <div>
+            <div class="health-animal">Tag #388 — Ivermectin Pour-on</div>
+            <div class="health-treatment">10 mL topical · Parasite</div>
+          </div>
+          <span class="pill pill-ok">Clear</span>
+        </div>
+        <div class="health-date">Jul 15, 2026 · Withdrawal cleared Jul 29</div>
+      </div>
+      <div class="health-entry">
+        <div class="health-head">
+          <div>
+            <div class="health-animal">Spring Lambs — CDT Vaccine</div>
+            <div class="health-treatment">2 mL subcutaneous · 34 head</div>
+          </div>
+          <span class="pill pill-muted">No withdrawal</span>
+        </div>
+        <div class="health-date">Jul 10, 2026</div>
+      </div>
+      <div class="health-entry">
+        <div class="health-head">
+          <div>
+            <div class="health-animal">Tag #401 — LA-200</div>
+            <div class="health-treatment">15 mL intramuscular · Foot rot</div>
+          </div>
+          <span class="pill pill-ok">Clear</span>
+        </div>
+        <div class="health-date">Jun 28, 2026 · Withdrawal cleared Jul 26</div>
+      </div>
+    </section>
+
+    <!-- ═══ HERD: BREEDING ═══ -->
+    <section class="scr" id="herd-breeding">
+      <div class="sh" style="margin-top:0">Breeding & Calving</div>
+      <div class="breed-entry">
+        <div class="breed-date-box">
+          <div class="breed-month">Sep</div>
+          <div class="breed-day">14</div>
+        </div>
+        <div class="breed-info">
+          <div class="animal-tag">Tag #215 — Due</div>
+          <div class="animal-meta">Bred to Connealy Consensus · 48 days out</div>
+        </div>
+        <span class="pill pill-accent">Due</span>
+      </div>
+      <div class="breed-entry">
+        <div class="breed-date-box">
+          <div class="breed-month">Sep</div>
+          <div class="breed-day">22</div>
+        </div>
+        <div class="breed-info">
+          <div class="animal-tag">Tag #308 — Due</div>
+          <div class="animal-meta">Bred to SAV Resource · 56 days out</div>
+        </div>
+        <span class="pill pill-accent">Due</span>
+      </div>
+      <div class="breed-entry">
+        <div class="breed-date-box">
+          <div class="breed-month">Jul</div>
+          <div class="breed-day">18</div>
+        </div>
+        <div class="breed-info">
+          <div class="animal-tag">Tag #422 — Calved</div>
+          <div class="animal-meta">Bull calf · 82 lb · Tag #447 assigned</div>
+        </div>
+        <span class="pill pill-ok">Born</span>
+      </div>
+      <div class="breed-entry">
+        <div class="breed-date-box">
+          <div class="breed-month">Jul</div>
+          <div class="breed-day">5</div>
+        </div>
+        <div class="breed-info">
+          <div class="animal-tag">Tag #190 — Calved</div>
+          <div class="animal-meta">Heifer calf · 76 lb · Tag #448 assigned</div>
+        </div>
+        <span class="pill pill-ok">Born</span>
+      </div>
+    </section>
+
+    <!-- ═══ LAND: PASTURES ═══ -->
+    <section class="scr" id="land-pastures">
+      <div class="sh" style="margin-top:0">Pastures</div>
+      <div class="pasture-card">
+        <div class="pasture-head">
+          <div class="pasture-name">North 80</div>
+          <span class="pill pill-warn">Day 18 / 21</span>
+        </div>
+        <div class="pasture-detail">80 acres · 45 head · Condition: Good</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:86%"></div></div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="act-btn" style="padding:8px 16px;font-size:13px;flex:1">Move Herd</button>
+          <button class="act-btn outline" style="padding:8px 16px;font-size:13px;flex:1" onclick="go('land','scan')">Scan</button>
+        </div>
+      </div>
+      <div class="pasture-card">
+        <div class="pasture-head">
+          <div class="pasture-name">South Creek</div>
+          <span class="pill pill-ok">Resting</span>
+        </div>
+        <div class="pasture-detail">160 acres · 0 head · Day 12 of 35-day rest · Condition: Fair</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:34%;background:var(--accent)"></div></div>
+      </div>
+      <div class="pasture-card">
+        <div class="pasture-head">
+          <div class="pasture-name">Highway</div>
+          <span class="pill pill-ok">Day 5 / 21</span>
+        </div>
+        <div class="pasture-detail">40 acres · 22 head · Condition: Good</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:24%"></div></div>
+      </div>
+      <div class="pasture-card">
+        <div class="pasture-head">
+          <div class="pasture-name">East Pasture</div>
+          <span class="pill pill-ok">Day 8 / 14</span>
+        </div>
+        <div class="pasture-detail">120 acres · 34 head (sheep) · Condition: Good</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:57%"></div></div>
+      </div>
+    </section>
+
+    <!-- ═══ LAND: SCAN ═══ -->
+    <section class="scr" id="land-scan">
+      <div class="sh" style="margin-top:0">Grazing Plan</div>
+      <p style="font:400 14px/1.5 var(--sans);color:var(--ink2);margin-bottom:16px">
+        Photograph a pasture, tap to measure, get a conservative grazing capacity analysis.
+      </p>
+
+      <div class="scan-step">
+        <div class="scan-num">1</div>
+        <div class="scan-body">
+          <div class="scan-title">Photograph</div>
+          <div class="scan-desc">Include a forage stick, tape measure, or T-post for scale reference.</div>
+        </div>
+      </div>
+      <div class="scan-step">
+        <div class="scan-num">2</div>
+        <div class="scan-body">
+          <div class="scan-title">Tap to Measure</div>
+          <div class="scan-desc">Mark the reference object, then mark the forage height. Two taps each.</div>
+        </div>
+      </div>
+      <div class="scan-step">
+        <div class="scan-num">3</div>
+        <div class="scan-body">
+          <div class="scan-title">Enter Details</div>
+          <div class="scan-desc">Pasture acres, herd size, and current month for seasonal adjustment.</div>
+        </div>
+      </div>
+
+      <button class="capture-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="15" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 5V3h8v2"/></svg>
+        <span>Scan a Pasture</span>
+      </button>
+
+      <div class="sh">Sample Result</div>
+      <div class="hero-card">
+        <div class="hero-label">Carrying Capacity</div>
+        <div class="hero-value" style="color:#8DA06A">Room to Run</div>
+        <div class="hero-sub">This pasture can support <strong style="color:#F6F2EA">52 AU</strong> — you're running 45</div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat"><div class="sl">Usable forage</div><div class="sv">1,840 <span style="font-size:12px;font-weight:400;color:var(--ink2)">lb/ac</span></div></div>
+        <div class="stat"><div class="sl">AU-days/acre</div><div class="sv">70</div></div>
+        <div class="stat"><div class="sl">Drought</div><div class="sv">D1 <span style="font-size:12px;font-weight:400;color:var(--ink2)">−10%</span></div></div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <div class="card-title">Rotation Plan</div>
+        <div class="rot-grid">
+          <div class="rot-stat"><div class="rot-num">5</div><div class="rot-label">Paddocks</div></div>
+          <div class="rot-stat"><div class="rot-num">5</div><div class="rot-label">Graze Days</div></div>
+          <div class="rot-stat"><div class="rot-num">20</div><div class="rot-label">Rest Days</div></div>
+          <div class="rot-stat"><div class="rot-num">16</div><div class="rot-label">Acres Each</div></div>
+        </div>
+      </div>
+
+      <p style="font:400 12px/1.4 var(--sans);color:var(--ink3);margin-top:16px;text-align:center">
+        Conservative by design — numbers round down and apply a safety buffer.
+      </p>
+    </section>
+
+    <!-- ═══ LAND: ROTATION ═══ -->
+    <section class="scr" id="land-rotation">
+      <div class="sh" style="margin-top:0">Rotation Planner</div>
+      <p style="font:400 14px/1.5 var(--sans);color:var(--ink2);margin-bottom:16px">
+        Plan paddock rotations from known forage data — no photo needed.
+      </p>
+      <div class="field">
+        <label>Usable Forage (lb/acre)</label>
+        <input type="text" inputmode="decimal" value="1,840" readonly>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="field">
+          <label>Pasture Acres</label>
+          <input type="text" inputmode="decimal" value="80" readonly>
+        </div>
+        <div class="field">
+          <label>Herd (AU)</label>
+          <input type="text" inputmode="decimal" value="45" readonly>
+        </div>
+      </div>
+      <div class="field">
+        <label>Target Residency (days)</label>
+        <input type="text" inputmode="decimal" value="5" readonly>
+      </div>
+
+      <div class="rot-grid">
+        <div class="rot-stat"><div class="rot-num">5</div><div class="rot-label">Paddocks</div></div>
+        <div class="rot-stat"><div class="rot-num">5</div><div class="rot-label">Graze Days</div></div>
+        <div class="rot-stat"><div class="rot-num">20</div><div class="rot-label">Rest Days</div></div>
+        <div class="rot-stat"><div class="rot-num">52</div><div class="rot-label">Max AU</div></div>
+      </div>
+
+      <div class="card" style="margin-top:4px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="pill pill-ok">Feasible</span>
+          <span style="font:400 13px/1 var(--sans);color:var(--ink2)">Each paddock feeds 45 AU for 5 days</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ LAND: CONDITIONS ═══ -->
+    <section class="scr" id="land-conditions">
+      <div class="sh" style="margin-top:0">Conditions</div>
+      <p style="font:400 13px/1.4 var(--sans);color:var(--ink2);margin-bottom:16px">Logan County, KS · ZIP 67646</p>
+
+      <div class="cond-card">
+        <div class="cond-label">Drought Status</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="drought-indicator" style="background:#E8C84A"></div>
+          <div>
+            <div class="cond-value">D1 — Moderate</div>
+            <div class="cond-note">10% capacity reduction applied to all analyses</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cond-card">
+        <div class="cond-label">Growing Season Rainfall</div>
+        <div class="cond-value">8.4"</div>
+        <div class="cond-note">vs. 3-year average of 10.2" — below normal</div>
+      </div>
+
+      <div class="cond-card">
+        <div class="cond-label">Annual Rainfall</div>
+        <div class="cond-value">14.1"</div>
+        <div class="cond-note">vs. 3-year average of 19.8" (71% of normal)</div>
+      </div>
+
+      <div class="card" style="background:var(--warn-bg);border-color:transparent">
+        <div style="font:600 13px/1.3 var(--sans);color:var(--warn)">
+          Below-average rainfall may tighten grazing capacity beyond the drought category alone. Consider conservative stocking.
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MARKET: COSTS ═══ -->
+    <section class="scr" id="market-costs">
+      <div class="sh" style="margin-top:0">Cost of Ownership</div>
+
+      <div class="tile-dark card" style="padding:20px;margin-bottom:16px">
+        <div class="tl" style="color:var(--nav-muted);font:500 11px/1 var(--sans);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Daily Cost Per Head</div>
+        <div style="font:600 36px/1 var(--serif);color:#F6F2EA">$1.42</div>
+        <div style="font:400 13px/1 var(--sans);color:var(--nav-text);margin-top:6px">$42.60/month · $518/year</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Monthly Costs</div>
+        <div class="cost-row"><span class="cost-label">Feed & mineral</span><span class="cost-val">$2,400</span></div>
+        <div class="cost-row"><span class="cost-label">Pasture rent</span><span class="cost-val">$1,800</span></div>
+        <div class="cost-row"><span class="cost-label">Labor</span><span class="cost-val">$800</span></div>
+        <div class="cost-row"><span class="cost-label">Vet & supplies</span><span class="cost-val">$600</span></div>
+        <div class="cost-row"><span class="cost-label">Equipment</span><span class="cost-val">$400</span></div>
+        <div class="cost-row"><span class="cost-label">Insurance</span><span class="cost-val">$250</span></div>
+        <div class="cost-row" style="border-top:2px solid var(--line);font-weight:700">
+          <span class="cost-label" style="color:var(--ink);font-weight:700">Total</span>
+          <span class="cost-val">$6,250</span>
+        </div>
+      </div>
+
+      <div class="tiles" style="margin-top:16px">
+        <div class="tile"><div class="tl">Breakeven</div><div class="tv">$186</div><div class="ts">per cwt</div></div>
+        <div class="tile"><div class="tl">Market</div><div class="tv" style="color:var(--ok)">$192</div><div class="ts">per cwt</div></div>
+      </div>
+    </section>
+
+    <!-- ═══ MARKET: BID ═══ -->
+    <section class="scr" id="market-bid">
+      <div class="sh" style="margin-top:0">Max Bid</div>
+
+      <div class="hero-card">
+        <div class="hero-label">Maximum Bid</div>
+        <div class="hero-value">$847<span class="unit">/head</span></div>
+        <div class="hero-sub">$174.23/cwt on 486 lb calves</div>
+      </div>
+
+      <div class="filters" style="margin-bottom:16px">
+        <button class="filt on">Steer calves</button>
+        <button class="filt">Feeder lambs</button>
+        <button class="filt">+ Setup</button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Current Bid</div>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
+          <div class="field" style="flex:1;margin:0">
+            <input type="text" inputmode="decimal" value="168" style="font-size:20px;font-weight:600;text-align:center" readonly>
+          </div>
+          <span style="font:400 14px/1 var(--sans);color:var(--ink2)">$/cwt</span>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin:16px 0">
+        <div class="verdict verdict-bid">BID</div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat"><div class="sl">Margin</div><div class="sv" style="color:var(--ok)">+$29/hd</div></div>
+        <div class="stat"><div class="sl">On 20 head</div><div class="sv" style="color:var(--ok)">+$584</div></div>
+        <div class="stat"><div class="sl">ROI</div><div class="sv">3.5%</div></div>
+      </div>
+
+      <button class="act-btn" style="width:100%;justify-content:center;margin-top:16px;background:var(--ok-fill)">
+        Bought It — Log to Sale Day
+      </button>
+    </section>
+
+    <!-- ═══ MARKET: SALE DAY ═══ -->
+    <section class="scr" id="market-saleday">
+      <div class="sh" style="margin-top:0">Sale Day</div>
+
+      <div class="budget">
+        <div class="budget-header">
+          <span class="budget-label">Budget</span>
+          <span class="budget-val">$50,000</span>
+        </div>
+        <div class="budget-bar"><div class="budget-fill" style="width:77%"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px">
+          <span style="font:400 12px/1 var(--sans);color:var(--ink2)">Spent: $38,640</span>
+          <span style="font:600 12px/1 var(--sans);color:var(--ok)">$11,360 left</span>
+        </div>
+      </div>
+
+      <div class="tiles" style="margin-bottom:16px">
+        <div class="tile"><div class="tl">Head</div><div class="tv">20</div></div>
+        <div class="tile"><div class="tl">Lots</div><div class="tv">2</div></div>
+        <div class="tile"><div class="tl">Avg $/head</div><div class="tv">$1,932</div></div>
+        <div class="tile"><div class="tl">Under Ceiling</div><div class="tv" style="color:var(--ok)">2/2</div></div>
+      </div>
+
+      <div class="lot-card">
+        <div class="lot-head">
+          <span class="lot-num">Lot 47</span>
+          <span class="pill pill-ok">Under</span>
+        </div>
+        <div class="lot-detail">12 head · Steer calves · 486 lb · $174/cwt · $845/head</div>
+        <div class="lot-result" style="color:var(--ok)">$43/head under ceiling · Total: $10,140</div>
+      </div>
+      <div class="lot-card">
+        <div class="lot-head">
+          <span class="lot-num">Lot 52</span>
+          <span class="pill pill-ok">Under</span>
+        </div>
+        <div class="lot-detail">8 head · Heifer calves · 462 lb · $162/cwt · $748/head</div>
+        <div class="lot-result" style="color:var(--ok)">$12/head under ceiling · Total: $5,984</div>
+      </div>
+    </section>
+
+    <!-- ═══ MARKET: TIMING ═══ -->
+    <section class="scr" id="market-timing">
+      <div class="sh" style="margin-top:0">Sell Timing</div>
+
+      <div class="month-sel">
+        <button class="month-btn">Jan</button><button class="month-btn">Feb</button>
+        <button class="month-btn">Mar</button><button class="month-btn">Apr</button>
+        <button class="month-btn">May</button><button class="month-btn">Jun</button>
+        <button class="month-btn">Jul</button><button class="month-btn on">Aug</button>
+        <button class="month-btn">Sep</button><button class="month-btn">Oct</button>
+        <button class="month-btn">Nov</button><button class="month-btn">Dec</button>
+      </div>
+
+      <div class="sh" style="font-size:14px;margin-top:8px">Steers</div>
+      <div class="season-card">
+        <div class="season-info">
+          <div class="season-class">Steers 500–600 lb</div>
+          <div class="season-weight">Feeder weight · 3 sources</div>
+        </div>
+        <span class="pill pill-ok">Seasonal High</span>
+      </div>
+      <div class="season-card">
+        <div class="season-info">
+          <div class="season-class">Steers 700–800 lb</div>
+          <div class="season-weight">Feeder weight · 4 sources</div>
+        </div>
+        <span class="pill pill-ok">Above Avg</span>
+      </div>
+
+      <div class="sh" style="font-size:14px">Heifers</div>
+      <div class="season-card">
+        <div class="season-info">
+          <div class="season-class">Heifers 400–500 lb</div>
+          <div class="season-weight">Calf weight · 3 sources</div>
+        </div>
+        <span class="pill pill-warn">Average</span>
+      </div>
+
+      <div class="sh" style="font-size:14px">Sheep</div>
+      <div class="season-card">
+        <div class="season-info">
+          <div class="season-class">Feeder Lambs 60–90 lb</div>
+          <div class="season-weight">2 sources</div>
+        </div>
+        <span class="pill pill-bad">Below Avg</span>
+      </div>
+      <div class="season-card">
+        <div class="season-info">
+          <div class="season-class">Slaughter Lambs 110+ lb</div>
+          <div class="season-weight">2 sources</div>
+        </div>
+        <span class="pill pill-warn">Average</span>
+      </div>
+    </section>
+
+    <!-- ═══ MARKET: BARNS ═══ -->
+    <section class="scr" id="market-barns">
+      <div class="sh" style="margin-top:0">Sale Barns</div>
+      <p style="font:400 13px/1.4 var(--sans);color:var(--ink2);margin-bottom:16px">Within 100 miles of Logan, KS</p>
+
+      <div class="barn-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="barn-name">Pratt Livestock</div>
+          <span class="pill pill-accent">62 mi</span>
+        </div>
+        <div class="barn-meta">Next sale: Aug 12 · Avg last month: $188/cwt</div>
+        <div class="barn-meta">Tuesday sales · Cattle & sheep</div>
+      </div>
+      <div class="barn-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="barn-name">Dodge City Commission</div>
+          <span class="pill pill-muted">84 mi</span>
+        </div>
+        <div class="barn-meta">Next sale: Aug 8 · Avg last month: $185/cwt</div>
+        <div class="barn-meta">Friday sales · Cattle only</div>
+      </div>
+      <div class="barn-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="barn-name">Salina Livestock Exchange</div>
+          <span class="pill pill-muted">98 mi</span>
+        </div>
+        <div class="barn-meta">Next sale: Aug 14 · Avg last month: $191/cwt</div>
+        <div class="barn-meta">Thursday sales · Cattle & sheep</div>
+      </div>
+      <div class="barn-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="barn-name">Colby Livestock</div>
+          <span class="pill pill-muted">42 mi</span>
+        </div>
+        <div class="barn-meta">Next sale: Aug 9 · Avg last month: $183/cwt</div>
+        <div class="barn-meta">Saturday sales · Cattle, sheep, & goats</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom nav -->
+  <nav class="bnav">
+    <button class="on" data-tab="home" onclick="go('home')">
+      <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 12l8-8 8 8"/><path d="M6 10.5V19a1 1 0 001 1h3v-4h4v4h3a1 1 0 001-1v-8.5"/>
+      </svg>
+      <span class="nl">Home</span>
+      <div class="nav-dot"></div>
+    </button>
+    <button data-tab="herd" onclick="go('herd')">
+      <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="3" width="12" height="17" rx="2"/><circle cx="12" cy="7" r="1.5"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="15" x2="13" y2="15"/>
+      </svg>
+      <span class="nl">Herd</span>
+      <div class="nav-dot"></div>
+    </button>
+    <button data-tab="land" onclick="go('land')">
+      <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 20l5-8 4 4 4-10 4 6 3-3v11H2z"/>
+      </svg>
+      <span class="nl">Land</span>
+      <div class="nav-dot"></div>
+    </button>
+    <button data-tab="market" onclick="go('market')">
+      <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 20V10l4 4 5-8 4 6 5-4v12H3z"/><line x1="3" y1="20" x2="21" y2="20"/>
+      </svg>
+      <span class="nl">Market</span>
+      <div class="nav-dot"></div>
+    </button>
+  </nav>
+
+</div>
+
+<script>
+(function(){
+  // Boot screen
+  var boot = document.getElementById('b1656');
+  var t0 = Date.now();
+  function dismiss(){
+    var elapsed = Date.now() - t0;
+    var wait = Math.max(0, 600 - elapsed);
+    setTimeout(function(){
+      boot.classList.add('out');
+      document.getElementById('app').classList.add('ready');
+      setTimeout(function(){ boot.remove() }, 460);
+    }, wait);
+  }
+  if (document.readyState === 'complete') dismiss();
+  else window.addEventListener('load', dismiss);
+  setTimeout(dismiss, 3500);
+
+  // State
+  var state = {
+    tab: 'home',
+    sub: { herd:'animals', land:'pastures', market:'costs' }
+  };
+
+  // Navigation
+  window.go = function(tab, sub) {
+    state.tab = tab;
+    if (sub) state.sub[tab] = sub;
+    render();
+  };
+
+  function render() {
+    // Screens
+    document.querySelectorAll('.scr').forEach(function(el){ el.classList.remove('on') });
+    var screenId = state.tab === 'home' ? 'home' : state.tab + '-' + state.sub[state.tab];
+    var screen = document.getElementById(screenId);
+    if (screen) screen.classList.add('on');
+
+    // Bottom nav
+    document.querySelectorAll('.bnav button').forEach(function(btn){
+      btn.classList.toggle('on', btn.dataset.tab === state.tab);
+    });
+
+    // Sub-tab bars
+    document.querySelectorAll('.subtab-bar').forEach(function(bar){
+      var show = bar.dataset.for === state.tab && state.tab !== 'home';
+      bar.classList.toggle('on', show);
+      if (show) {
+        bar.querySelectorAll('.chip').forEach(function(chip){
+          chip.classList.toggle('on', chip.dataset.sub === state.sub[state.tab]);
+        });
+      }
+    });
+
+    // Scroll to top
+    document.querySelector('.content').scrollTop = 0;
+  }
+
+  // Sub-tab clicks
+  document.querySelectorAll('.subtab-bar .chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var tab = this.closest('.subtab-bar').dataset.for;
+      go(tab, this.dataset.sub);
+    });
+  });
+
+  // Filter chips (visual toggle only)
+  document.querySelectorAll('.filters .filt').forEach(function(f){
+    f.addEventListener('click', function(){
+      this.parentElement.querySelectorAll('.filt').forEach(function(s){ s.classList.remove('on') });
+      this.classList.add('on');
+    });
+  });
+
+  // Month selector (visual toggle)
+  document.querySelectorAll('.month-btn').forEach(function(m){
+    m.addEventListener('click', function(){
+      this.parentElement.querySelectorAll('.month-btn').forEach(function(s){ s.classList.remove('on') });
+      this.classList.add('on');
+    });
+  });
+
+  // Theme toggle
+  var themeBtn = document.getElementById('themeToggle');
+  var theme = 'day';
+  try { theme = localStorage.getItem('arpent-proto-theme') || 'day' } catch(e){}
+  document.documentElement.setAttribute('data-theme', theme);
+
+  themeBtn.addEventListener('click', function(){
+    theme = theme === 'day' ? 'field' : 'day';
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('arpent-proto-theme', theme) } catch(e){}
+  });
+})();
+</script>
