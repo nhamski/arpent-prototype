@@ -2,8 +2,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const base = process.env.NETLIFY ? '/' : '/arpent-prototype/';
+
 export default defineConfig({
-  base: '/arpent-prototype/',
+  base,
   plugins: [
     react(),
     VitePWA({
@@ -17,7 +19,7 @@ export default defineConfig({
         background_color: '#241C14',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/arpent-prototype/',
+        start_url: base,
         icons: [
           {
             src: 'favicon.svg',
