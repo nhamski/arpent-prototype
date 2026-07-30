@@ -1,75 +1,276 @@
-export default function ForagePanel() {
+import { useState, useMemo, useRef } from 'react';
+import { computeCapacity } from '../engine/capacity.js';
+import { planRotation, seasonFromMonth } from '../engine/rotation.js';
+import { computeDepletion } from '../engine/depletion.js';
+import { recommendSpecies } from '../engine/recommendations.js';
+import { SPECIES_CATALOG } from '../engine/species.js';
+import { useStoredState } from '../hooks/useStoredState.js';
+import { identifyPlant } from '../data/plantnetApi.js';
+import { speciesIdForScientificName } from '../engine/species.js';
+
+const SPECIES_LIST = Object.values(SPECIES_CATALOG).sort((a, b) => a.name.localeCompare(b.name));
+const num = (v) => { const n = parseFloat(String(v).replace(/,/g, '')); return Number.isFinite(n) && n >= 0 ? n : 0; };
+
+function emptyPoint() {
+  return { id: Date.now(), speciesId: 'big_bluestem', height: 8, share: 0.5 };
+}
+
+export default function ForagePanel({ zip }) {
+  const [points, setPoints] = useStoredState('arpent.intercept', [emptyPoint()]);
+  const [acres, setAcres] = useState(80);
+  const [herdAU, setHerdAU] = useState(45);
+  const [droughtCat, setDroughtCat] = useStoredState('arpent.droughtCat', 'NONE');
+  const [showResult, setShowResult] = useState(false);
+  const [identifying, setIdentifying] = useState(false);
+  const fileRef = useRef(null);
+  const [idTarget, setIdTarget] = useState(null);
+
+  const droughtReduction = { NONE: 0, D0: 0.05, D1: 0.10, D2: 0.15, D3: 0.25, D4: 0.40 }[droughtCat] || 0;
+
+  const measured = useMemo(() =>
+    points.filter((p) => p.speciesId && p.height > 0 && p.share > 0).map((p) => ({
+      speciesId: p.speciesId,
+      meanHeightInches: p.height,
+      share: p.share,
+    })),
+  [points]);
+
+  const totalShare = measured.reduce((a, m) => a + m.share, 0);
+
+  const capacity = useMemo(() => {
+    if (measured.length === 0 || totalShare > 1.001) return null;
+    try { return computeCapacity(measured, { droughtReduction }); }
+    catch { return null; }
+  }, [measured, droughtReduction, totalShare]);
+
+  const rotation = useMemo(() => {
+    if (!capacity || acres <= 0 || herdAU <= 0) return null;
+    const month = new Date().getMonth() + 1;
+    try {
+      return planRotation({
+        usableForageLbPerAcre: capacity.usableForageLbPerAcre,
+        pastureAcres: acres,
+        herdAnimalUnits: herdAU,
+        speciesIds: measured.map((m) => m.speciesId),
+        season: seasonFromMonth(month),
+      });
+    } catch { return null; }
+  }, [capacity, acres, herdAU, measured]);
+
+  const recs = useMemo(() => {
+    try { return recommendSpecies({ droughtCategory: droughtCat, preferNative: true }, 5); }
+    catch { return []; }
+  }, [droughtCat]);
+
+  const addPoint = () => setPoints((prev) => [...prev, emptyPoint()]);
+  const removePoint = (id) => setPoints((prev) => prev.filter((p) => p.id !== id));
+  const updatePoint = (id, field, val) =>
+    setPoints((prev) => prev.map((p) => p.id === id ? { ...p, [field]: val } : p));
+
+  const handleIdentify = async (pointId) => {
+    setIdTarget(pointId);
+    fileRef.current?.click();
+  };
+
+  const onFileSelected = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file || !idTarget) return;
+    setIdentifying(true);
+    try {
+      const results = await identifyPlant(file);
+      if (results?.length) {
+        const match = results.find((r) => speciesIdForScientificName(r.scientificName));
+        if (match) {
+          const sid = speciesIdForScientificName(match.scientificName);
+          updatePoint(idTarget, 'speciesId', sid);
+        }
+      }
+    } finally {
+      setIdentifying(false);
+      setIdTarget(null);
+      e.target.value = '';
+    }
+  };
+
+  const capacityAU = capacity ? Math.floor(capacity.usableForageLbPerAcre * acres / 26 / (residencyOrDefault())) : null;
+  function residencyOrDefault() { return 5; }
+
+  const verdictLabel = rotation
+    ? (rotation.recommendedMaxHerdAU >= herdAU ? 'Room to Run' : 'Overstocked')
+    : null;
+  const verdictColor = verdictLabel === 'Room to Run' ? '#8DA06A' : 'var(--bad)';
+
   return (
     <section className="screen on">
       <div className="sh" style={{ marginTop: 0 }}>Grazing Plan</div>
       <p style={{ font: '400 15px/1.5 var(--sans)', color: 'var(--ink2)', marginBottom: 16 }}>
-        Photograph a pasture, tap to measure, get a conservative grazing capacity analysis.
+        Enter species composition from a point-intercept transect, or scan a pasture photo to identify species.
       </p>
 
-      <div className="scan-step">
-        <div className="scan-num">1</div>
-        <div className="scan-body">
-          <div className="scan-title">Photograph</div>
-          <div className="scan-desc">Include a forage stick, tape measure, or T-post for scale reference.</div>
-        </div>
-      </div>
-      <div className="scan-step">
-        <div className="scan-num">2</div>
-        <div className="scan-body">
-          <div className="scan-title">Tap to Measure</div>
-          <div className="scan-desc">Mark the reference object, then mark the forage height. Two taps each.</div>
-        </div>
-      </div>
-      <div className="scan-step">
-        <div className="scan-num">3</div>
-        <div className="scan-body">
-          <div className="scan-title">Enter Details</div>
-          <div className="scan-desc">Pasture acres, herd size, and current month for seasonal adjustment.</div>
-        </div>
-      </div>
+      <input ref={fileRef} type="file" accept="image/*" capture="environment" style={{ display: 'none' }} onChange={onFileSelected} />
 
-      <button className="capture-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <rect x="2" y="5" width="20" height="15" rx="2" />
-          <circle cx="12" cy="13" r="4" />
-          <path d="M8 5V3h8v2" />
-        </svg>
-        <span>Scan a Pasture</span>
+      <div className="sh">Intercept Points</div>
+      {points.map((p, i) => (
+        <div key={p.id} className="card" style={{ marginBottom: 8, padding: 12 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+            <span style={{ font: '600 14px/1 var(--sans)', color: 'var(--ink2)' }}>Point {i + 1}</span>
+            <div style={{ display: 'flex', gap: 4 }}>
+              <button
+                className="act-btn outline"
+                style={{ fontSize: 12, padding: '4px 8px' }}
+                onClick={() => handleIdentify(p.id)}
+                disabled={identifying}
+              >
+                {identifying && idTarget === p.id ? 'Identifying...' : 'ID Plant'}
+              </button>
+              {points.length > 1 && (
+                <button
+                  style={{ background: 'none', border: 'none', color: 'var(--bad)', fontSize: 18, cursor: 'pointer', padding: '4px 8px' }}
+                  onClick={() => removePoint(p.id)}
+                >
+                  ×
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="field" style={{ margin: '0 0 6px' }}>
+            <label>Species</label>
+            <select
+              value={p.speciesId}
+              onChange={(e) => updatePoint(p.id, 'speciesId', e.target.value)}
+              style={{ width: '100%', fontSize: 16, padding: '8px 10px', background: 'var(--card)', color: 'var(--ink)', border: '1px solid var(--line)', borderRadius: 8 }}
+            >
+              {SPECIES_LIST.map((s) => (
+                <option key={s.id} value={s.id}>{s.name}</option>
+              ))}
+            </select>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            <div className="field" style={{ margin: 0 }}>
+              <label>Height (inches)</label>
+              <input type="number" min="0" step="0.5" value={p.height} onChange={(e) => updatePoint(p.id, 'height', num(e.target.value))} />
+            </div>
+            <div className="field" style={{ margin: 0 }}>
+              <label>Share (0–1)</label>
+              <input type="number" min="0" max="1" step="0.05" value={p.share} onChange={(e) => updatePoint(p.id, 'share', Math.min(num(e.target.value), 1))} />
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {totalShare > 1.001 && (
+        <div style={{ font: '400 14px/1.4 var(--sans)', color: 'var(--bad)', marginBottom: 8 }}>
+          Shares sum to {totalShare.toFixed(2)} — must be ≤ 1.0
+        </div>
+      )}
+
+      <button className="act-btn outline" style={{ width: '100%', justifyContent: 'center', marginBottom: 16 }} onClick={addPoint}>
+        + Add Intercept Point
       </button>
 
-      <div className="sh">Sample Result</div>
-      <div className="hero-card">
-        <div className="hero-label">Carrying Capacity</div>
-        <div className="hero-value" style={{ color: '#8DA06A' }}>Room to Run</div>
-        <div className="hero-sub">
-          This pasture can support <strong style={{ color: '#F6F2EA' }}>52 AU</strong> — you're running 45
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+        <div className="field">
+          <label>Pasture Acres</label>
+          <input type="text" inputMode="decimal" value={acres || ''} onChange={(e) => setAcres(num(e.target.value))} />
+        </div>
+        <div className="field">
+          <label>Running Herd (AU)</label>
+          <input type="text" inputMode="decimal" value={herdAU || ''} onChange={(e) => setHerdAU(num(e.target.value))} />
         </div>
       </div>
 
-      <div className="stat-row">
-        <div className="stat">
-          <div className="sl">Usable forage</div>
-          <div className="sv">1,840 <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--ink2)' }}>lb/ac</span></div>
-        </div>
-        <div className="stat">
-          <div className="sl">AU-days/acre</div>
-          <div className="sv">70</div>
-        </div>
-        <div className="stat">
-          <div className="sl">Drought</div>
-          <div className="sv">D1 <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--ink2)' }}>−10%</span></div>
-        </div>
+      <div className="field">
+        <label>Drought Category</label>
+        <select
+          value={droughtCat}
+          onChange={(e) => setDroughtCat(e.target.value)}
+          style={{ width: '100%', fontSize: 16, padding: '10px 12px', background: 'var(--card)', color: 'var(--ink)', border: '1px solid var(--line)', borderRadius: 8 }}
+        >
+          <option value="NONE">None</option>
+          <option value="D0">D0 — Abnormally Dry (−5%)</option>
+          <option value="D1">D1 — Moderate Drought (−10%)</option>
+          <option value="D2">D2 — Severe Drought (−15%)</option>
+          <option value="D3">D3 — Extreme Drought (−25%)</option>
+          <option value="D4">D4 — Exceptional Drought (−40%)</option>
+        </select>
       </div>
 
-      <div className="card" style={{ marginTop: 12 }}>
-        <div className="card-title">Rotation Plan</div>
-        <div className="rot-grid">
-          <div className="rot-stat"><div className="rot-num">5</div><div className="rot-label">Paddocks</div></div>
-          <div className="rot-stat"><div className="rot-num">5</div><div className="rot-label">Graze Days</div></div>
-          <div className="rot-stat"><div className="rot-num">20</div><div className="rot-label">Rest Days</div></div>
-          <div className="rot-stat"><div className="rot-num">16</div><div className="rot-label">Acres Each</div></div>
+      {capacity && (
+        <>
+          <div className="sh">Analysis</div>
+          <div className="hero-card">
+            <div className="hero-label">Carrying Capacity</div>
+            <div className="hero-value" style={{ color: verdictColor }}>{verdictLabel}</div>
+            <div className="hero-sub">
+              This pasture can support <strong style={{ color: '#F6F2EA' }}>{rotation?.recommendedMaxHerdAU ?? '—'} AU</strong> — you're running {herdAU}
+            </div>
+          </div>
+
+          <div className="stat-row">
+            <div className="stat">
+              <div className="sl">Usable forage</div>
+              <div className="sv">{capacity.usableForageLbPerAcre.toLocaleString()} <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--ink2)' }}>lb/ac</span></div>
+            </div>
+            <div className="stat">
+              <div className="sl">AU-days/acre</div>
+              <div className="sv">{capacity.cattleAUDaysPerAcre}</div>
+            </div>
+            <div className="stat">
+              <div className="sl">Drought</div>
+              <div className="sv">{droughtCat === 'NONE' ? '—' : droughtCat} <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--ink2)' }}>{droughtReduction ? `−${Math.round(droughtReduction*100)}%` : ''}</span></div>
+            </div>
+          </div>
+
+          {rotation && (
+            <div className="card" style={{ marginTop: 12 }}>
+              <div className="card-title">Rotation Plan</div>
+              <div className="rot-grid">
+                <div className="rot-stat"><div className="rot-num">{rotation.numPaddocks}</div><div className="rot-label">Paddocks</div></div>
+                <div className="rot-stat"><div className="rot-num">{rotation.residencyDaysPerPaddock}</div><div className="rot-label">Graze Days</div></div>
+                <div className="rot-stat"><div className="rot-num">{rotation.restPeriodDays}</div><div className="rot-label">Rest Days</div></div>
+                <div className="rot-stat"><div className="rot-num">{Math.round(rotation.paddockAcres)}</div><div className="rot-label">Acres Each</div></div>
+              </div>
+            </div>
+          )}
+
+          {capacity.contributions.length > 0 && (
+            <div className="card" style={{ marginTop: 12 }}>
+              <div className="card-title">Species Contributions</div>
+              {capacity.contributions.map((c, i) => {
+                const sp = SPECIES_CATALOG[c.speciesId];
+                return (
+                  <div key={i} className="cost-row">
+                    <span className="cost-label">{sp?.name || c.speciesId}</span>
+                    <span className="cost-val">{Math.round(c.standingLbPerAcre)} lb/ac ({Math.round(c.share * 100)}%)</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </>
+      )}
+
+      <div className="sh" style={{ marginTop: 24 }}>Species Recommendations</div>
+      <p style={{ font: '400 14px/1.4 var(--sans)', color: 'var(--ink2)', marginBottom: 12 }}>
+        Best-fit species for current conditions{droughtCat !== 'NONE' ? ` (${droughtCat} drought)` : ''}, prioritizing native grasses.
+      </p>
+      {recs.map((r) => (
+        <div key={r.speciesId} className="card" style={{ marginBottom: 8, padding: 12 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div>
+              <div style={{ font: '600 15px/1.3 var(--sans)', color: 'var(--ink)' }}>{r.commonName}</div>
+              <div style={{ font: '400 13px/1.4 var(--sans)', color: 'var(--ink2)', marginTop: 2 }}>{r.rationale}</div>
+            </div>
+            <div style={{ display: 'flex', gap: 4, flexShrink: 0, marginLeft: 8 }}>
+              {r.native && <span className="pill pill-ok" style={{ fontSize: 11 }}>Native</span>}
+              <span className="pill pill-muted" style={{ fontSize: 11 }}>{r.growthSeason}</span>
+            </div>
+          </div>
+          <div style={{ font: '400 13px/1.3 var(--sans)', color: 'var(--ink3)', marginTop: 4 }}>
+            Seeding: {r.preferredSeedingMethod.replace(/_/g, ' ')} · Drought tolerance: {r.droughtTolerance}
+          </div>
         </div>
-      </div>
+      ))}
 
       <p style={{ font: '400 14px/1.4 var(--sans)', color: 'var(--ink3)', marginTop: 16, textAlign: 'center' }}>
         Conservative by design — numbers round down and apply a safety buffer.

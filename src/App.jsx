@@ -37,6 +37,7 @@ export default function App() {
   const [tab, setTab] = useStoredState('arpent.tab', 'home');
   const [subs, setSubs] = useStoredState('arpent.subs', DEFAULT_SUBS);
   const [theme, setTheme] = useStoredState('arpent.theme', 'day');
+  const [zip, setZip] = useStoredState('arpent.zip', '67646');
 
   const toggleTheme = useCallback(() => {
     const next = theme === 'day' ? 'field' : 'day';
@@ -44,7 +45,6 @@ export default function App() {
     document.documentElement.setAttribute('data-theme', next);
   }, [theme, setTheme]);
 
-  // sync data-theme on mount
   if (typeof document !== 'undefined') {
     document.documentElement.setAttribute('data-theme', theme);
   }
@@ -72,8 +72,8 @@ export default function App() {
         <main className="content">
           {tab === 'home' && <HomeTab navigate={navigate} />}
           {tab === 'herd' && <HerdTab sub={activeSub} />}
-          {tab === 'land' && <LandTab sub={activeSub} />}
-          {tab === 'market' && <MarketTab sub={activeSub} />}
+          {tab === 'land' && <LandTab sub={activeSub} zip={zip} />}
+          {tab === 'market' && <MarketTab sub={activeSub} zip={zip} onZipChange={setZip} />}
         </main>
         <BottomNav active={tab} onChange={setTab} />
       </div>

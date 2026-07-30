@@ -12,10 +12,12 @@ export function useStoredState(key, initial) {
 
   const set = useCallback(
     (next) => {
-      setValue(next);
-      try {
-        localStorage.setItem(key, JSON.stringify(next));
-      } catch { /* quota or private mode */ }
+      setValue((prev) => {
+        const resolved = typeof next === 'function' ? next(prev) : next;
+        try { localStorage.setItem(key, JSON.stringify(resolved)); }
+        catch { /* quota or private mode */ }
+        return resolved;
+      });
     },
     [key],
   );
