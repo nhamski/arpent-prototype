@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { timingFor, standingLabel, MON, MONTHS, inWindow } from '../engine/sellTiming.js';
+import { timingFor, standingLabel, MON, MONTHS } from '../engine/sellTiming.js';
 import { liveFor, liveSheepFor, signalLabel } from '../engine/liveSignal.js';
 import SeasonBars from '../components/SeasonBars.jsx';
 import PriceBars from '../components/PriceBars.jsx';

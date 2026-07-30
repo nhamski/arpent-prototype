@@ -53,6 +53,30 @@ export default defineConfig({
               expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 },
             },
           },
+          {
+            urlPattern: /^https:\/\/archive-api\.open-meteo\.com\/.*/i,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'open-meteo-cache',
+              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/api\.zippopotam\.us\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'geo-zip-cache',
+              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 30 },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/geo\.fcc\.gov\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'geo-fcc-cache',
+              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 30 },
+            },
+          },
         ],
       },
     }),

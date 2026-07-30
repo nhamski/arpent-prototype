@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useStoredState } from './hooks/useStoredState';
 import { cachedUser, signIn, signOut, resumeRedirect } from './auth/auth.js';
-import { isApprovedEmail, getUserByEmail } from './auth/users.js';
+import { isApprovedEmail } from './auth/users.js';
 import { friendlyError } from './lib/errors.js';
 import BootScreen from './components/BootScreen';
 import TopBar from './components/TopBar';

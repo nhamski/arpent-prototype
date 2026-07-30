@@ -1,4 +1,5 @@
-const USDM_BASE = 'https://droughtmonitor.unl.edu/DmData/DataDownload.aspx';
+import { DROUGHT_CATEGORY_REDUCTION } from '../engine/constants.js';
+
 const USDM_API = 'https://usdmdataservices.unl.edu/api';
 const CACHE_KEY = 'arpent.usdm';
 const CACHE_TTL = 24 * 60 * 60 * 1000;
@@ -84,8 +85,7 @@ export function parseDroughtCategory(stats) {
 }
 
 export function droughtReduction(category) {
-  const map = { None: 0, D0: 0.05, D1: 0.10, D2: 0.15, D3: 0.25, D4: 0.40 };
-  return map[category] ?? 0;
+  return DROUGHT_CATEGORY_REDUCTION[category] ?? 0;
 }
 
 function today() {

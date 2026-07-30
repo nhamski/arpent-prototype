@@ -1,14 +1,6 @@
 import { useMemo } from 'react';
 import { useStoredState } from '../hooks/useStoredState.js';
-
-const DEFAULT_COSTS = [
-  { id: 'feed', label: 'Feed & mineral', val: 2400 },
-  { id: 'pasture', label: 'Pasture rent', val: 1800 },
-  { id: 'labor', label: 'Labor', val: 800 },
-  { id: 'vet', label: 'Vet & supplies', val: 600 },
-  { id: 'equip', label: 'Equipment', val: 400 },
-  { id: 'ins', label: 'Insurance', val: 250 },
-];
+import { DEFAULT_COSTS } from '../data/defaults.js';
 
 const fmt = (n) => `$${Math.round(n).toLocaleString()}`;
 

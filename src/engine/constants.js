@@ -12,6 +12,7 @@ export const REFERENCE_OBJECT_LENGTHS_INCHES = {
 
 export const DROUGHT_CATEGORY_REDUCTION = {
   NONE: 0.00,
+  None: 0.00,
   D0: 0.05,
   D1: 0.10,
   D2: 0.15,

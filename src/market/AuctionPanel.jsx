@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { evaluate, verdict as bidVerdict } from '../engine/maxBid.js';
+import { evaluate } from '../engine/maxBid.js';
 import { makeLot, saleTotals, budgetState, lotMargin, underCeiling } from '../engine/sale.js';
 import { fetchColbyResults, parseColbyResults, avgPriceByClass } from '../data/colbyScraper.js';
 import { useStore } from '../hooks/useStore.js';

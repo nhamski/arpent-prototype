@@ -1,14 +1,8 @@
 import { useState, useMemo } from 'react';
 import { useStore } from '../hooks/useStore.js';
 import { useStoredState } from '../hooks/useStoredState.js';
-import { getLatestAnalysis, getAnalyses, getProductivityTrend } from '../data/analysisStore.js';
-
-const DEFAULT_PASTURES = [
-  { id: 'p1', name: 'North 80', acres: 80, head: 45, species: 'cattle', condition: 'Good', grazeDays: 18, totalDays: 21, resting: false, notes: '' },
-  { id: 'p2', name: 'South Creek', acres: 160, head: 0, species: 'cattle', condition: 'Fair', grazeDays: 12, totalDays: 35, resting: true, notes: '' },
-  { id: 'p3', name: 'Highway', acres: 40, head: 22, species: 'cattle', condition: 'Good', grazeDays: 5, totalDays: 21, resting: false, notes: '' },
-  { id: 'p4', name: 'East Pasture', acres: 120, head: 34, species: 'sheep', condition: 'Good', grazeDays: 8, totalDays: 14, resting: false, notes: '' },
-];
+import { getLatestAnalysis, getAnalyses, getProductivityTrend, deleteAnalysis } from '../data/analysisStore.js';
+import { DEFAULT_PASTURES } from '../data/defaults.js';
 
 function initPastures() {
   try {
@@ -22,8 +16,14 @@ function emptyPasture() {
 }
 
 function PastureAnalyses({ pastureId }) {
+  const [rev, setRev] = useState(0);
   const analyses = getAnalyses(pastureId);
   if (!analyses.length) return null;
+
+  const handleDelete = (id) => {
+    deleteAnalysis(id);
+    setRev((r) => r + 1);
+  };
 
   const trend = getProductivityTrend(pastureId);
   const maxCap = trend.length ? Math.max(...trend.map((t) => t.avgCapacity)) : 0;
@@ -56,12 +56,19 @@ function PastureAnalyses({ pastureId }) {
       {analyses.slice(0, 10).map((a) => {
         const d = new Date(a.date);
         return (
-          <div key={a.id} className="cost-row">
+          <div key={a.id} className="cost-row" style={{ alignItems: 'center' }}>
             <span className="cost-label">
               {d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
               {a.droughtCategory && a.droughtCategory !== 'NONE' ? ` · ${a.droughtCategory}` : ''}
             </span>
-            <span className="cost-val">{a.usableForageLbPerAcre?.toLocaleString()} lb/ac</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span className="cost-val">{a.usableForageLbPerAcre?.toLocaleString()} lb/ac</span>
+              <button
+                onClick={() => handleDelete(a.id)}
+                style={{ background: 'none', border: 'none', color: 'var(--ink3)', fontSize: 16, cursor: 'pointer', padding: '2px 4px', lineHeight: 1 }}
+                aria-label="Delete analysis"
+              >×</button>
+            </span>
           </div>
         );
       })}

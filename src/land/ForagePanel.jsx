@@ -5,6 +5,8 @@ import { computeDepletion } from '../engine/depletion.js';
 import { recommendSpecies } from '../engine/recommendations.js';
 import { buildBuyCullReport, renderBuyCullText } from '../engine/buyCull.js';
 import { SPECIES_CATALOG, speciesIdForScientificName } from '../engine/species.js';
+import { cattleToAU, sheepToAU } from '../engine/livestock.js';
+import { DROUGHT_CATEGORY_REDUCTION } from '../engine/constants.js';
 import { useStoredState } from '../hooks/useStoredState.js';
 import { identifyPlant } from '../data/plantnetApi.js';
 import PhotoMeasure from '../components/PhotoMeasure.jsx';
@@ -191,13 +193,13 @@ export default function ForagePanel({ zip }) {
       const p = pastures.find((x) => x.id === id);
       if (p) {
         setAcres(p.acres || 80);
-        const auFactor = p.species === 'sheep' ? 0.2 : 1;
-        setHerdAU(Math.round(p.head * auFactor) || 45);
+        const au = p.species === 'sheep' ? sheepToAU(p.head) : cattleToAU(p.head);
+        setHerdAU(Math.round(au) || 45);
       }
     }
   }, [pastures, setSelectedPasture]);
 
-  const droughtReduction = { NONE: 0, D0: 0.05, D1: 0.10, D2: 0.15, D3: 0.25, D4: 0.40 }[droughtCat] || 0;
+  const droughtReduction = DROUGHT_CATEGORY_REDUCTION[droughtCat] ?? 0;
 
   const measured = useMemo(() =>
     points.filter((p) => p.speciesId && p.height > 0 && p.share > 0).map((p) => ({
