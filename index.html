@@ -272,7 +272,16 @@ input,select{font:inherit}
 .timing-row-name{font:500 13px/1 var(--sans);color:var(--ink);margin-bottom:8px}
 .timing-row-data{display:flex;align-items:center;gap:10px}
 .timing-heatmap{display:flex;gap:2px;flex:1;min-width:0}
-.hm{flex:1;height:24px;border-radius:3px;min-width:0}
+.hm{flex:1;height:24px;border-radius:3px;min-width:0;position:relative}
+.timing-heatmap{padding-bottom:16px}
+.hm::after{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
+  font:500 9px/1 var(--sans);color:var(--ink3)}
+.hm:nth-child(1)::after{content:'J'}.hm:nth-child(2)::after{content:'F'}
+.hm:nth-child(3)::after{content:'M'}.hm:nth-child(4)::after{content:'A'}
+.hm:nth-child(5)::after{content:'M'}.hm:nth-child(6)::after{content:'J'}
+.hm:nth-child(7)::after{content:'J'}.hm:nth-child(8)::after{content:'A'}
+.hm:nth-child(9)::after{content:'S'}.hm:nth-child(10)::after{content:'O'}
+.hm:nth-child(11)::after{content:'N'}.hm:nth-child(12)::after{content:'D'}
 .hm-1{background:#9E5040}.hm-2{background:#C4876E}
 .hm-3{background:#C5B99E}.hm-4{background:#97A472}.hm-5{background:#5E7038}
 .timing-signals{display:flex;flex-direction:column;gap:4px;flex-shrink:0;align-items:flex-end}
@@ -933,7 +942,7 @@ input,select{font:inherit}
         <span class="timing-cat-label">Steers</span>
       </div>
       <div class="timing-table">
-        <div class="timing-thead"><span>Jan → Dec</span><span>Best / Worst</span></div>
+        <div class="timing-thead"><span></span><span>Best / Worst</span></div>
         <div class="timing-row">
           <div class="timing-row-name">Str Calves 300–400#</div>
           <div class="timing-row-data">
@@ -968,7 +977,7 @@ input,select{font:inherit}
         <span class="timing-cat-label">Heifers</span>
       </div>
       <div class="timing-table">
-        <div class="timing-thead"><span>Jan → Dec</span><span>Best / Worst</span></div>
+        <div class="timing-thead"><span></span><span>Best / Worst</span></div>
         <div class="timing-row">
           <div class="timing-row-name">Hfr Calves 300–400#</div>
           <div class="timing-row-data">
@@ -989,7 +998,7 @@ input,select{font:inherit}
         <span class="timing-cat-label">Sheep</span>
       </div>
       <div class="timing-table">
-        <div class="timing-thead"><span>Jan → Dec</span><span>Best / Worst</span></div>
+        <div class="timing-thead"><span></span><span>Best / Worst</span></div>
         <div class="timing-row">
           <div class="timing-row-name">Fdr Lambs 60–90#</div>
           <div class="timing-row-data">
