@@ -30,6 +30,10 @@ jobs:
         env:
           AMS_API_KEY: ${{ secrets.AMS_API_KEY }}
         run: |
+          if [ -z "$AMS_API_KEY" ]; then
+            echo "AMS_API_KEY not set — skipping. Add it in Settings > Secrets to enable daily price updates."
+            exit 0
+          fi
           node tools/pull-mars.mjs 1895 .cache/mars-1895.json
           node tools/build-live.mjs .cache/mars-1895.json
           node tools/pull-mars.mjs 1899 .cache/mars-1899.json
