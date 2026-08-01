@@ -327,6 +327,7 @@ export default function ForagePanel({ zip }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
             <span style={{ font: '600 14px/1 var(--sans)', color: 'var(--ink2)' }}>Point {i + 1}</span>
             <div style={{ display: 'flex', gap: 4 }}>
+              {import.meta.env.VITE_PLANTNET_API_KEY && (
               <button
                 className="act-btn outline"
                 style={{ fontSize: 12, padding: '4px 8px' }}
@@ -335,6 +336,7 @@ export default function ForagePanel({ zip }) {
               >
                 {identifying && idTarget === p.id ? 'Identifying...' : 'ID Plant'}
               </button>
+              )}
               {points.length > 1 && (
                 <button
                   style={{ background: 'none', border: 'none', color: 'var(--bad)', fontSize: 18, cursor: 'pointer', padding: '4px 8px' }}
