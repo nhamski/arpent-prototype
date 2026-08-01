@@ -6,26 +6,26 @@
     {
       "region": "Fort Collins, CO",
       "slug": 1899,
-      "weekEnding": "2026-07-15",
-      "pricePerCwt": 262.79,
-      "headCount": 599,
-      "trailing12moAvg": 285.56
+      "weekEnding": "2026-07-29",
+      "pricePerCwt": 290.04,
+      "headCount": 602,
+      "trailing12moAvg": 288.46
     },
     {
       "region": "Missouri",
       "slug": 1833,
-      "weekEnding": "2026-07-11",
-      "pricePerCwt": 266.12,
-      "headCount": 1760,
-      "trailing12moAvg": 307.2
+      "weekEnding": "2026-08-01",
+      "pricePerCwt": 252.66,
+      "headCount": 529,
+      "trailing12moAvg": 309.32
     },
     {
       "region": "San Angelo, TX",
       "slug": 2014,
-      "weekEnding": "2026-07-14",
-      "pricePerCwt": 257.64,
-      "headCount": 2096,
-      "trailing12moAvg": 331.28
+      "weekEnding": "2026-07-28",
+      "pricePerCwt": 277.55,
+      "headCount": 1589,
+      "trailing12moAvg": 331.63
     }
   ]
 }
