@@ -48,6 +48,7 @@ jobs:
           if [ -n "$(git status --porcelain src/data/live)" ]; then
             git add src/data/live
             git commit -m "Live price update $(date -u +%Y-%m-%d)"
+            git pull --rebase origin main
             git push
           else
             echo "No price change this run."
