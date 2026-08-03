@@ -1,78 +1,78 @@
 {
   "source": "USDA AMS report 1895 — Kansas Weekly Cattle Auction Summary (Dodge City, Pratt, Salina)",
   "region": "Kansas",
-  "weekEnding": "2026-07-25",
+  "weekEnding": "2026-08-01",
   "note": "Latest weekly weighted-average auction prices, with a trailing-12-month average for the seasonal comparison. Public domain (USDA). Refreshed daily by the live-price GitHub Action.",
   "prices": [
     {
       "sex": "steer",
       "weightClass": "400-500 lb",
-      "pricePerCwt": 469.23,
-      "headCount": 15,
-      "trailing12moAvg": 532.94
+      "pricePerCwt": 462.95,
+      "headCount": 13,
+      "trailing12moAvg": 533.55
     },
     {
       "sex": "steer",
       "weightClass": "500-600 lb",
-      "pricePerCwt": 434.49,
-      "headCount": 119,
-      "trailing12moAvg": 470.07
+      "pricePerCwt": 423.2,
+      "headCount": 38,
+      "trailing12moAvg": 470.54
     },
     {
       "sex": "steer",
       "weightClass": "600-700 lb",
-      "pricePerCwt": 407.92,
-      "headCount": 523,
-      "trailing12moAvg": 412.98
+      "pricePerCwt": 392.99,
+      "headCount": 87,
+      "trailing12moAvg": 413.31
     },
     {
       "sex": "steer",
       "weightClass": "700-800 lb",
-      "pricePerCwt": 366.59,
-      "headCount": 802,
-      "trailing12moAvg": 377.49
+      "pricePerCwt": 362.9,
+      "headCount": 219,
+      "trailing12moAvg": 378.05
     },
     {
       "sex": "steer",
       "weightClass": "800-900 lb",
-      "pricePerCwt": 347.94,
-      "headCount": 1884,
-      "trailing12moAvg": 354.98
+      "pricePerCwt": 344.34,
+      "headCount": 298,
+      "trailing12moAvg": 356.11
     },
     {
       "sex": "heifer",
       "weightClass": "400-500 lb",
-      "pricePerCwt": 446.06,
-      "headCount": 76,
-      "trailing12moAvg": 473.12
+      "pricePerCwt": 406.36,
+      "headCount": 11,
+      "trailing12moAvg": 474.76
     },
     {
       "sex": "heifer",
       "weightClass": "500-600 lb",
-      "pricePerCwt": 396.8,
-      "headCount": 102,
-      "trailing12moAvg": 417.44
+      "pricePerCwt": 391.6,
+      "headCount": 139,
+      "trailing12moAvg": 418.23
     },
     {
       "sex": "heifer",
       "weightClass": "600-700 lb",
-      "pricePerCwt": 365,
-      "headCount": 492,
-      "trailing12moAvg": 374.37
+      "pricePerCwt": 364.64,
+      "headCount": 114,
+      "trailing12moAvg": 374.72
     },
     {
       "sex": "heifer",
       "weightClass": "700-800 lb",
-      "pricePerCwt": 336.1,
-      "headCount": 956,
-      "trailing12moAvg": 346.85
+      "pricePerCwt": 340.2,
+      "headCount": 389,
+      "trailing12moAvg": 347.28
     },
     {
       "sex": "heifer",
       "weightClass": "800-900 lb",
-      "pricePerCwt": 322.47,
-      "headCount": 646,
-      "trailing12moAvg": 326.99
+      "pricePerCwt": 326.8,
+      "headCount": 828,
+      "trailing12moAvg": 327.37
     }
   ]
 }
