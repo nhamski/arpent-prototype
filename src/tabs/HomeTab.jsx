@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useStoredState } from '../hooks/useStoredState.js';
 import { DEFAULT_COSTS, DEFAULT_PASTURES } from '../data/defaults.js';
+import PricingPanel, { useTrialState } from '../components/PricingPanel.jsx';
 
 function load(key, fallback) {
   try {
@@ -21,7 +22,9 @@ function relTime(ts) {
   return `${days}d ago`;
 }
 
-export default function HomeTab({ navigate }) {
+export default function HomeTab({ navigate, user }) {
+  const [showPricing, setShowPricing] = useState(false);
+  const [trial] = useTrialState();
   const pastures = load('arpent.pastures', DEFAULT_PASTURES);
   const costs = load('arpent.costs', DEFAULT_COSTS);
   const [headCount] = useStoredState('arpent.headCount', 281);
@@ -120,6 +123,37 @@ export default function HomeTab({ navigate }) {
 
   return (
     <section className="screen on">
+      {showPricing && (
+        <PricingPanel onClose={() => setShowPricing(false)} user={user} />
+      )}
+
+      <div
+        className="home-plan-card"
+        onClick={() => setShowPricing(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === 'Enter' && setShowPricing(true)}
+      >
+        <div className="home-plan-info">
+          <div className="home-plan-label">
+            {trial.isPaid ? 'Your Plan' : 'Free Trial'}
+          </div>
+          <div className="home-plan-value">
+            {trial.isLifetime
+              ? 'Lifetime Pro'
+              : trial.plan === 'monthly'
+                ? 'Monthly — $10/mo'
+                : `${trial.remaining} days left`}
+          </div>
+          {!trial.isPaid && trial.totalEarned < 90 && (
+            <div className="home-plan-sub">Earn up to {90 - trial.totalEarned} more free days</div>
+          )}
+        </div>
+        <button className="home-plan-btn" onClick={(e) => { e.stopPropagation(); setShowPricing(true); }}>
+          {trial.isPaid ? 'Manage' : 'Upgrade'}
+        </button>
+      </div>
+
       <div className="tiles">
         <div className="tile">
           <div className="tl">Cattle</div>

@@ -108,7 +108,7 @@ export default function App() {
           <SubTabs tabs={subTabs} active={activeSub} onChange={handleSubChange} />
         )}
         <main className="content">
-          {tab === 'home' && <HomeTab navigate={navigate} />}
+          {tab === 'home' && <HomeTab navigate={navigate} user={user} />}
           {tab === 'herd' && <HerdTab sub={activeSub} />}
           {tab === 'land' && <LandTab sub={activeSub} zip={zip} />}
           {tab === 'market' && <MarketTab sub={activeSub} zip={zip} onZipChange={setZip} />}
