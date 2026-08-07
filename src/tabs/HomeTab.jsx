@@ -135,22 +135,12 @@ export default function HomeTab({ navigate, user }) {
         onKeyDown={(e) => e.key === 'Enter' && setShowPricing(true)}
       >
         <div className="home-plan-info">
-          <div className="home-plan-label">
-            {trial.isPaid ? 'Your Plan' : 'Free Trial'}
-          </div>
-          <div className="home-plan-value">
-            {trial.isLifetime
-              ? 'Lifetime Pro'
-              : trial.plan === 'monthly'
-                ? 'Monthly — $10/mo'
-                : `${trial.remaining} days left`}
-          </div>
-          {!trial.isPaid && trial.totalEarned < 90 && (
-            <div className="home-plan-sub">Earn up to {90 - trial.totalEarned} more free days</div>
-          )}
+          <div className="home-plan-label">Prototype</div>
+          <div className="home-plan-value">Free Access</div>
+          <div className="home-plan-sub">Free while we're building. See what's coming.</div>
         </div>
         <button className="home-plan-btn" onClick={(e) => { e.stopPropagation(); setShowPricing(true); }}>
-          {trial.isPaid ? 'Manage' : 'Upgrade'}
+          Plans
         </button>
       </div>
 

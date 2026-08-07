@@ -115,38 +115,20 @@ export default function PricingPanel({ onClose, user }) {
           Back
         </button>
 
-        {/* Trial Progress */}
-        {!trial.isPaid && (
-          <div className="trial-banner">
-            <div className="trial-label">Free Trial</div>
-            <div className="trial-days">
-              {trial.totalEarned} <span className="trial-max">/ {MAX_TRIAL_DAYS} days earned</span>
-            </div>
-            <div className="trial-sub">
-              {trial.remaining > 0
-                ? `${trial.remaining} days remaining`
-                : 'Trial expired'}
-            </div>
-            <div className="trial-track">
-              <div className="trial-fill" style={{ width: `${progressPct}%` }} />
-            </div>
+        {/* Prototype Banner */}
+        <div className="trial-banner">
+          <div className="trial-label">Prototype</div>
+          <div className="trial-days">
+            Free Access
           </div>
-        )}
-
-        {trial.isPaid && (
-          <div className="trial-banner">
-            <div className="trial-label">Your Plan</div>
-            <div className="trial-days">
-              {trial.isLifetime ? 'Lifetime Pro' : 'Monthly'}
-            </div>
-            <div className="trial-sub">
-              {trial.isLifetime ? 'Unlimited access — forever' : '$10/mo — cancel anytime'}
-            </div>
+          <div className="trial-sub">
+            Arpent is in active development. Everything is free while we're in prototype.
+            Paid plans kick in when we launch.
           </div>
-        )}
+        </div>
 
         {/* Pricing Cards */}
-        <div className="sh">Choose Your Plan</div>
+        <div className="sh">Plans at Launch</div>
 
         <div className="plan-grid">
           {/* Monthly */}
@@ -166,11 +148,8 @@ export default function PricingPanel({ onClose, user }) {
               <li>Offline-first PWA</li>
               <li>All future updates</li>
             </ul>
-            <button
-              className="plan-btn plan-btn-outline"
-              onClick={() => setTrial((p) => ({ ...p, plan: 'monthly' }))}
-            >
-              {trial.plan === 'monthly' ? 'Current Plan' : 'Start Monthly'}
+            <button className="plan-btn plan-btn-outline" disabled>
+              Available at Launch
             </button>
           </div>
 
@@ -201,23 +180,21 @@ export default function PricingPanel({ onClose, user }) {
               <li>Direct phone/text support</li>
               <li>Priority feature requests</li>
             </ul>
-            <button
-              className="plan-btn plan-btn-solid"
-              onClick={() => setTrial((p) => ({ ...p, plan: 'lifetime' }))}
-            >
-              {trial.plan === 'lifetime' ? 'Current Plan' : 'Get Lifetime Access'}
+            <button className="plan-btn plan-btn-solid" disabled>
+              Available at Launch
             </button>
           </div>
         </div>
 
         <div className="guarantee">
-          <strong>No credit card required to start.</strong> Try everything free for {BASE_TRIAL_DAYS} days — earn up to {MAX_TRIAL_DAYS}.
+          <strong>Free during prototype.</strong> Use everything now — no credit card, no limits.
+          Paid plans and the trial system activate when we launch.
         </div>
 
-        {/* Earn More Free Days */}
+        {/* Earn More Free Days — preview of what's coming */}
         {!trial.isPaid && (
           <>
-            <div className="sh">Earn More Free Days</div>
+            <div className="sh">At Launch: Earn More Free Days</div>
 
             {/* Review Widget */}
             <div className="earn-card">
