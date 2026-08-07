@@ -38,6 +38,8 @@ function setupToInputs(s) {
   };
 }
 
+const HELP_EMAIL = import.meta.env.VITE_HELP_EMAIL || 'help@arpent.us.com';
+
 const num = (v) => { const n = parseFloat(String(v).replace(/,/g, '')); return Number.isFinite(n) ? n : 0; };
 const fmt = (n) => n != null && Number.isFinite(n) ? `$${Math.round(n).toLocaleString()}` : '—';
 const fmtCwt = (n) => n != null && Number.isFinite(n) ? `$${n.toFixed(2)}` : '—';
@@ -161,6 +163,17 @@ export default function AuctionPanel({ zip, onZipChange }) {
           <div className="barn-meta">{b.meta2}</div>
         </div>
       ))}
+
+      <a
+        href={`mailto:${HELP_EMAIL}?subject=${encodeURIComponent('Sale Barn Data Request')}&body=${encodeURIComponent('Sale barn name:\nLocation (city, state):\nSale day(s):\nSpecies sold (cattle, sheep, goats, etc.):\nWebsite or Facebook link (if available):\n')}`}
+        className="barn-request"
+      >
+        <div className="barn-request-icon">+</div>
+        <div>
+          <div className="barn-request-title">Request Your Sale Barn</div>
+          <div className="barn-request-sub">Don't see your barn? We'll pull their data and add it to your app.</div>
+        </div>
+      </a>
 
       {colbyAvgs.length > 0 && (
         <>
