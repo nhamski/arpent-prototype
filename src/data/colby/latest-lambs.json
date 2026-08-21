@@ -1,63 +1,59 @@
 {
   "source": "Colby Livestock Auction — operator-maintained weekly report",
-  "weekEnding": "2026-07-23",
-  "yearAgoTarget": "2025-07-23",
+  "weekEnding": "2026-08-13",
+  "yearAgoTarget": "2025-08-13",
   "unit": "$/cwt (range)",
   "lambs": [
     {
-      "low": 275,
-      "high": 365,
-      "mid": 320,
-      "weight": "20-39#",
-      "yearAgoMid": 365,
-      "changePct": -12.3
-    },
-    {
-      "low": 230,
-      "high": 335,
-      "mid": 282.5,
+      "low": 265,
+      "high": 385,
+      "mid": 325,
       "weight": "40-59#",
-      "yearAgoMid": 300,
-      "changePct": -5.8
+      "yearAgoMid": 212.5,
+      "changePct": 52.9
     },
     {
-      "low": 235,
-      "high": 265,
-      "mid": 250,
+      "low": 275,
+      "high": 345,
+      "mid": 310,
       "weight": "60-79#",
-      "yearAgoMid": 240,
-      "changePct": 4.2
+      "yearAgoMid": 197.5,
+      "changePct": 57
     },
     {
-      "low": 225,
+      "low": 245,
+      "high": 295,
+      "mid": 270,
+      "weight": "80-99#",
+      "yearAgoMid": 185,
+      "changePct": 45.9
+    },
+    {
+      "low": 240,
       "high": 270,
-      "mid": 247.5,
+      "mid": 255,
       "weight": "100+#",
-      "yearAgoMid": 200,
-      "changePct": 23.8
+      "yearAgoMid": 177.5,
+      "changePct": 43.7
     }
   ],
   "ewes": {
-    "low": 80,
-    "high": 170,
-    "mid": 125,
-    "yearAgoMid": 102.5,
-    "changePct": 22
+    "low": 70,
+    "high": 165,
+    "mid": 117.5,
+    "yearAgoMid": 70,
+    "changePct": 67.9
   },
   "rams": {
-    "low": 130,
-    "high": 220,
-    "mid": 175,
-    "yearAgoMid": 127.5,
-    "changePct": 37.3
+    "low": 95,
+    "high": 140,
+    "mid": 117.5,
+    "yearAgoMid": 105,
+    "changePct": 11.9
   },
   "slaughter12mo": {
     "weight": "100+#",
     "months": [
-      {
-        "label": "Aug",
-        "avg": 181.25
-      },
       {
         "label": "Sep",
         "avg": 183.5
@@ -101,6 +97,10 @@
       {
         "label": "Jul",
         "avg": 253.75
+      },
+      {
+        "label": "Aug",
+        "avg": 242.5
       }
     ]
   }
