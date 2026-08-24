@@ -14,10 +14,10 @@
     {
       "region": "Missouri",
       "slug": 1833,
-      "weekEnding": "2026-08-15",
-      "pricePerCwt": 304.15,
-      "headCount": 105,
-      "trailing12moAvg": 311.38
+      "weekEnding": "2026-08-22",
+      "pricePerCwt": 302.8,
+      "headCount": 660,
+      "trailing12moAvg": 312.53
     },
     {
       "region": "San Angelo, TX",
