@@ -13713,6 +13713,144 @@
           "mid": 77.5
         }
       ]
+    },
+    {
+      "weekEnding": "2026-08-20",
+      "prices": [
+        {
+          "category": "STRS",
+          "weight": null,
+          "low": 1000,
+          "high": 1000,
+          "mid": 1000
+        },
+        {
+          "category": "HFRS",
+          "weight": null,
+          "low": 1000,
+          "high": 1000,
+          "mid": 1000
+        },
+        {
+          "category": "SOWS",
+          "weight": null,
+          "low": 27,
+          "high": 36,
+          "mid": 31.5
+        },
+        {
+          "category": "FAT HOGS",
+          "weight": "150-350#",
+          "low": 50,
+          "high": 65,
+          "mid": 57.5
+        },
+        {
+          "category": "EWES",
+          "weight": null,
+          "low": 100,
+          "high": 150,
+          "mid": 125
+        },
+        {
+          "category": "RAMS",
+          "weight": null,
+          "low": 120,
+          "high": 155,
+          "mid": 137.5
+        },
+        {
+          "category": "LAMBS",
+          "weight": "20-39#",
+          "low": 250,
+          "high": 300,
+          "mid": 275
+        },
+        {
+          "category": "LAMBS",
+          "weight": "40-59#",
+          "low": 225,
+          "high": 325,
+          "mid": 275
+        },
+        {
+          "category": "LAMBS",
+          "weight": "60-79#",
+          "low": 225,
+          "high": 300,
+          "mid": 262.5
+        },
+        {
+          "category": "LAMBS",
+          "weight": "80-99#",
+          "low": 200,
+          "high": 265,
+          "mid": 232.5
+        },
+        {
+          "category": "LAMBS",
+          "weight": "100+#",
+          "low": 200,
+          "high": 255,
+          "mid": 227.5
+        },
+        {
+          "category": "BILLIES",
+          "weight": null,
+          "low": 185,
+          "high": 225,
+          "mid": 205
+        },
+        {
+          "category": "NANNIES",
+          "weight": null,
+          "low": 100,
+          "high": 185,
+          "mid": 142.5
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "20-39#",
+          "low": 250,
+          "high": 485,
+          "mid": 367.5
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "40-59#",
+          "low": 250,
+          "high": 445,
+          "mid": 347.5
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "60-79#",
+          "low": 250,
+          "high": 345,
+          "mid": 297.5
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "80-99#",
+          "low": 250,
+          "high": 340,
+          "mid": 295
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "100+#",
+          "low": 200,
+          "high": 325,
+          "mid": 262.5
+        },
+        {
+          "category": "FEEDER PIGS",
+          "weight": null,
+          "low": 45,
+          "high": 65,
+          "mid": 55
+        }
+      ]
     }
   ]
 }

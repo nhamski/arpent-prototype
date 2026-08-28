@@ -1,55 +1,63 @@
 {
   "source": "Colby Livestock Auction — operator-maintained weekly report",
-  "weekEnding": "2026-08-13",
-  "yearAgoTarget": "2025-08-13",
+  "weekEnding": "2026-08-20",
+  "yearAgoTarget": "2025-08-20",
   "unit": "$/cwt (range)",
   "lambs": [
     {
-      "low": 265,
-      "high": 385,
-      "mid": 325,
+      "low": 250,
+      "high": 300,
+      "mid": 275,
+      "weight": "20-39#",
+      "yearAgoMid": 247.5,
+      "changePct": 11.1
+    },
+    {
+      "low": 225,
+      "high": 325,
+      "mid": 275,
       "weight": "40-59#",
-      "yearAgoMid": 212.5,
-      "changePct": 52.9
+      "yearAgoMid": 253.5,
+      "changePct": 8.5
     },
     {
-      "low": 275,
-      "high": 345,
-      "mid": 310,
+      "low": 225,
+      "high": 300,
+      "mid": 262.5,
       "weight": "60-79#",
-      "yearAgoMid": 197.5,
-      "changePct": 57
+      "yearAgoMid": 212.5,
+      "changePct": 23.5
     },
     {
-      "low": 245,
-      "high": 295,
-      "mid": 270,
+      "low": 200,
+      "high": 265,
+      "mid": 232.5,
       "weight": "80-99#",
-      "yearAgoMid": 185,
-      "changePct": 45.9
+      "yearAgoMid": 198.5,
+      "changePct": 17.1
     },
     {
-      "low": 240,
-      "high": 270,
-      "mid": 255,
+      "low": 200,
+      "high": 255,
+      "mid": 227.5,
       "weight": "100+#",
-      "yearAgoMid": 177.5,
-      "changePct": 43.7
+      "yearAgoMid": 187.5,
+      "changePct": 21.3
     }
   ],
   "ewes": {
-    "low": 70,
-    "high": 165,
-    "mid": 117.5,
-    "yearAgoMid": 70,
-    "changePct": 67.9
+    "low": 100,
+    "high": 150,
+    "mid": 125,
+    "yearAgoMid": 91,
+    "changePct": 37.4
   },
   "rams": {
-    "low": 95,
-    "high": 140,
-    "mid": 117.5,
-    "yearAgoMid": 105,
-    "changePct": 11.9
+    "low": 120,
+    "high": 155,
+    "mid": 137.5,
+    "yearAgoMid": 95,
+    "changePct": 44.7
   },
   "slaughter12mo": {
     "weight": "100+#",
@@ -100,7 +108,7 @@
       },
       {
         "label": "Aug",
-        "avg": 242.5
+        "avg": 237.5
       }
     ]
   }
