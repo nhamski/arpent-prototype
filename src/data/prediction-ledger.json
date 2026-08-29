@@ -1,0 +1,34 @@
+{
+  "purpose": "Rolling accuracy audit for the Northwest Kansas sell-buy agent. Every buy/sell/hold call is logged here when it is made, with the price it was made against and the window that settles it. Nothing is graded from memory \u2014 tools/ledger-audit.mjs resolves the realized number from the archived market data.",
+  "graded_by": "node tools/ledger-audit.mjs (--write to record)",
+  "schema": {
+    "id": "stable slug, e.g. 2026-08-cattle-str-400-599",
+    "logged": "YYYY-MM-DD the call was made",
+    "species": "cattle | sheep | goats | pigs | chickens",
+    "class": "plain-language class, e.g. 'steer calves 400-599 lb'",
+    "action": "buy | sell | hold",
+    "thesis": "one line \u2014 why, in sell-buy terms",
+    "targetWindow": {
+      "from": "YYYY-MM-DD",
+      "to": "YYYY-MM-DD"
+    },
+    "expected": {
+      "metric": "pricePerCwt | pricePerHead | spreadPerCwt",
+      "direction": "up | down | flat",
+      "band": "[low, high] \u2014 optional, the range the call commits to"
+    },
+    "basis": {
+      "source": "which report the call was priced against",
+      "asOf": "YYYY-MM-DD",
+      "value": "the number the call was made against"
+    },
+    "market": {
+      "source": "colby | usda-ks-summary",
+      "category": "Colby category, e.g. STRS",
+      "weight": "Colby weight label, e.g. '400-599#', or null"
+    },
+    "outcome": "null until the window closes; then the resolved realized figure",
+    "assessment": "null until graded; then { verdict: accurate|partial|inaccurate, rootCause, gradedOn }"
+  },
+  "entries": []
+}

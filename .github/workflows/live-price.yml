@@ -41,12 +41,20 @@ jobs:
           node tools/pull-mars.mjs 2014 .cache/mars-2014.json
           node tools/build-live-sheep.mjs .cache/mars-1899.json .cache/mars-1833.json .cache/mars-2014.json
 
+      - name: Rebuild the inflation-adjusted valuation benchmark
+        run: |
+          if [ -f .cache/mars-1895.json ]; then
+            node tools/build-real-benchmark.mjs .cache/mars-1895.json || echo "benchmark build skipped"
+          else
+            echo "No MARS pull this run — benchmark left as is."
+          fi
+
       - name: Commit if the prices changed
         run: |
           git config user.name  "arpent-market-bot"
           git config user.email "actions@users.noreply.github.com"
-          if [ -n "$(git status --porcelain src/data/live)" ]; then
-            git add src/data/live
+          if [ -n "$(git status --porcelain src/data/live src/data/derived)" ]; then
+            git add src/data/live src/data/derived
             git commit -m "Live price update $(date -u +%Y-%m-%d)"
             git pull --rebase origin main
             git push

@@ -1,0 +1,29 @@
+{
+  "purpose": "Local input costs within ~20 miles of Logan, Kansas, used to compute cost of gain for drylot and confinement wintering. Nothing here is estimated on the operator's behalf — every value is a real quote the operator entered, with the date it was quoted and who quoted it.",
+  "rule": "A null value, or a quote older than staleAfterDays, is NOT a licence to assume a number. Ask for the current quote, or state the assumption in the open and label every figure derived from it.",
+  "staleAfterDays": 30,
+  "location": { "reference": "Logan, Kansas", "radiusMiles": 20 },
+  "feeds": [
+    { "id": "grass_hay", "name": "Grass hay, large round", "unit": "$/ton", "value": null, "dryMatterPct": 88, "wastePct": 15, "asOf": null, "quotedBy": null },
+    { "id": "alfalfa_hay", "name": "Alfalfa hay", "unit": "$/ton", "value": null, "dryMatterPct": 88, "wastePct": 10, "asOf": null, "quotedBy": null },
+    { "id": "corn", "name": "Corn", "unit": "$/bushel", "bushelWeightLb": 56, "value": null, "dryMatterPct": 86, "wastePct": 0, "asOf": null, "quotedBy": null },
+    { "id": "milo", "name": "Grain sorghum (milo)", "unit": "$/bushel", "bushelWeightLb": 56, "value": null, "dryMatterPct": 87, "wastePct": 0, "asOf": null, "quotedBy": null },
+    { "id": "wheat_midds", "name": "Wheat midds / byproduct pellet", "unit": "$/ton", "value": null, "dryMatterPct": 89, "wastePct": 0, "asOf": null, "quotedBy": null },
+    { "id": "ddgs", "name": "Distillers grains", "unit": "$/ton", "value": null, "dryMatterPct": 90, "wastePct": 0, "asOf": null, "quotedBy": null },
+    { "id": "corn_stalks", "name": "Grazed corn residue", "unit": "$/head/day", "value": null, "dryMatterPct": 50, "wastePct": 0, "asOf": null, "quotedBy": null },
+    { "id": "mineral", "name": "Mineral and supplement", "unit": "$/head/day", "value": null, "asOf": null, "quotedBy": null }
+  ],
+  "yardage": [
+    { "id": "own_drylot", "name": "Own drylot — bedding, fuel, labour, manure handling", "unit": "$/head/day", "value": null, "asOf": null, "quotedBy": null },
+    { "id": "custom_lot", "name": "Custom feedlot yardage", "unit": "$/head/day", "value": null, "asOf": null, "quotedBy": null },
+    { "id": "hoop_barn", "name": "Hoop structure / confinement pen", "unit": "$/head/day", "value": null, "asOf": null, "quotedBy": null }
+  ],
+  "money": [
+    { "id": "operating_apr", "name": "Operating note APR", "unit": "%", "value": null, "asOf": null, "quotedBy": null }
+  ],
+  "health": [
+    { "id": "processing", "name": "Receiving and processing", "unit": "$/head", "value": null, "asOf": null, "quotedBy": null },
+    { "id": "treatment_budget", "name": "Treatment budget", "unit": "$/head", "value": null, "asOf": null, "quotedBy": null }
+  ],
+  "deathLossPct": { "cattle_backgrounding": null, "lambs": null, "kids": null, "feeder_pigs": null }
+}

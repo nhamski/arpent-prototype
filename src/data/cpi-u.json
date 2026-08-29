@@ -1,0 +1,25 @@
+{
+  "series": "CUUR0000SA0",
+  "title": "CPI-U, U.S. city average, all items, not seasonally adjusted (1982-84 = 100)",
+  "source": "U.S. Bureau of Labor Statistics. Public domain.",
+  "basis": "annual average",
+  "note": "Used to restate historical auction prices in today's dollars. Refresh with `node tools/pull-cpi.mjs`, which appends completed years from the BLS public API. Years missing here are NOT guessed by the code — realPrice.js reports them as a gap, or extends the series only when the caller passes an explicit assumedAnnualInflationPct, and then labels the result 'assumed'.",
+  "finalThrough": 2024,
+  "annual": {
+    "2010": 218.056,
+    "2011": 224.939,
+    "2012": 229.594,
+    "2013": 232.957,
+    "2014": 236.736,
+    "2015": 237.017,
+    "2016": 240.007,
+    "2017": 245.12,
+    "2018": 251.107,
+    "2019": 255.657,
+    "2020": 258.811,
+    "2021": 270.97,
+    "2022": 292.655,
+    "2023": 304.702,
+    "2024": 313.689
+  }
+}
