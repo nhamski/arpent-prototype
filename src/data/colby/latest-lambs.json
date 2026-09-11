@@ -1,71 +1,53 @@
 {
   "source": "Colby Livestock Auction — operator-maintained weekly report",
-  "weekEnding": "2026-08-27",
-  "yearAgoTarget": "2025-08-27",
+  "weekEnding": "2026-09-03",
+  "yearAgoTarget": "2025-09-03",
   "unit": "$/cwt (range)",
   "lambs": [
     {
-      "low": 300,
-      "high": 440,
-      "mid": 370,
-      "weight": "20-39#",
-      "yearAgoMid": 215,
-      "changePct": 72.1
-    },
-    {
-      "low": 280,
-      "high": 360,
-      "mid": 320,
+      "low": 305,
+      "high": 355,
+      "mid": 330,
       "weight": "40-59#",
-      "yearAgoMid": 240,
-      "changePct": 33.3
+      "yearAgoMid": 232.5,
+      "changePct": 41.9
     },
     {
-      "low": 247,
-      "high": 337,
-      "mid": 292,
+      "low": 260,
+      "high": 360,
+      "mid": 310,
       "weight": "60-79#",
-      "yearAgoMid": 240,
-      "changePct": 21.7
+      "yearAgoMid": 229.5,
+      "changePct": 35.1
     },
     {
-      "low": 232,
-      "high": 252,
-      "mid": 242,
+      "low": 250,
+      "high": 275,
+      "mid": 262.5,
       "weight": "80-99#",
-      "yearAgoMid": 205,
-      "changePct": 18
+      "yearAgoMid": 202.5,
+      "changePct": 29.6
     },
     {
-      "low": 200,
-      "high": 250,
-      "mid": 225,
+      "low": 220,
+      "high": 255,
+      "mid": 237.5,
       "weight": "100+#",
-      "yearAgoMid": 181.5,
-      "changePct": 24
+      "yearAgoMid": 173,
+      "changePct": 37.3
     }
   ],
   "ewes": {
-    "low": 75,
-    "high": 165,
-    "mid": 120,
-    "yearAgoMid": 92.5,
-    "changePct": 29.7
+    "low": 80,
+    "high": 167,
+    "mid": 123.5,
+    "yearAgoMid": 85,
+    "changePct": 45.3
   },
-  "rams": {
-    "low": 105,
-    "high": 147,
-    "mid": 126,
-    "yearAgoMid": 137.5,
-    "changePct": -8.4
-  },
+  "rams": null,
   "slaughter12mo": {
     "weight": "100+#",
     "months": [
-      {
-        "label": "Sep",
-        "avg": 183.5
-      },
       {
         "label": "Oct",
         "avg": 197.8
@@ -109,6 +91,10 @@
       {
         "label": "Aug",
         "avg": 234.38
+      },
+      {
+        "label": "Sep",
+        "avg": 237.5
       }
     ]
   }
