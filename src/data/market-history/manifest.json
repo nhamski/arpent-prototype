@@ -1,20 +1,20 @@
 {
-  "updated": "2026-09-10",
+  "updated": "2026-09-17",
   "sources": {
     "usda-ks-summary": {
-      "weeks": 7,
+      "weeks": 8,
       "earliest": "2026-07-11",
-      "latest": "2026-09-05"
+      "latest": "2026-09-12"
     },
     "usda-dodge-city": {
-      "weeks": 9,
+      "weeks": 10,
       "earliest": "2026-07-15",
-      "latest": "2026-09-09"
+      "latest": "2026-09-16"
     },
     "usda-pratt": {
-      "weeks": 9,
+      "weeks": 10,
       "earliest": "2026-07-09",
-      "latest": "2026-09-10"
+      "latest": "2026-09-17"
     }
   },
   "note": "Raw text is the source of truth; JSON is a best-effort parse. See README."
