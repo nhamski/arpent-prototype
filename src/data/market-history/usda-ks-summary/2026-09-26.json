@@ -1,0 +1,779 @@
+{
+  "source": "usda-ks-summary",
+  "label": "Kansas Weekly Cattle Auction Summary (Dodge City, Pratt, Salina)",
+  "week": "9/20/2026 - 9/26/2026",
+  "weekEnding": "2026-09-26",
+  "capturedFrom": "https://www.ams.usda.gov/mnreports/ams_1895.pdf",
+  "rows": [
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 5,
+      "wtRange": "275-290",
+      "avgWt": 284,
+      "priceRange": "507.50-515.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 30,
+      "wtRange": "306-340",
+      "avgWt": 324,
+      "priceRange": "532.00-575.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 106,
+      "wtRange": "350-397",
+      "avgWt": 388,
+      "priceRange": "502.00-530.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 3,
+      "wtRange": "375",
+      "avgWt": 375,
+      "priceRange": "547.50"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 5,
+      "wtRange": "360-368",
+      "avgWt": 363,
+      "priceRange": "445.00-550.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 101,
+      "wtRange": "403-438",
+      "avgWt": 418,
+      "priceRange": "482.50-505.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 27,
+      "wtRange": "424",
+      "avgWt": 424,
+      "priceRange": "537.50"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 51,
+      "wtRange": "409-420",
+      "avgWt": 419,
+      "priceRange": "445.00-486.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 132,
+      "wtRange": "462-495",
+      "avgWt": 479,
+      "priceRange": "442.50-479.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 56,
+      "wtRange": "465-476",
+      "avgWt": 467,
+      "priceRange": "501.00-517.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 126,
+      "wtRange": "500-540",
+      "avgWt": 513,
+      "priceRange": "385.00-452.50"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 52,
+      "wtRange": "501-511",
+      "avgWt": 507,
+      "priceRange": "489.00-497.50"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 23,
+      "wtRange": "532",
+      "avgWt": 532,
+      "priceRange": "465.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 68,
+      "wtRange": "517-522",
+      "avgWt": 518,
+      "priceRange": "426.00-430.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 182,
+      "wtRange": "559-599",
+      "avgWt": 566,
+      "priceRange": "410.00-435.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 11,
+      "wtRange": "550",
+      "avgWt": 550,
+      "priceRange": "445.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 168,
+      "wtRange": "601-648",
+      "avgWt": 619,
+      "priceRange": "367.00-415.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 2,
+      "wtRange": "613",
+      "avgWt": 613,
+      "priceRange": "391.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 137,
+      "wtRange": "651-693",
+      "avgWt": 674,
+      "priceRange": "368.00-386.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 218,
+      "wtRange": "702-736",
+      "avgWt": 715,
+      "priceRange": "347.00-385.50"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 210,
+      "wtRange": "750-799",
+      "avgWt": 781,
+      "priceRange": "330.00-357.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 15,
+      "wtRange": "759-768",
+      "avgWt": 761,
+      "priceRange": "353.00-367.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 271,
+      "wtRange": "811-838",
+      "avgWt": 822,
+      "priceRange": "320.00-354.25"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 489,
+      "wtRange": "853-899",
+      "avgWt": 880,
+      "priceRange": "305.00-349.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 171,
+      "wtRange": "870-898",
+      "avgWt": 879,
+      "priceRange": "339.50-354.50"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 223,
+      "wtRange": "901-947",
+      "avgWt": 923,
+      "priceRange": "305.00-324.75"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 283,
+      "wtRange": "909-923",
+      "avgWt": 914,
+      "priceRange": "337.00-345.50"
+    },
+    {
+      "section": "STEERS Medium and Large 1",
+      "head": 310,
+      "wtRange": "950-990",
+      "avgWt": 974,
+      "priceRange": "290.00-317.50"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 2,
+      "wtRange": "448",
+      "avgWt": 448,
+      "priceRange": "445.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 4,
+      "wtRange": "453",
+      "avgWt": 453,
+      "priceRange": "442.50"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 68,
+      "wtRange": "500-547",
+      "avgWt": 527,
+      "priceRange": "405.00-424.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 21,
+      "wtRange": "573-586",
+      "avgWt": 578,
+      "priceRange": "387.00-399.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 23,
+      "wtRange": "635",
+      "avgWt": 635,
+      "priceRange": "360.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 44,
+      "wtRange": "651-689",
+      "avgWt": 667,
+      "priceRange": "345.00-352.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 33,
+      "wtRange": "702-745",
+      "avgWt": 718,
+      "priceRange": "322.00-345.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 6,
+      "wtRange": "796",
+      "avgWt": 796,
+      "priceRange": "296.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 15,
+      "wtRange": "820-835",
+      "avgWt": 824,
+      "priceRange": "255.00-326.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 70,
+      "wtRange": "858-893",
+      "avgWt": 879,
+      "priceRange": "301.00-322.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 7,
+      "wtRange": "903-935",
+      "avgWt": 912,
+      "priceRange": "287.00-301.00"
+    },
+    {
+      "section": "STEERS Medium and Large 1-2",
+      "head": 12,
+      "wtRange": "994",
+      "avgWt": 994,
+      "priceRange": "286.00"
+    },
+    {
+      "section": "STEERS Medium and Large 2",
+      "head": 11,
+      "wtRange": "450-485",
+      "avgWt": 469,
+      "priceRange": "412.50-437.50"
+    },
+    {
+      "section": "STEERS Medium and Large 2",
+      "head": 12,
+      "wtRange": "508-513",
+      "avgWt": 511,
+      "priceRange": "385.00-395.00"
+    },
+    {
+      "section": "STEERS Large 1",
+      "head": 242,
+      "wtRange": "1002-1040",
+      "avgWt": 1011,
+      "priceRange": "281.00-310.50"
+    },
+    {
+      "section": "STEERS Large 1",
+      "head": 170,
+      "wtRange": "1065-1092",
+      "avgWt": 1075,
+      "priceRange": "280.00-299.50"
+    },
+    {
+      "section": "STEERS Large 1-2",
+      "head": 2,
+      "wtRange": "1018",
+      "avgWt": 1018,
+      "priceRange": "236.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 2,
+      "wtRange": "288",
+      "avgWt": 288,
+      "priceRange": "455.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 38,
+      "wtRange": "331-341",
+      "avgWt": 340,
+      "priceRange": "452.50-506.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 5,
+      "wtRange": "339",
+      "avgWt": 339,
+      "priceRange": "432.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 92,
+      "wtRange": "370-399",
+      "avgWt": 379,
+      "priceRange": "440.00-487.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 8,
+      "wtRange": "382",
+      "avgWt": 382,
+      "priceRange": "500.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 57,
+      "wtRange": "415-449",
+      "avgWt": 430,
+      "priceRange": "415.00-460.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 55,
+      "wtRange": "405-439",
+      "avgWt": 417,
+      "priceRange": "400.00-429.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 209,
+      "wtRange": "450-499",
+      "avgWt": 468,
+      "priceRange": "396.00-432.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 55,
+      "wtRange": "489",
+      "avgWt": 489,
+      "priceRange": "392.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 224,
+      "wtRange": "500-549",
+      "avgWt": 525,
+      "priceRange": "375.00-406.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 16,
+      "wtRange": "522",
+      "avgWt": 522,
+      "priceRange": "412.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 80,
+      "wtRange": "552-590",
+      "avgWt": 564,
+      "priceRange": "345.00-382.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 20,
+      "wtRange": "576-590",
+      "avgWt": 577,
+      "priceRange": "382.50-399.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 125,
+      "wtRange": "604-649",
+      "avgWt": 636,
+      "priceRange": "350.00-376.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 53,
+      "wtRange": "625",
+      "avgWt": 625,
+      "priceRange": "369.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 213,
+      "wtRange": "656-690",
+      "avgWt": 682,
+      "priceRange": "345.00-366.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 204,
+      "wtRange": "705-749",
+      "avgWt": 727,
+      "priceRange": "329.25-352.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 314,
+      "wtRange": "753-787",
+      "avgWt": 772,
+      "priceRange": "312.50-335.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 14,
+      "wtRange": "796",
+      "avgWt": 796,
+      "priceRange": "323.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 165,
+      "wtRange": "802-848",
+      "avgWt": 819,
+      "priceRange": "302.00-322.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 19,
+      "wtRange": "849",
+      "avgWt": 849,
+      "priceRange": "332.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 384,
+      "wtRange": "853-899",
+      "avgWt": 872,
+      "priceRange": "295.25-314.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 108,
+      "wtRange": "856",
+      "avgWt": 856,
+      "priceRange": "317.25"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 148,
+      "wtRange": "901-937",
+      "avgWt": 923,
+      "priceRange": "280.00-299.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1",
+      "head": 54,
+      "wtRange": "975-997",
+      "avgWt": 979,
+      "priceRange": "273.00-291.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 8,
+      "wtRange": "389",
+      "avgWt": 389,
+      "priceRange": "430.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 17,
+      "wtRange": "479-493",
+      "avgWt": 488,
+      "priceRange": "348.00-372.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 4,
+      "wtRange": "530",
+      "avgWt": 530,
+      "priceRange": "380.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 26,
+      "wtRange": "553-599",
+      "avgWt": 588,
+      "priceRange": "334.00-358.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 9,
+      "wtRange": "600-636",
+      "avgWt": 623,
+      "priceRange": "315.00-328.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 53,
+      "wtRange": "651-691",
+      "avgWt": 675,
+      "priceRange": "313.00-337.50"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 14,
+      "wtRange": "701-745",
+      "avgWt": 717,
+      "priceRange": "281.00-310.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 7,
+      "wtRange": "775",
+      "avgWt": 775,
+      "priceRange": "305.00-315.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 2,
+      "wtRange": "840",
+      "avgWt": 840,
+      "priceRange": "300.00"
+    },
+    {
+      "section": "HEIFERS Medium and Large 1-2",
+      "head": 9,
+      "wtRange": "979-998",
+      "avgWt": 986,
+      "priceRange": "225.00-260.00"
+    },
+    {
+      "section": "HEIFERS Large 1",
+      "head": 46,
+      "wtRange": "1000-1007",
+      "avgWt": 1001,
+      "priceRange": "257.50-288.25"
+    },
+    {
+      "section": "HEIFERS Large 1",
+      "head": 4,
+      "wtRange": "1051",
+      "avgWt": 1051,
+      "priceRange": "237.50"
+    },
+    {
+      "section": "HEIFERS Large 1",
+      "head": 3,
+      "wtRange": "1123",
+      "avgWt": 1123,
+      "priceRange": "249.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 8,
+      "wtRange": "405-415",
+      "avgWt": 408,
+      "priceRange": "417.50-450.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 7,
+      "wtRange": "499",
+      "avgWt": 499,
+      "priceRange": "407.50"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 5,
+      "wtRange": "506",
+      "avgWt": 506,
+      "priceRange": "375.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 5,
+      "wtRange": "571",
+      "avgWt": 571,
+      "priceRange": "350.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 9,
+      "wtRange": "611-618",
+      "avgWt": 613,
+      "priceRange": "280.00-360.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 3,
+      "wtRange": "663",
+      "avgWt": 663,
+      "priceRange": "338.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 4,
+      "wtRange": "731",
+      "avgWt": 731,
+      "priceRange": "300.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 4,
+      "wtRange": "818",
+      "avgWt": 818,
+      "priceRange": "266.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 9,
+      "wtRange": "925",
+      "avgWt": 925,
+      "priceRange": "285.00"
+    },
+    {
+      "section": "BULLS Medium and Large 1",
+      "head": 5,
+      "wtRange": "957",
+      "avgWt": 957,
+      "priceRange": "262.50"
+    },
+    {
+      "section": "BULLS Large 1",
+      "head": 3,
+      "wtRange": "1018",
+      "avgWt": 1018,
+      "priceRange": "250.00"
+    },
+    {
+      "section": "BULLS Large 1",
+      "head": 11,
+      "wtRange": "1162-1189",
+      "avgWt": 1174,
+      "priceRange": "232.50-237.50"
+    },
+    {
+      "section": "COWS Breaker 75-80%",
+      "head": 45,
+      "wtRange": "1190-1800",
+      "avgWt": 1436,
+      "priceRange": "142.00-162.00"
+    },
+    {
+      "section": "COWS Breaker 75-80%",
+      "head": 2,
+      "wtRange": "980",
+      "avgWt": 980,
+      "priceRange": "192.00"
+    },
+    {
+      "section": "COWS Breaker 75-80%",
+      "head": 2,
+      "wtRange": "1725",
+      "avgWt": 1725,
+      "priceRange": "157.00"
+    },
+    {
+      "section": "COWS Boner 80-85%",
+      "head": 200,
+      "wtRange": "775-1540",
+      "avgWt": 1165,
+      "priceRange": "134.00-156.50"
+    },
+    {
+      "section": "COWS Boner 80-85%",
+      "head": 7,
+      "wtRange": "905-1271",
+      "avgWt": 1187,
+      "priceRange": "160.00-168.00"
+    },
+    {
+      "section": "COWS Boner 80-85%",
+      "head": 5,
+      "wtRange": "948-1235",
+      "avgWt": 1059,
+      "priceRange": "128.00-131.00"
+    },
+    {
+      "section": "COWS Lean 85-90%",
+      "head": 67,
+      "wtRange": "1025-1618",
+      "avgWt": 1276,
+      "priceRange": "114.00-139.00"
+    },
+    {
+      "section": "COWS Lean 85-90%",
+      "head": 3,
+      "wtRange": "975-978",
+      "avgWt": 977,
+      "priceRange": "114.00-132.00"
+    },
+    {
+      "section": "COWS Lean 85-90%",
+      "head": 11,
+      "wtRange": "1627-1800",
+      "avgWt": 1693,
+      "priceRange": "145.00-146.00"
+    },
+    {
+      "section": "COWS Lean 85-90%",
+      "head": 21,
+      "wtRange": "970-1478",
+      "avgWt": 1187,
+      "priceRange": "100.00-110.00"
+    },
+    {
+      "section": "COWS Lean 85-90%",
+      "head": 12,
+      "wtRange": "845-1395",
+      "avgWt": 1135,
+      "priceRange": "80.00-95.00"
+    },
+    {
+      "section": "BULLS 1-2",
+      "head": 17,
+      "wtRange": "1270-1930",
+      "avgWt": 1748,
+      "priceRange": "178.00-195.00"
+    },
+    {
+      "section": "BULLS 1-2",
+      "head": 3,
+      "wtRange": "896",
+      "avgWt": 896,
+      "priceRange": "267.00"
+    },
+    {
+      "section": "BULLS 1-2",
+      "head": 5,
+      "wtRange": "1810-2195",
+      "avgWt": 2030,
+      "priceRange": "191.00-202.00"
+    },
+    {
+      "section": "BULLS 1-2",
+      "head": 8,
+      "wtRange": "1115-1960",
+      "avgWt": 1489,
+      "priceRange": "152.00-179.00"
+    }
+  ]
+}
