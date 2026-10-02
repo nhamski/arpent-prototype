@@ -1,63 +1,63 @@
 {
   "source": "Colby Livestock Auction — operator-maintained weekly report",
-  "weekEnding": "2026-09-17",
-  "yearAgoTarget": "2025-09-17",
+  "weekEnding": "2026-09-24",
+  "yearAgoTarget": "2025-09-24",
   "unit": "$/cwt (range)",
   "lambs": [
     {
-      "low": 300,
-      "high": 335,
-      "mid": 317.5,
+      "low": 270,
+      "high": 385,
+      "mid": 327.5,
       "weight": "20-39#",
-      "yearAgoMid": 235,
-      "changePct": 35.1
+      "yearAgoMid": 265,
+      "changePct": 23.6
     },
     {
-      "low": 298,
-      "high": 335,
-      "mid": 316.5,
+      "low": 235,
+      "high": 350,
+      "mid": 292.5,
       "weight": "40-59#",
-      "yearAgoMid": 271,
-      "changePct": 16.8
+      "yearAgoMid": 272.5,
+      "changePct": 7.3
     },
     {
-      "low": 258,
-      "high": 328,
-      "mid": 293,
+      "low": 250,
+      "high": 290,
+      "mid": 270,
       "weight": "60-79#",
-      "yearAgoMid": 221,
-      "changePct": 32.6
+      "yearAgoMid": 239,
+      "changePct": 13
     },
     {
-      "low": 265,
-      "high": 283,
-      "mid": 274,
+      "low": 240,
+      "high": 257,
+      "mid": 248.5,
       "weight": "80-99#",
       "yearAgoMid": 197.5,
-      "changePct": 38.7
+      "changePct": 25.8
     },
     {
-      "low": 230,
-      "high": 264,
-      "mid": 247,
+      "low": 200,
+      "high": 250,
+      "mid": 225,
       "weight": "100+#",
       "yearAgoMid": 187.5,
-      "changePct": 31.7
+      "changePct": 20
     }
   ],
   "ewes": {
-    "low": 118,
+    "low": 95,
     "high": 160,
-    "mid": 139,
-    "yearAgoMid": 113.5,
-    "changePct": 22.5
+    "mid": 127.5,
+    "yearAgoMid": 101.5,
+    "changePct": 25.6
   },
   "rams": {
-    "low": 95,
-    "high": 165,
-    "mid": 130,
-    "yearAgoMid": 85,
-    "changePct": 52.9
+    "low": 115,
+    "high": 155,
+    "mid": 135,
+    "yearAgoMid": 102.5,
+    "changePct": 31.7
   },
   "slaughter12mo": {
     "weight": "100+#",
@@ -108,7 +108,7 @@
       },
       {
         "label": "Sep",
-        "avg": 241.5
+        "avg": 237.38
       }
     ]
   }
