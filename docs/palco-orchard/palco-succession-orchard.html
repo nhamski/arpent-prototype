@@ -1,0 +1,877 @@
+<title>Palco Succession Orchard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ground:#EEEFEA;
+  --surface:#F8F9F5;
+  --surface-2:#E4E6DD;
+  --ink:#23221D;
+  --ink-2:#4A4941;
+  --muted:#6E6D63;
+  --rule:#CFD2C7;
+  --rule-soft:#DFE1D8;
+  --plum:#9A2140;
+  --plum-ink:#9A2140;
+  --plum-wash:#F0DDE2;
+  --sage:#5A6F50;
+  --sage-wash:#DDE3D7;
+  --wheat:#9C7020;
+  --map-lot:#F5F6F1;
+  --map-street:#E3E5DC;
+  --shadow:0 1px 2px rgba(35,34,29,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#191A17;
+    --surface:#212320;
+    --surface-2:#2C2F2A;
+    --ink:#E9EAE2;
+    --ink-2:#C2C4B8;
+    --muted:#8E9086;
+    --rule:#3B3E38;
+    --rule-soft:#31342E;
+    --plum:#E8798F;
+    --plum-ink:#F0A0B0;
+    --plum-wash:#3A2029;
+    --sage:#9FB791;
+    --sage-wash:#283123;
+    --wheat:#D7AC55;
+    --map-lot:#22241F;
+    --map-street:#1F211D;
+    --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#191A17;
+  --surface:#212320;
+  --surface-2:#2C2F2A;
+  --ink:#E9EAE2;
+  --ink-2:#C2C4B8;
+  --muted:#8E9086;
+  --rule:#3B3E38;
+  --rule-soft:#31342E;
+  --plum:#E8798F;
+  --plum-ink:#F0A0B0;
+  --plum-wash:#3A2029;
+  --sage:#9FB791;
+  --sage-wash:#283123;
+  --wheat:#D7AC55;
+  --map-lot:#22241F;
+  --map-street:#1F211D;
+  --shadow:0 1px 2px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-size:17px;
+  line-height:1.62;
+  margin:0;
+  padding:0 20px 96px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1140px;margin:0 auto}
+.col{max-width:660px}
+.col-wide{max-width:1140px}
+
+/* ---------- type ---------- */
+h1,h2,h3,h4,.eyebrow,.lbl,th,.chip,.num{font-family:Archivo,"Helvetica Neue",Arial,sans-serif}
+h1{
+  font-size:clamp(2.5rem,6vw,4.1rem);
+  font-weight:800;
+  line-height:.98;
+  letter-spacing:-.028em;
+  margin:0;
+  text-wrap:balance;
+}
+h2{
+  font-size:clamp(1.45rem,3vw,1.9rem);
+  font-weight:700;
+  letter-spacing:-.018em;
+  line-height:1.12;
+  margin:0 0 .2em;
+  text-wrap:balance;
+}
+h3{
+  font-size:1.06rem;
+  font-weight:700;
+  letter-spacing:-.005em;
+  margin:2.1em 0 .5em;
+}
+h4{
+  font-size:.78rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--muted);
+  margin:2em 0 .6em;
+}
+p{margin:0 0 1.05em}
+a{color:var(--plum-ink)}
+strong{font-weight:600;color:var(--ink)}
+em{font-style:italic}
+.lede{font-size:1.16rem;line-height:1.55;color:var(--ink-2)}
+.eyebrow{
+  font-size:.735rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:.17em;color:var(--muted);
+}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+.note{font-size:.9rem;color:var(--muted);line-height:1.5}
+
+/* ---------- header ---------- */
+header{padding:64px 0 0}
+.h-rule{height:5px;background:var(--plum);width:64px;margin:0 0 26px}
+.subtitle{font-size:1.2rem;color:var(--ink-2);margin:.85em 0 0;max-width:44ch;line-height:1.45}
+
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(146px,1fr));
+  gap:1px;background:var(--rule);border:1px solid var(--rule);
+  margin:44px 0 0;
+}
+.fact{background:var(--surface);padding:14px 16px 15px}
+.fact dt{font-family:Archivo,sans-serif;font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);margin:0 0 5px}
+.fact dd{margin:0;font-family:"IBM Plex Mono",monospace;font-size:.96rem;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.3}
+.fact dd small{display:block;font-family:"Source Serif 4",serif;font-size:.78rem;color:var(--muted);margin-top:3px;font-weight:400}
+
+/* ---------- sections ---------- */
+section{padding-top:62px}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:1.1em;border-top:1px solid var(--rule);padding-top:18px}
+.sec-n{font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--plum-ink);font-weight:600;flex:0 0 auto;padding-top:.35em}
+
+/* ---------- map ---------- */
+figure{margin:0}
+.mapbox{
+  background:var(--surface);border:1px solid var(--rule);
+  padding:20px;margin:26px 0 0;overflow-x:auto;
+}
+.map{display:block;width:100%;min-width:560px;max-width:820px;height:auto;margin:0 auto;color:var(--ink)}
+figcaption{font-size:.9rem;color:var(--muted);line-height:1.5;margin-top:16px;max-width:70ch}
+.legend{
+  display:flex;flex-wrap:wrap;gap:8px 22px;margin:20px 0 0;
+  padding-top:16px;border-top:1px solid var(--rule-soft);
+}
+.lg{display:flex;align-items:center;gap:8px;font-size:.83rem;color:var(--ink-2)}
+.lg svg{flex:0 0 auto}
+
+/* ---------- tables ---------- */
+.tablebox{overflow-x:auto;margin:20px 0 0;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:.9rem}
+caption{
+  text-align:left;font-family:Archivo,sans-serif;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.11em;color:var(--muted);
+  padding:13px 16px 11px;border-bottom:1px solid var(--rule);
+}
+th{
+  text-align:left;font-size:.68rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--muted);padding:10px 16px;
+  border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+td{padding:9px 16px;border-bottom:1px solid var(--rule-soft);vertical-align:top;line-height:1.42}
+tbody tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.total td{border-top:2px solid var(--rule);border-bottom:none;font-weight:600;background:var(--surface-2)}
+tr.sub td{background:var(--surface-2);font-family:Archivo,sans-serif;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.cv{font-weight:600}
+.sci{font-style:italic;color:var(--muted);font-size:.88em}
+
+/* ---------- chips ---------- */
+.chip{
+  display:inline-block;font-size:.62rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.07em;padding:2px 6px 3px;border:1px solid;white-space:nowrap;
+}
+.chip-seed{color:var(--sage);border-color:var(--sage);background:var(--sage-wash)}
+.chip-graft{color:var(--plum-ink);border-color:var(--plum);background:var(--plum-wash)}
+.chip-cut{color:var(--wheat);border-color:var(--wheat);background:transparent}
+.chip-buy{color:var(--muted);border-color:var(--rule);background:transparent}
+
+/* ---------- harvest chart ---------- */
+.chartbox{overflow-x:auto;margin:24px 0 0;border:1px solid var(--rule);background:var(--surface);padding:20px 18px 18px}
+.chart{min-width:660px;display:grid;grid-template-columns:172px repeat(12,1fr);align-items:center;row-gap:5px}
+.chart .mh{
+  font-family:Archivo,sans-serif;font-size:.66rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--muted);padding-bottom:8px;text-align:center;
+  border-bottom:1px solid var(--rule);margin-bottom:6px;
+}
+.chart .crop{
+  font-size:.85rem;padding-right:14px;text-align:right;color:var(--ink-2);
+  line-height:1.25;
+}
+.chart .bar{height:15px;border-radius:1px}
+.bar-in{background:var(--sage)}
+.bar-out{
+  background:repeating-linear-gradient(45deg,var(--plum) 0 2px,transparent 2px 5px);
+  border:1px solid var(--plum);
+}
+.chart .band{background:var(--surface-2);align-self:stretch;z-index:0}
+.chart .bar,.chart .crop,.chart .mh,.chart .bandlbl{position:relative;z-index:1}
+.chart .bandlbl{
+  font-family:Archivo,sans-serif;font-size:.62rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;color:var(--plum-ink);
+  text-align:center;padding-bottom:4px;
+}
+
+/* ---------- callout ---------- */
+.call{
+  border-left:3px solid var(--plum);background:var(--surface);
+  padding:16px 20px;margin:24px 0;
+}
+.call p:last-child{margin-bottom:0}
+.call .lbl{
+  display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.11em;color:var(--plum-ink);margin-bottom:6px;
+}
+
+/* ---------- tracks ---------- */
+.tracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:24px 0 0}
+.track{background:var(--surface);padding:18px 18px 20px}
+.track h5{font-family:Archivo,sans-serif;font-size:.95rem;font-weight:700;margin:10px 0 .45em}
+.track p{font-size:.9rem;line-height:1.5;margin:0 0 .7em;color:var(--ink-2)}
+.track p:last-child{margin-bottom:0}
+.track ul{margin:0;padding-left:1.05em;font-size:.87rem;color:var(--ink-2);line-height:1.5}
+
+/* ---------- lists ---------- */
+ul.body,ol.body{margin:0 0 1.05em;padding-left:1.15em}
+ul.body li,ol.body li{margin-bottom:.5em}
+dl.qa{margin:0}
+dl.qa dt{font-family:Archivo,sans-serif;font-weight:700;font-size:.98rem;margin:1.5em 0 .3em}
+dl.qa dd{margin:0;color:var(--ink-2)}
+
+/* ---------- timeline ---------- */
+.tl{border-top:1px solid var(--rule);margin:24px 0 0}
+.tl-row{display:grid;grid-template-columns:132px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--rule-soft);align-items:baseline}
+.tl-when{font-family:"IBM Plex Mono",monospace;font-size:.82rem;font-weight:500;color:var(--plum-ink);line-height:1.4}
+.tl-what{font-size:.94rem;line-height:1.5;color:var(--ink-2)}
+.tl-row.key .tl-what{color:var(--ink);font-weight:600}
+.tl-row.key{background:var(--surface)}
+.tl-row.key .tl-when,.tl-row.key .tl-what{padding-left:12px}
+
+footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--rule);font-size:.85rem;color:var(--muted);line-height:1.55}
+
+@media (max-width:640px){
+  body{font-size:16px;padding:0 16px 72px}
+  header{padding-top:40px}
+  .tl-row{grid-template-columns:1fr;gap:3px}
+  .sec-head{flex-direction:column;gap:2px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:focus-visible{outline:2px solid var(--plum);outline-offset:2px}
+</style>
+
+<div class="wrap">
+
+<header class="col">
+  <div class="h-rule"></div>
+  <p class="eyebrow">Northwest Kansas Agriculture Education Center &nbsp;·&nbsp; USD 269 &nbsp;·&nbsp; Rooks County</p>
+  <h1>Palco Succession Orchard</h1>
+  <p class="subtitle">A 0.49-acre dryland food forest on the old playground, designed so the students who plant it grow its replacements.</p>
+</header>
+
+<dl class="facts col-wide">
+  <div class="fact"><dt>Site</dt><dd>0.49 ac<small>~145′ × 145′, verify</small></dd></div>
+  <div class="fact"><dt>Hardiness</dt><dd>5b–6a<small>designed to 5b</small></dd></div>
+  <div class="fact"><dt>Precipitation</dt><dd>22–23″<small>annual, May–July peak</small></dd></div>
+  <div class="fact"><dt>Frost-free</dt><dd>~155 days<small>late Apr – ~Oct 17</small></dd></div>
+  <div class="fact"><dt>Density</dt><dd>47 trees/ac<small>~⅓ of conventional</small></dd></div>
+  <div class="fact"><dt>In ground</dt><dd>Spring 2027<small>bare root</small></dd></div>
+</dl>
+
+<!-- ============ 1 ============ -->
+<section class="col">
+  <div class="sec-head"><span class="sec-n">01</span><h2>The site, honestly</h2></div>
+
+  <p>The parcel you sent is the USD 269 lot in Palco, Rooks County — the county layer reads <strong>0.49 acres</strong>, not the three-quarters you remembered. That difference is real money and real plant count, so everything below is built for 0.49. Walk the corners before we order; every spacing in this plan scales off a nominal 145′ × 145′.</p>
+
+  <p>It’s a former playground, and that is the single most important fact about it. "Just dirt" on a playground means <strong>compacted dirt</strong> — typically packed hard to 8–12 inches by decades of feet, with organic matter near zero and possibly a layer of imported sand or road base under the surface. Trees planted into that will sit in an auger-glazed hole and sulk for five years. Ripping the row lines with a single-shank subsoiler this fall, while the soil is dry, is the highest-value $80 of diesel in the entire project.</p>
+
+  <p>Underneath, expect Harney silt loam — Kansas’s state soil, deep and genuinely fertile, but <em>calcareous and moderately alkaline</em> in the B horizon. That single trait does more to shape the plant list than the cold does. It’s why there are no blueberries and no chestnuts in this plan, and why the rootstock column in the tables below is not decoration.</p>
+
+  <div class="call">
+    <span class="lbl">On skipping the soil test</span>
+    <p>You said we probably don’t need one. You’re likely right about fertility — Harney doesn’t need help there. But the test also returns <strong>pH and soluble salts</strong>, and on a compacted former playground with possible construction fill, that’s the number that decides whether apples go on MM.111 or something else, and whether we budget elemental sulfur. It’s about $25 a sample through K&#8209;State’s Rooks County office. I’ve carried two samples at $50 in the budget. Pull them in October; if pH comes back under 7.5 we change nothing and you’ve spent fifty dollars on certainty.</p>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="col-wide">
+  <div class="col"><div class="sec-head"><span class="sec-n">02</span><h2>The plan</h2></div>
+
+  <p>Five rows running east–west, perpendicular to the prevailing northwest winter wind, so each row shelters the one behind it. Tallest on the north, shortest on the south, which keeps every row in full sun and throws the longest shadows off our own ground. Rows are <strong>32 feet apart</strong> — at maturity that leaves 10 to 14 feet of open, mowable, chicken-runnable alley, which is what "not super dense" actually means in numbers.</p>
+
+  <p>Six positions are drawn as open circles. Those are deliberately empty, reserved for trees the students will grow themselves. More on that in section 04.</p>
+  </div>
+
+  <figure>
+  <div class="mapbox">
+  <svg class="map" viewBox="0 0 700 700" role="img" aria-label="Plan view of a 145 by 145 foot lot showing five east-west planting rows: a shelterbelt hedge on the north, a long-lived canopy row, an apple and hazelnut row, a stone fruit row, and a small fruit row on the south, with six reserved slots for student-grown trees, three irrigation hydrants on the west side, grapes on the east fence, and a student nursery bed in the south service strip.">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+      </marker>
+    </defs>
+
+    <!-- streets -->
+    <rect x="26" y="60" width="30" height="560" fill="var(--map-street)"/>
+    <rect x="70" y="638" width="560" height="30" fill="var(--map-street)"/>
+
+    <!-- lot -->
+    <rect x="70" y="60" width="560" height="560" fill="var(--map-lot)" stroke="currentColor" stroke-width="2"/>
+
+    <!-- context labels -->
+    <g font-family="Archivo, sans-serif" font-size="10.5" font-weight="600" letter-spacing="1.4" fill="currentColor" opacity=".5">
+      <text x="350" y="38" text-anchor="middle">NEIGHBORING LOTS</text>
+      <text x="655" y="340" text-anchor="middle" transform="rotate(90 655 340)">NEIGHBORING LOTS</text>
+      <text x="44" y="340" text-anchor="middle" transform="rotate(-90 44 340)">W 3RD STREET</text>
+      <text x="350" y="686" text-anchor="middle">STREET · MAIN ACCESS</text>
+    </g>
+
+    <!-- north arrow -->
+    <g stroke="currentColor" fill="currentColor">
+      <line x1="640" y1="44" x2="640" y2="14" stroke-width="1.6" marker-end="url(#ar)"/>
+      <text x="656" y="34" font-family="Archivo, sans-serif" font-size="12" font-weight="700" stroke="none">N</text>
+    </g>
+
+    <!-- wind -->
+    <g opacity=".45">
+      <line x1="86" y1="16" x2="126" y2="46" stroke="currentColor" stroke-width="1.4" marker-end="url(#ar)"/>
+      <text x="132" y="30" font-family="Archivo, sans-serif" font-size="9.5" font-weight="600" letter-spacing=".7" fill="currentColor">NW WINTER WIND</text>
+    </g>
+
+    <!-- irrigation header + laterals (drawn under plants) -->
+    <g stroke="currentColor" stroke-width="1.1" stroke-dasharray="3 3" opacity=".42" fill="none">
+      <line x1="84" y1="100" x2="84" y2="576"/>
+      <line x1="84" y1="106" x2="595" y2="106"/>
+      <line x1="84" y1="230" x2="595" y2="230"/>
+      <line x1="84" y1="353" x2="595" y2="353"/>
+      <line x1="84" y1="477" x2="595" y2="477"/>
+      <line x1="84" y1="570" x2="595" y2="570"/>
+    </g>
+    <g fill="var(--map-lot)" stroke="currentColor" stroke-width="1.5">
+      <rect x="79" y="163" width="10" height="10"/>
+      <rect x="79" y="348" width="10" height="10"/>
+      <rect x="79" y="518" width="10" height="10"/>
+    </g>
+    <g font-family="IBM Plex Mono, monospace" font-size="9" font-weight="600" fill="currentColor" opacity=".62" text-anchor="middle">
+      <text x="84" y="157">H1</text>
+      <text x="84" y="342">H2</text>
+      <text x="84" y="512">H3</text>
+    </g>
+
+    <!-- row labels -->
+    <g font-family="Archivo, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1.2" fill="currentColor" opacity=".72">
+      <text x="124" y="80">1 · SHELTERBELT &amp; JELLY HEDGE</text>
+      <text x="124" y="204">2 · LONG-LIVED CANOPY</text>
+      <text x="124" y="327">3 · APPLES + HAZELNUT BLOCK</text>
+      <text x="124" y="451">4 · STONE FRUIT</text>
+      <text x="124" y="544">5 · SMALL FRUIT</text>
+    </g>
+
+    <!-- ROW 1 hedge : 16 dots -->
+    <g fill="var(--sage)">
+      <circle cx="124" cy="106" r="5"/><circle cx="155" cy="106" r="5"/><circle cx="186" cy="106" r="5"/>
+      <circle cx="217" cy="106" r="5"/><circle cx="248" cy="106" r="5"/><circle cx="280" cy="106" r="5"/>
+      <circle cx="311" cy="106" r="5"/><circle cx="342" cy="106" r="5"/><circle cx="373" cy="106" r="5"/>
+      <circle cx="404" cy="106" r="5"/><circle cx="435" cy="106" r="5"/><circle cx="466" cy="106" r="5"/>
+      <circle cx="498" cy="106" r="5"/><circle cx="529" cy="106" r="5"/><circle cx="560" cy="106" r="5"/>
+      <circle cx="591" cy="106" r="5"/>
+    </g>
+
+    <!-- west street hedge -->
+    <g fill="var(--sage)" opacity=".8">
+      <circle cx="110" cy="140" r="4"/><circle cx="110" cy="176" r="4"/><circle cx="110" cy="212" r="4"/>
+      <circle cx="110" cy="248" r="4"/><circle cx="110" cy="284" r="4"/><circle cx="110" cy="320" r="4"/>
+      <circle cx="110" cy="392" r="4"/><circle cx="110" cy="428" r="4"/><circle cx="110" cy="464" r="4"/>
+    </g>
+    <text x="110" y="500" font-family="Archivo, sans-serif" font-size="9" font-weight="600" letter-spacing=".6" fill="currentColor" opacity=".5" text-anchor="middle" transform="rotate(-90 110 500)">STREET SCREEN</text>
+
+    <!-- mature-spread demo on row 2 -->
+    <circle cx="509" cy="230" r="39" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" opacity=".38"/>
+    <text x="509" y="184" font-family="IBM Plex Mono, monospace" font-size="9" fill="currentColor" opacity=".55" text-anchor="middle">20′ canopy at maturity</text>
+
+    <!-- ROW 2 -->
+    <g fill="currentColor">
+      <circle cx="136" cy="230" r="13"/><circle cx="210" cy="230" r="13"/><circle cx="285" cy="230" r="13"/>
+      <circle cx="360" cy="230" r="13"/><circle cx="509" cy="230" r="13"/><circle cx="584" cy="230" r="13"/>
+    </g>
+    <circle cx="434" cy="230" r="13" fill="none" stroke="var(--plum)" stroke-width="2.2" stroke-dasharray="4 3"/>
+
+    <!-- ROW 3 : ribes shoulder -->
+    <g fill="var(--wheat)" opacity=".85">
+      <circle cx="150" cy="330" r="4"/><circle cx="196" cy="330" r="4"/><circle cx="242" cy="330" r="4"/>
+      <circle cx="288" cy="330" r="4"/><circle cx="334" cy="330" r="4"/><circle cx="380" cy="330" r="4"/>
+    </g>
+    <g fill="currentColor">
+      <circle cx="136" cy="353" r="10"/><circle cx="197" cy="353" r="10"/><circle cx="259" cy="353" r="10"/>
+      <circle cx="383" cy="353" r="10"/>
+    </g>
+    <circle cx="321" cy="353" r="10" fill="none" stroke="var(--plum)" stroke-width="2.2" stroke-dasharray="4 3"/>
+    <g fill="var(--sage)">
+      <circle cx="445" cy="353" r="7"/><circle cx="474" cy="353" r="7"/><circle cx="503" cy="353" r="7"/>
+      <circle cx="532" cy="353" r="7"/><circle cx="560" cy="353" r="7"/><circle cx="589" cy="353" r="7"/>
+    </g>
+    <text x="517" y="378" font-family="Archivo, sans-serif" font-size="9" font-weight="600" letter-spacing=".6" fill="currentColor" opacity=".5" text-anchor="middle">HAZELNUT BLOCK</text>
+
+    <!-- ROW 4 : ribes shoulder -->
+    <g fill="var(--wheat)" opacity=".85">
+      <circle cx="150" cy="454" r="4"/><circle cx="196" cy="454" r="4"/><circle cx="242" cy="454" r="4"/>
+      <circle cx="288" cy="454" r="4"/><circle cx="334" cy="454" r="4"/><circle cx="380" cy="454" r="4"/>
+    </g>
+    <g fill="currentColor">
+      <circle cx="136" cy="477" r="10"/><circle cx="192" cy="477" r="10"/><circle cx="248" cy="477" r="10"/>
+      <circle cx="360" cy="477" r="10"/><circle cx="416" cy="477" r="10"/><circle cx="472" cy="477" r="10"/>
+      <circle cx="584" cy="477" r="10"/>
+    </g>
+    <g fill="none" stroke="var(--plum)" stroke-width="2.2" stroke-dasharray="4 3">
+      <circle cx="304" cy="477" r="10"/><circle cx="528" cy="477" r="10"/>
+    </g>
+
+    <!-- ROW 5 -->
+    <g fill="var(--sage)">
+      <circle cx="136" cy="570" r="5"/><circle cx="170" cy="570" r="5"/><circle cx="204" cy="570" r="5"/>
+      <circle cx="239" cy="570" r="5"/><circle cx="273" cy="570" r="5"/><circle cx="307" cy="570" r="5"/>
+      <circle cx="376" cy="570" r="5"/><circle cx="410" cy="570" r="5"/><circle cx="444" cy="570" r="5"/>
+      <circle cx="478" cy="570" r="5"/><circle cx="512" cy="570" r="5"/><circle cx="546" cy="570" r="5"/>
+      <circle cx="580" cy="570" r="5"/>
+    </g>
+    <circle cx="341" cy="570" r="5" fill="none" stroke="var(--plum)" stroke-width="2" stroke-dasharray="3 2.5"/>
+
+    <!-- grapes on east fence -->
+    <g fill="var(--wheat)">
+      <circle cx="612" cy="137" r="4"/><circle cx="612" cy="168" r="4"/><circle cx="612" cy="199" r="4"/>
+      <circle cx="612" cy="230" r="4"/><circle cx="612" cy="261" r="4"/><circle cx="612" cy="292" r="4"/>
+      <circle cx="612" cy="323" r="4"/><circle cx="612" cy="354" r="4"/>
+    </g>
+    <text x="612" y="380" font-family="Archivo, sans-serif" font-size="9" font-weight="600" letter-spacing=".6" fill="currentColor" opacity=".55" text-anchor="middle">GRAPES</text>
+
+    <!-- nursery bed + gate -->
+    <rect x="124" y="594" width="77" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="3 2"/>
+    <text x="209" y="606" font-family="Archivo, sans-serif" font-size="9.5" font-weight="600" letter-spacing=".6" fill="currentColor" opacity=".62">STUDENT NURSERY BED</text>
+    <g stroke="var(--plum)" stroke-width="3">
+      <line x1="392" y1="620" x2="440" y2="620"/>
+    </g>
+    <text x="416" y="634" font-family="Archivo, sans-serif" font-size="9" font-weight="700" letter-spacing=".8" fill="var(--plum)" text-anchor="middle">GATE</text>
+  </svg>
+  </div>
+
+  <div class="legend col-wide">
+    <span class="lg"><svg width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="currentColor"/></svg> Fruit tree, planted 2027</span>
+    <span class="lg"><svg width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="var(--plum)" stroke-width="2.2" stroke-dasharray="4 3"/></svg> Reserved for a student-grown tree</span>
+    <span class="lg"><svg width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="var(--sage)"/></svg> Shrub, hedge, hazelnut, small fruit</span>
+    <span class="lg"><svg width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="4.5" fill="var(--wheat)"/></svg> Currant, gooseberry, grape</span>
+    <span class="lg"><svg width="22" height="22" aria-hidden="true"><line x1="1" y1="11" x2="21" y2="11" stroke="currentColor" stroke-dasharray="3 3" opacity=".5"/></svg> Drip line &amp; hydrant</span>
+  </div>
+
+  <figcaption>Plan view, north up. The hedge on row 1 does double duty as the windbreak and as the sandhill-plum jelly supply; because it suckers and self-seeds, it is the one row that fills its own gaps without help. Currants and gooseberries sit six feet off the north shoulder of rows 3 and 4, in the trees’ afternoon shade — they scorch in open Kansas sun. Grapes use the existing east fence as their trellis, which is most of why they cost almost nothing.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="col-wide">
+  <div class="col"><div class="sec-head"><span class="sec-n">03</span><h2>What goes where</h2></div>
+
+  <p>Every plant here clears four bars: hardy to 5b, tolerant of alkaline soil, productive on 22 inches of rain plus drip, and unbothered by a caretaker who visits every other week. Beyond that, no two adjacent trees are the same species — that’s Sobkowiak’s rule, and on a small lot it does more for pest and disease pressure than any spray program the school would realistically run.</p>
+
+  <p>The chips mark how each plant reproduces, because that determines which track of the student program it feeds:</p>
+
+  <p style="margin-bottom:1.6em">
+    <span class="chip chip-seed">seed</span> comes true or near-true from seed &nbsp;
+    <span class="chip chip-cut">cutting</span> roots from dormant hardwood cuttings &nbsp;
+    <span class="chip chip-graft">graft</span> must be grafted &nbsp;
+    <span class="chip chip-buy">buy</span> purchase only
+  </p>
+  </div>
+
+  <div class="tablebox">
+    <table>
+      <caption>Row 1 · Shelterbelt &amp; jelly hedge — 30 conservation seedlings at 4′, mature 8–15′</caption>
+      <thead><tr><th>Plant</th><th>Species / notes</th><th class="n">Qty</th><th>Why it’s here</th><th>Track</th></tr></thead>
+      <tbody>
+        <tr><td class="cv">Sandhill plum</td><td class="sci">Prunus angustifolia</td><td class="n">10</td><td>Kansas’s signature jelly. Thicket-forming, drought-proof, native. The flagship product.</td><td><span class="chip chip-seed">seed</span></td></tr>
+        <tr><td class="cv">Chokecherry</td><td class="sci">Prunus virginiana</td><td class="n">6</td><td>Jelly and syrup. Bulletproof native, suckers to fill the hedge.</td><td><span class="chip chip-seed">seed</span></td></tr>
+        <tr><td class="cv">Nanking cherry</td><td class="sci">Prunus tomentosa</td><td class="n">6</td><td>Enormous crops by year 4, classic plains windbreak shrub, comes true from pits.</td><td><span class="chip chip-seed">seed</span></td></tr>
+        <tr><td class="cv">Siberian pea shrub</td><td class="sci">Caragana arborescens</td><td class="n">4</td><td>Nitrogen fixer. Seed pods are chicken feed — this is deliberate.</td><td><span class="chip chip-seed">seed</span></td></tr>
+        <tr><td class="cv">Buffaloberry</td><td class="sci">Shepherdia argentea</td><td class="n">2</td><td>Nitrogen fixer that also fruits. Needs one male, one female. Plains native.</td><td><span class="chip chip-seed">seed</span></td></tr>
+        <tr><td class="cv">Manchurian apricot</td><td class="sci">Prunus mandshurica</td><td class="n">2</td><td>The frost lottery ticket. Crops maybe two years in five; costs $3 to find out.</td><td><span class="chip chip-seed">seed</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tablebox">
+    <table>
+      <caption>Row 2 · Long-lived canopy — 7 positions at 19′, mature 18–24′</caption>
+      <thead><tr><th>Position</th><th>Plant</th><th>Rootstock</th><th>Why it’s here</th><th>Track</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td class="cv">Mulberry ‘Illinois Everbearing’</td><td class="sci">own root</td><td>Six weeks of fruit, zero pest problems, and the drop feeds chickens directly beneath it.</td><td><span class="chip chip-seed">seed</span></td></tr>
+        <tr><td class="n">2</td><td class="cv">Pear ‘Kieffer’</td><td class="sci">OHxF 87</td><td>The plains canning pear. Fireblight-resistant to the point of rudeness. Mediocre fresh, superb as butter.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">3</td><td class="cv">Apple ‘Enterprise’</td><td class="sci">MM.111</td><td>Scab, rust and fireblight resistant; ripens early Oct; stores till spring. Best all-round apple for a low-spray Kansas orchard.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">4</td><td class="cv">Pear ‘Moonglow’</td><td class="sci">OHxF 87</td><td>Fireblight-resistant and good enough to eat off the tree. Pollinates Kieffer.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">5</td><td style="color:var(--plum-ink);font-weight:600">Reserved — Class of 2030</td><td class="sci">—</td><td>Student-grafted apple or pear, planted from the school’s own nursery bed.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">6</td><td class="cv">Apple ‘Arkansas Black’</td><td class="sci">MM.111</td><td>Very late, very hard, stores six months. A cider and sauce apple with real history in this state.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">7</td><td class="cv">American persimmon ‘Meader’</td><td class="sci">seedling</td><td>Native, self-fertile, drought- and alkali-proof, no pests. Ripens after frost in late Oct — students are there for it. Persimmon butter is a genuinely uncommon product.</td><td><span class="chip chip-seed">seed</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tablebox">
+    <table>
+      <caption>Row 3 · Apples &amp; hazelnut block — 5 positions at 16′ plus 6 hazels at 7.5′</caption>
+      <thead><tr><th>Position</th><th>Plant</th><th>Rootstock</th><th>Why it’s here</th><th>Track</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td class="cv">Apple ‘Liberty’</td><td class="sci">G.935</td><td>Immune to scab, resistant to rust and fireblight. The lowest-maintenance good apple that exists.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">2</td><td class="cv">Apple ‘William’s Pride’</td><td class="sci">G.935</td><td>Ripens mid-August — the first apple of the school year, the week students walk back in.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">3</td><td class="cv">Apple ‘Freedom’</td><td class="sci">M.7</td><td>Disease-resistant, heavy cropper, and the best sauce apple in the planting.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">4</td><td style="color:var(--plum-ink);font-weight:600">Reserved — Class of 2031</td><td class="sci">—</td><td>First tree grafted start-to-finish by the high school ag class.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">5</td><td class="cv">Apple ‘Redfree’</td><td class="sci">M.7</td><td>Early August, scab-immune, excellent fresh for the cafeteria.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">6–11</td><td class="cv">Hybrid hazelnut ×6</td><td class="sci">Corylus americana × avellana</td><td>The nut crop. Bears in 4–6 years, tops out at 12–15′, thrives on alkaline ground, and grows readily from its own seed. Plant six for cross-pollination.</td><td><span class="chip chip-seed">seed</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tablebox">
+    <table>
+      <caption>Row 4 · Stone fruit — 9 positions at 14.5′, mature 12–18′</caption>
+      <thead><tr><th>Position</th><th>Plant</th><th>Rootstock</th><th>Why it’s here</th><th>Track</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td class="cv">Tart cherry ‘Montmorency’</td><td class="sci">Mahaleb</td><td>Pie filling and jam. Mahaleb is the dryland, high-pH cherry rootstock — not Mazzard, which wants water we don’t have.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">2</td><td class="cv">Plum ‘Toka’</td><td class="sci">own root / Krymsk 1</td><td>The universal plum pollinator, and hardy to zone 3. Everything else in this row depends on it.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">3</td><td class="cv">Peach ‘Contender’</td><td class="sci">Lovell</td><td>The late-blooming, cold-hardy peach bred for exactly this problem. The most reliable peach on the High Plains.</td><td><span class="chip chip-seed">seed</span></td></tr>
+        <tr><td class="n">4</td><td style="color:var(--plum-ink);font-weight:600">Reserved — student seedling peach</td><td class="sci">—</td><td>Peach pits come ~80% true. The easiest possible first win for a middle-school class.</td><td><span class="chip chip-seed">seed</span></td></tr>
+        <tr><td class="n">5</td><td class="cv">Plum ‘Superior’</td><td class="sci">Krymsk 1</td><td>American–Japanese hybrid: blooms later than a Japanese plum, so it actually sets fruit here.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">6</td><td class="cv">Tart cherry ‘North Star’</td><td class="sci">Mahaleb</td><td>Naturally dwarf at 8–10′ — students can pick the whole tree from the ground.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">7</td><td class="cv">Plum ‘Mount Royal’</td><td class="sci">Myrobalan</td><td>Self-fertile European. The jam and prune plum; freestone, high sugar.</td><td><span class="chip chip-graft">graft</span></td></tr>
+        <tr><td class="n">8</td><td style="color:var(--plum-ink);font-weight:600">Reserved — student seedling plum</td><td class="sci">—</td><td>Grown from American plum or sandhill plum seed off row 1.</td><td><span class="chip chip-seed">seed</span></td></tr>
+        <tr><td class="n">9</td><td class="cv">Peach ‘Reliance’</td><td class="sci">Lovell</td><td>The hardiest peach in commerce. Insurance against the year Contender gets frosted.</td><td><span class="chip chip-seed">seed</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tablebox">
+    <table>
+      <caption>Row 5, shoulders &amp; fence · Small fruit — 46 plants</caption>
+      <thead><tr><th>Plant</th><th>Where</th><th class="n">Qty</th><th>Why it’s here</th><th>Track</th></tr></thead>
+      <tbody>
+        <tr class="sub"><td colspan="5">Row 5 — full sun, south edge</td></tr>
+        <tr><td class="cv">Elderberry ‘Bob Gordon’, ‘Ranch’</td><td>Row 5</td><td class="n">4</td><td>Bears in year 2 — the first real harvest the planting produces. Elderberry syrup and jelly carry a price no other crop here touches.</td><td><span class="chip chip-cut">cutting</span></td></tr>
+        <tr><td class="cv">Aronia ‘Viking’</td><td>Row 5</td><td class="n">5</td><td>Pest-free, alkali-tolerant, enormous pectin. Blends into every jam. Seed is apomictic, so seedlings are clones of the parent.</td><td><span class="chip chip-seed">seed</span></td></tr>
+        <tr><td class="cv">Serviceberry ‘Regent’</td><td>Row 5</td><td class="n">3</td><td>Zone 3, drought-tolerant, June fruit that freezes well for a fall pie-filling run.</td><td><span class="chip chip-seed">seed</span></td></tr>
+        <tr><td class="cv">Blackberry ‘Prime-Ark Freedom’</td><td>Row 5</td><td class="n">6</td><td>Thornless — non-negotiable with students. Primocane-fruiting, so a fall crop even after a hard winter.</td><td><span class="chip chip-cut">cutting</span></td></tr>
+        <tr><td class="cv">Raspberry ‘Heritage’</td><td>Row 5</td><td class="n">7</td><td>Fall-bearing, so it ripens in September. Pruning is "mow it to the ground in February" — no skill required, which matters here.</td><td><span class="chip chip-cut">cutting</span></td></tr>
+        <tr><td style="color:var(--plum-ink);font-weight:600">Reserved — student-rooted cutting</td><td>Row 5</td><td class="n">1</td><td>Elderberry or aronia struck from the plants three feet away.</td><td><span class="chip chip-cut">cutting</span></td></tr>
+        <tr class="sub"><td colspan="5">North shoulders of rows 3 &amp; 4 — afternoon shade</td></tr>
+        <tr><td class="cv">Clove currant ‘Crandall’</td><td>Shoulders</td><td class="n">4</td><td>Kansas native <span class="sci">Ribes odoratum</span>. Drought- and alkali-proof where other currants fail, and the flowers smell like cloves in April.</td><td><span class="chip chip-cut">cutting</span></td></tr>
+        <tr><td class="cv">Black currant ‘Consort’</td><td>Shoulders</td><td class="n">2</td><td>Highest-pectin fruit in the planting. Sets jelly with no additions at all.</td><td><span class="chip chip-cut">cutting</span></td></tr>
+        <tr><td class="cv">Gooseberry ‘Hinnomaki Red’, ‘Captivator’</td><td>Shoulders</td><td class="n">6</td><td>Captivator is near-thornless. Gooseberry jam is a specialty item almost nobody local is making.</td><td><span class="chip chip-cut">cutting</span></td></tr>
+        <tr class="sub"><td colspan="5">East fence — existing fence is the trellis</td></tr>
+        <tr><td class="cv">Grape ‘Concord’</td><td>E fence</td><td class="n">4</td><td>Grape jelly is the product that sells itself. Concord is the reason the category exists.</td><td><span class="chip chip-cut">cutting</span></td></tr>
+        <tr><td class="cv">Grape ‘Edelweiss’, ‘St. Croix’</td><td>E fence</td><td class="n">4</td><td>Two hardy Minnesota selections — a white and a red — so the brand has three grape products, not one.</td><td><span class="chip chip-cut">cutting</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="col">
+  <div class="sec-head"><span class="sec-n">04</span><h2>Succession: seed, cutting, graft</h2></div>
+
+  <p>This is the part of the brief that reshaped everything else. You’re not planting sacrificial nurse trees to cut down later — you’re planting parents, and the students grow the replacements. That makes <em>"how does this plant reproduce?"</em> a selection criterion equal to hardiness, and it’s why the list above leans so hard on natives and seedling-grown stock.</p>
+
+  <p>It also splits the teaching program into three tracks of genuinely different difficulty, which is convenient, because the school spans K through 12.</p>
+
+  <div class="tracks">
+    <div class="track">
+      <span class="chip chip-seed">seed</span>
+      <h5>Track A · Seed</h5>
+      <p>Elementary and middle school. Collect fruit in fall, clean the pits, cold-stratify 90–120 days in damp sand in a refrigerator, sow in the nursery bed in spring.</p>
+      <ul>
+        <li>Sandhill plum, chokecherry, Nanking cherry</li>
+        <li>Persimmon, hazelnut, mulberry</li>
+        <li>Peach (~80% true to parent)</li>
+        <li>Aronia (apomictic — a true clone)</li>
+        <li>Buffaloberry, Siberian pea shrub</li>
+      </ul>
+    </div>
+    <div class="track">
+      <span class="chip chip-cut">cutting</span>
+      <h5>Track B · Cuttings</h5>
+      <p>Middle school. Cut pencil-thick dormant wood in February, stick it in sand, water it. Elderberry and grape root at close to 100% with no hormone and no equipment.</p>
+      <ul>
+        <li>Elderberry, aronia</li>
+        <li>Currant, gooseberry</li>
+        <li>Grape</li>
+        <li>Mulberry (softwood, under mist)</li>
+      </ul>
+    </div>
+    <div class="track">
+      <span class="chip chip-graft">graft</span>
+      <h5>Track C · Grafting</h5>
+      <p>High school ag. Apples and pears do not come true from seed — every named variety on earth is a clone. Cut dormant scion from the orchard’s own trees in February, whip-and-tongue onto purchased rootstock, grow one season, plant out.</p>
+      <ul>
+        <li>All 6 apple varieties</li>
+        <li>Both pear varieties</li>
+        <li>Rootstock: Antonovka or MM.111, ~$3–4 each in bundles of 25</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>How the gaps actually fill</h3>
+  <p>Six positions are held open from day one — two in row 2, one in row 3, two in row 4, one in row 5. They are not accidents of spacing; they’re marked on the ground with a post and a plaque from the day the orchard goes in. Seed sown in spring 2027 spends two to three years in the nursery bed, which puts the <strong>first student-grown tree in the ground in spring 2030</strong>. A class that starts seventh grade the year the orchard is planted graduates the year its own trees start bearing.</p>
+
+  <p>Row 1 is the exception and the demonstration: sandhill plum and chokecherry sucker and self-seed, so that row repairs itself with no human involvement at all. It’s worth pointing at when explaining to a board why the rest of the orchard needs a nursery bed.</p>
+
+  <div class="call">
+    <span class="lbl">A second product line, free</span>
+    <p>A nursery bed producing more trees than six slots can absorb produces surplus — and surplus fruit trees sell at a school spring plant sale for $20 to $35 apiece. The same bed that fills the orchard’s gaps can fund the orchard’s maintenance. That’s two revenue streams from one system: the jams, and the trees that made them.</p>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="col-wide">
+  <div class="col"><div class="sec-head"><span class="sec-n">05</span><h2>Harvest against the school calendar</h2></div>
+
+  <p>This drove a lot of variety selection. A school orchard that ripens in June is a school orchard nobody picks. Wherever there was a choice — fall-bearing raspberry over summer-bearing, late apples over early, persimmon at all — the plan takes the later crop.</p>
+
+  <p>The result: the weight of the harvest lands <strong>mid-August through October</strong>, with students on site. What does ripen over the summer break is, without exception, a crop that freezes well.</p>
+  </div>
+
+  <div class="chartbox">
+    <div class="chart">
+      <div class="bandlbl" style="grid-row:1;grid-column:2/7">school out</div>
+      <div class="mh" style="grid-row:2;grid-column:2/4">Jun</div>
+      <div class="mh" style="grid-row:2;grid-column:4/6">Jul</div>
+      <div class="mh" style="grid-row:2;grid-column:6/8">Aug</div>
+      <div class="mh" style="grid-row:2;grid-column:8/10">Sep</div>
+      <div class="mh" style="grid-row:2;grid-column:10/12">Oct</div>
+      <div class="mh" style="grid-row:2;grid-column:12/14">Nov</div>
+      <div class="band" style="grid-row:3/21;grid-column:2/7"></div>
+      <div class="crop" style="grid-row:3;grid-column:1">Serviceberry</div><div class="bar bar-out" style="grid-row:3;grid-column:2/4"></div>
+      <div class="crop" style="grid-row:4;grid-column:1">Nanking cherry</div><div class="bar bar-out" style="grid-row:4;grid-column:3/5"></div>
+      <div class="crop" style="grid-row:5;grid-column:1">Tart cherry</div><div class="bar bar-out" style="grid-row:5;grid-column:3/5"></div>
+      <div class="crop" style="grid-row:6;grid-column:1">Currant &amp; gooseberry</div><div class="bar bar-out" style="grid-row:6;grid-column:4/6"></div>
+      <div class="crop" style="grid-row:7;grid-column:1">Blackberry</div><div class="bar bar-out" style="grid-row:7;grid-column:5/8"></div>
+      <div class="crop" style="grid-row:8;grid-column:1">Sandhill plum</div><div class="bar bar-in" style="grid-row:8;grid-column:6/8"></div>
+      <div class="crop" style="grid-row:9;grid-column:1">Apple — early</div><div class="bar bar-in" style="grid-row:9;grid-column:6/8"></div>
+      <div class="crop" style="grid-row:10;grid-column:1">Elderberry</div><div class="bar bar-in" style="grid-row:10;grid-column:6/9"></div>
+      <div class="crop" style="grid-row:11;grid-column:1">Hybrid plum</div><div class="bar bar-in" style="grid-row:11;grid-column:6/9"></div>
+      <div class="crop" style="grid-row:12;grid-column:1">Peach ‘Contender’</div><div class="bar bar-in" style="grid-row:12;grid-column:7/9"></div>
+      <div class="crop" style="grid-row:13;grid-column:1">Aronia</div><div class="bar bar-in" style="grid-row:13;grid-column:8/10"></div>
+      <div class="crop" style="grid-row:14;grid-column:1">Hazelnut</div><div class="bar bar-in" style="grid-row:14;grid-column:8/10"></div>
+      <div class="crop" style="grid-row:15;grid-column:1">Grape</div><div class="bar bar-in" style="grid-row:15;grid-column:8/10"></div>
+      <div class="crop" style="grid-row:16;grid-column:1">Apple — main</div><div class="bar bar-in" style="grid-row:16;grid-column:8/10"></div>
+      <div class="crop" style="grid-row:17;grid-column:1">Raspberry — fall</div><div class="bar bar-in" style="grid-row:17;grid-column:8/12"></div>
+      <div class="crop" style="grid-row:18;grid-column:1">Pear</div><div class="bar bar-in" style="grid-row:18;grid-column:9/12"></div>
+      <div class="crop" style="grid-row:19;grid-column:1">Apple — late</div><div class="bar bar-in" style="grid-row:19;grid-column:10/12"></div>
+      <div class="crop" style="grid-row:20;grid-column:1">Persimmon</div><div class="bar bar-in" style="grid-row:20;grid-column:11/14"></div>
+    </div>
+  </div>
+
+  <div class="legend col-wide">
+    <span class="lg"><svg width="26" height="14" aria-hidden="true"><rect width="26" height="14" fill="var(--sage)"/></svg> Harvested with students on site</span>
+    <span class="lg"><svg width="26" height="14" aria-hidden="true"><rect width="26" height="14" fill="none" stroke="var(--plum)"/><line x1="0" y1="14" x2="14" y2="0" stroke="var(--plum)"/><line x1="8" y1="14" x2="22" y2="0" stroke="var(--plum)"/><line x1="16" y1="14" x2="26" y2="4" stroke="var(--plum)"/></svg> Ripens over summer break — pick and freeze</span>
+  </div>
+
+  <div class="col">
+  <div class="call">
+    <span class="lbl">The summer problem, solved cheaply</span>
+    <p>Six crops ripen while school is out, and all six — cherries, currants, gooseberries, serviceberries, blackberries, Nanking cherries — freeze perfectly and lose nothing that matters for jam. Pick them into the school’s freezer over the summer with whatever help is around, then run the jelly batches with students in September. A chest freezer is the cheapest piece of processing equipment in this whole enterprise, and it converts your worst scheduling constraint into a September lab exercise.</p>
+  </div>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="col">
+  <div class="sec-head"><span class="sec-n">06</span><h2>Water</h2></div>
+
+  <p>I’ve read your note as: three hydrants get trenched to the lot, and we run drip off them on timers. That maps cleanly onto three zones, one per hydrant — correct me if the hydrants are already in and I’m drawing them in the wrong place.</p>
+
+  <div class="tablebox">
+    <table>
+      <caption>Three zones, one hydrant each</caption>
+      <thead><tr><th>Zone</th><th>Serves</th><th>Emitters</th><th class="n">Peak draw</th></tr></thead>
+      <tbody>
+        <tr><td class="cv">H1</td><td>Row 1 hedge + row 2 canopy + west street screen</td><td>Inline dripline 18″ on hedges; 4× 2 gph button drippers per tree</td><td class="n">~1.9 gpm</td></tr>
+        <tr><td class="cv">H2</td><td>Rows 3 &amp; 4 + currant/gooseberry shoulders</td><td>4× 2 gph per tree; 1× 2 gph per shrub</td><td class="n">~2.2 gpm</td></tr>
+        <tr><td class="cv">H3</td><td>Row 5 small fruit + grapes + nursery bed</td><td>Inline dripline 18″ throughout</td><td class="n">~1.6 gpm</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:1.4em">Every zone runs on well under 3 gpm, so a standard garden hydrant at 5–10 gpm carries any of them without pressure loss, and two zones can run simultaneously if a timer fails and you need to catch up by hand.</p>
+
+  <h3>The stack at each hydrant, in order</h3>
+  <p class="mono" style="font-size:.9rem;line-height:1.9;color:var(--ink-2)">hydrant → battery timer → hose-bib vacuum breaker → 155-mesh Y-filter → 25 psi pressure regulator → ½″ poly mainline → laterals</p>
+  <p class="note">Order matters. The filter goes ahead of the regulator, and the vacuum breaker is not optional — it’s a backflow device on a potable school supply, and it’s a $12 part.</p>
+
+  <h3>Schedule</h3>
+  <ul class="body">
+    <li><strong>Year 1 (2027):</strong> three runs a week, 60–90 minutes, roughly 8–10 gallons per tree per week. Trees are living on the root ball they arrived with; this is the year they die if anything goes wrong.</li>
+    <li><strong>Years 2–3:</strong> twice weekly, longer runs, deeper. Add two more emitters per tree as the root zone widens.</li>
+    <li><strong>Year 4 on:</strong> deep soak every 10–14 days in July and August only. Mark Shepard would tell you to cut the water off entirely and let the weak ones die; on a school site with $35 trees and a public audience, I’d keep the drip and let it earn its cost back in survival.</li>
+  </ul>
+
+  <h3>What will actually go wrong</h3>
+  <p>Two things, both of them boring. <strong>A dead timer battery in July</strong> kills more young orchards than drought does — so the biweekly walkthrough starts with pressing the manual-on button and watching for water, not with looking at the trees. And <strong>failing to winterize</strong> splits the filter housing and the regulator every time. Before November 15: pull timers, filters and regulators indoors, open the ends of every lateral, and let the lines gravity-drain. Put both on the ag teacher’s calendar now, because neither is intuitive and both are expensive.</p>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="col">
+  <div class="sec-head"><span class="sec-n">07</span><h2>Ground: compaction, mulch, alleys</h2></div>
+
+  <h3>Rip it this fall</h3>
+  <p>Pull a single-shank subsoiler 18–24 inches deep down each of the five row lines in October or November, when the soil is dry enough to shatter rather than smear. One pass, or two crossing passes at the tree positions. This fractures the playground pan, gives roots somewhere to go, and lets winter moisture in. If a district patron has a tractor with a ripper, this costs fuel and an afternoon; it is worth more than every amendment in the budget combined.</p>
+
+  <h3>Mulch</h3>
+  <p>Four inches of arborist wood chips in a five-foot strip down each row — call it 50 cubic yards. <strong>Do not buy this.</strong> Line-clearing crews, county Road &amp; Bridge, the city brush pile, and any tree service within thirty miles will deliver chips free to get rid of them. Start asking in September and stockpile all winter. I’ve carried $275 for trucking and handling, not material.</p>
+  <p>Lay cardboard under the chips on the first application — the lot will grow a spectacular weed crop the first summer, and cardboard buys a full season. Keep chips <strong>four inches clear of every trunk</strong>; mulch piled against bark rots the crown and kills the tree in year three, and it is the single most common way a well-funded planting fails.</p>
+
+  <h3>Alleys</h3>
+  <p>Bare playground dirt will blow and wash all winter if we leave it. Two-stage fix:</p>
+  <ul class="body">
+    <li><strong>Fall 2026, right after ripping:</strong> broadcast cereal rye and hairy vetch across the whole lot. Cheap, fast, holds the soil, and the vetch fixes nitrogen for the trees arriving in spring.</li>
+    <li><strong>June 2027, once soil is warm:</strong> seed the alleys to buffalograss and blue grama with Dutch white clover. Buffalograss is the right answer here and almost nowhere else — it’s the native shortgrass, it survives on 22 inches, it tops out at four to six inches so mowing becomes optional, and the clover feeds both the soil and the chickens.</li>
+  </ul>
+
+  <h3>Trunk protection</h3>
+  <p>Two things, neither expensive, both fatal to skip in Kansas. <strong>Rabbit guards</strong> — quarter-inch hardware cloth cylinders or spiral wraps — on every trunk, because a rabbit will ring-bark a young apple under snow in one January night. And <strong>white latex paint</strong>, diluted 1:1, on the southwest side of every trunk. Winter sun on a dark trunk on a cold clear day heats the bark, the cambium wakes, night drops it to zero, and the bark splits. Southwest injury is the leading cause of young-tree death on the High Plains and the fix costs about thirty dollars for the whole orchard.</p>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="col">
+  <div class="sec-head"><span class="sec-n">08</span><h2>Chickens — when, and how</h2></div>
+
+  <p>You don’t have their plan yet, so I’ve designed the orchard to <em>accept</em> birds rather than depend on them. Nothing below is costed in section 10; add roughly $300 for netting and an energizer when the school decides.</p>
+
+  <ul class="body">
+    <li><strong>Keep birds out entirely through 2028.</strong> A first- and second-year tree’s roots are in the top eight inches — precisely where chickens scratch — and a fresh mulch ring is an irresistible dust bath. Two seasons of exclusion is the difference between an orchard and an expensive lesson.</li>
+    <li><strong>From 2029, run them in the alleys.</strong> A 164-foot roll of electric poultry netting makes a paddock out of one alley. Move every 7 to 14 days. The 32-foot row spacing in this plan exists partly so a netting roll fits an alley without touching branches.</li>
+    <li><strong>Food safety sets the real constraint.</strong> Fruit going to a school cafeteria under raw manure wants a harvest interval — the widely used standard is 90 days for crops that don’t touch soil. Simplest workable rule: <strong>birds live in the alleys and come off any block 90 days before its fruit is picked.</strong> Run this past whoever writes the district’s food-safety plan before the first bird arrives, not after.</li>
+    <li><strong>Two plants are in this design specifically for them.</strong> Siberian pea shrub in row 1 drops high-protein seed pods; the mulberry at the west end of row 2 drops fruit for six weeks straight. Both are chicken feed the orchard produces for free.</li>
+  </ul>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="col">
+  <div class="sec-head"><span class="sec-n">09</span><h2>What we’re deliberately not planting</h2></div>
+
+  <p>Worth having in writing, because every one of these will get suggested by someone.</p>
+
+  <dl class="qa">
+    <dt>Blueberries</dt>
+    <dd>Need soil pH 4.5–5.5. Harney’s subsoil is calcareous — you cannot acidify your way out of that in open ground, and people who try spend years watching yellow plants die. Containers of peat, or not at all.</dd>
+
+    <dt>Chestnuts</dt>
+    <dd>Same problem. Chinese chestnut goes chlorotic above pH 7 and never recovers. It’s the classic permaculture-orchard staple that simply doesn’t apply to this soil.</dd>
+
+    <dt>Pawpaws</dt>
+    <dd>Want 35+ inches of rain, acidic soil, and shade for the first two years. Wrong biome by a wide margin.</dd>
+
+    <dt>Pecans</dt>
+    <dd>Genuinely native to Kansas — in the southeast corner, at 35 inches of rain and a longer season. At 22 inches and ~155 frost-free days, Rooks County won’t fill the nuts reliably.</dd>
+
+    <dt>Black walnut</dt>
+    <dd>The hard one. It’s the best-adapted nut tree in the county and it would thrive. But it reaches 60–80 feet and its juglone suppresses apples, tomatoes and much else within about 60 feet. On 0.49 acres that’s an either/or, and the orchard is worth more than the walnut. If the district has ground elsewhere, plant it there.</dd>
+
+    <dt>Sweet cherries</dt>
+    <dd>Crack in rain, rot in humidity, and lose their crop to spring frost. Tart cherries do everything the kitchen needs and are half the trouble.</dd>
+
+    <dt>June-bearing strawberries</dt>
+    <dd>Ripen when school is out, and chickens will find them in an afternoon. If the school wants strawberries, put day-neutrals in a separate raised bed outside the poultry area.</dd>
+
+    <dt>Russian olive and autumn olive</dt>
+    <dd>Excellent nitrogen fixers, widely recommended in older permaculture literature, and genuinely invasive in Kansas riparian corridors. Siberian pea shrub and buffaloberry do the same job without the liability.</dd>
+  </dl>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="col-wide">
+  <div class="col"><div class="sec-head"><span class="sec-n">10</span><h2>Budget</h2></div>
+  <p>Built to land under $6,500 all in. Your fee is penciled at $2,000 — tell me the real number and I’ll flex the contingency and the small-fruit count to match.</p>
+  </div>
+
+  <div class="tablebox">
+    <table>
+      <caption>Spring 2027 establishment — all figures estimates for planning</caption>
+      <thead><tr><th>Line</th><th>Detail</th><th class="n">Est.</th></tr></thead>
+      <tbody>
+        <tr class="sub"><td colspan="3">Plants</td></tr>
+        <tr><td>Fruit &amp; nut trees, bare root</td><td>23 trees — 6 canopy, 4 semi-dwarf apple, 6 hazelnut, 7 stone fruit</td><td class="n">$760</td></tr>
+        <tr><td>Small fruit &amp; vines</td><td>46 plants — row 5, currant/gooseberry shoulders, 8 grapes</td><td class="n">$575</td></tr>
+        <tr><td>Conservation seedlings</td><td>50 — two Kansas Forest Service bundles plus shipping</td><td class="n">$105</td></tr>
+        <tr><td>Grafting rootstock</td><td>25 Antonovka for the high school ag class</td><td class="n">$95</td></tr>
+        <tr class="sub"><td colspan="3">Systems &amp; ground</td></tr>
+        <tr><td>Drip irrigation</td><td>3 zones — timers, vacuum breakers, filters, regulators, poly, dripline, PC emitters, fittings, stakes</td><td class="n">$820</td></tr>
+        <tr><td>Soil preparation</td><td>Subsoil ripping (fuel), 6 yd compost, sulfur or gypsum pending test</td><td class="n">$340</td></tr>
+        <tr><td>Mulch</td><td>~50 yd arborist chips sourced free — trucking and handling only</td><td class="n">$275</td></tr>
+        <tr><td>Alley seeding</td><td>Fall rye/vetch cover, then buffalograss, blue grama, Dutch white clover</td><td class="n">$255</td></tr>
+        <tr><td>Trunk protection</td><td>Hardware-cloth cylinders, spiral guards, white latex</td><td class="n">$215</td></tr>
+        <tr><td>Trellis</td><td>T-posts and high-tensile wire for grapes and blackberry; existing fence carries the rest</td><td class="n">$185</td></tr>
+        <tr class="sub"><td colspan="3">Teaching infrastructure</td></tr>
+        <tr><td>Student nursery</td><td>Raised seedbed lumber, media, pots, grafting knives, tape and wax</td><td class="n">$270</td></tr>
+        <tr><td>Labels &amp; records</td><td>Engraved metal tags, reserved-slot plaques, map board</td><td class="n">$135</td></tr>
+        <tr><td>Soil tests</td><td>Two samples, K-State</td><td class="n">$50</td></tr>
+        <tr class="total"><td>Materials subtotal</td><td></td><td class="n">$4,080</td></tr>
+        <tr><td>Contingency</td><td>10% — substitutions, sold-out varieties, freight</td><td class="n">$408</td></tr>
+        <tr><td>Design &amp; project fee</td><td>Your line — placeholder</td><td class="n">$2,000</td></tr>
+        <tr class="total"><td>Total</td><td></td><td class="n">$6,488</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+  <h3>Where the money is hiding</h3>
+  <ul class="body">
+    <li><strong>Conservation seedlings.</strong> Fifty plants for $105. The Kansas Forest Service Pheasant Bundle is 25 sandhill plum and 25 chokecherry for about $40 — roughly $1.60 a plant against $12 for the same species from a retail nursery. They arrive as 12–18″ whips rather than the 4–5′ stock you wanted, but for a hedge that’s actually better: small conservation stock establishes faster and catches up within three years.</li>
+    <li><strong>Free wood chips.</strong> Fifty yards bought retail is $1,500 or more. Asked for in September, it’s the cost of the diesel to haul it.</li>
+    <li><strong>The existing fence as a trellis.</strong> Grapes need a wire and a post; they don’t need a structure if there’s already one there.</li>
+  </ul>
+  </div>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="col">
+  <div class="sec-head"><span class="sec-n">11</span><h2>Calendar to planting</h2></div>
+
+  <div class="tl">
+    <div class="tl-row"><div class="tl-when">Sept–Oct 2026</div><div class="tl-what">Walk and stake the lot corners; confirm dimensions. Pull two soil samples. Start asking line-clearing crews, county Road &amp; Bridge and the city about wood chips. Settle the chicken plan and check the city ordinance.</div></div>
+    <div class="tl-row"><div class="tl-when">Oct–Nov 2026</div><div class="tl-what">Rip the five row lines 18–24″ deep while the soil is dry. Broadcast cereal rye and hairy vetch over the whole lot. Begin stockpiling chips.</div></div>
+    <div class="tl-row key"><div class="tl-when">Dec 2026</div><div class="tl-what">Place cultivar orders. This is the real deadline — popular apple and pear varieties sell out at Cummins, Stark Bro’s, Century Farm and Schlabach’s through December and January, and a sold-out Enterprise in February means no Enterprise until 2028.</div></div>
+    <div class="tl-row key"><div class="tl-when">Jan 4, 2027</div><div class="tl-what">Kansas Forest Service conservation seedling sale opens. Order both bundles the first week — there is no fall 2026 sale, so spring 2027 demand is concentrated and bundles go early.</div></div>
+    <div class="tl-row"><div class="tl-when">Feb 2027</div><div class="tl-what">Irrigation parts arrive. Build the nursery seedbed. Students begin cold-stratifying seed collected last fall. High school ag cuts scionwood — from other orchards this year, from our own trees starting 2029.</div></div>
+    <div class="tl-row"><div class="tl-when">March 2027</div><div class="tl-what">Lay drip mainlines and laterals. Set trellis posts. Mark and dig tree positions — dig square holes, roughen the sides, no amendment in the backfill.</div></div>
+    <div class="tl-row key"><div class="tl-when">Late Mar–mid Apr 2027</div><div class="tl-what">Bare-root delivery and planting. Get everything in the ground within a week of arrival. Mulch, guard, paint trunks, water in deeply. Set the six reserved-slot plaques the same day.</div></div>
+    <div class="tl-row"><div class="tl-when">May 2027</div><div class="tl-what">Commission the irrigation and confirm every emitter runs. First deep soak.</div></div>
+    <div class="tl-row"><div class="tl-when">June 2027</div><div class="tl-what">Seed the alleys to buffalograss, blue grama and clover once soil is warm.</div></div>
+    <div class="tl-row"><div class="tl-when">Summer 2027</div><div class="tl-what">Biweekly walkthrough: timer battery, emitter flow, guard fit, mulch depth, weed line. In that order.</div></div>
+    <div class="tl-row"><div class="tl-when">Nov 15, 2027</div><div class="tl-what">Winterize — timers, filters and regulators indoors; lateral ends opened to drain.</div></div>
+    <div class="tl-row"><div class="tl-when">Spring 2030</div><div class="tl-what">First student-grown trees go into the reserved slots.</div></div>
+  </div>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="col">
+  <div class="sec-head"><span class="sec-n">12</span><h2>Still open</h2></div>
+
+  <ol class="body">
+    <li><strong>Lot dimensions.</strong> I’ve drawn 145′ × 145′ from a 0.49-acre readout. Every spacing scales off that — one afternoon with a tape locks the whole plan.</li>
+    <li><strong>Your fee.</strong> $2,000 is a placeholder. Give me the real figure and I’ll rebalance.</li>
+    <li><strong>Access and gate.</strong> I’ve assumed the main gate is on the south street. If it’s on West 3rd, the nursery bed and service strip move.</li>
+    <li><strong>Hydrant positions.</strong> Drawn on the west side because that’s where the trench logically comes from. If they’re already placed elsewhere, the zone map redraws in ten minutes.</li>
+    <li><strong>A tractor with a subsoiler.</strong> Can the district borrow one this fall? If not, the fallback is a rented walk-behind trencher down the row lines — worse, but far better than nothing.</li>
+    <li><strong>Fence condition.</strong> You’re not worried about wildlife and I’ll take that. But confirm there are no dog-sized gaps, because a loose dog in a first-year planting does the damage a deer would.</li>
+    <li><strong>Chicken plan and city ordinance.</strong> Not blocking — nothing in the order sheet depends on it — but it wants an answer before 2029.</li>
+  </ol>
+
+  <div class="call">
+    <span class="lbl">On the September 5 deadline</span>
+    <p>It’s past. For a spring 2027 planting that’s fine: the binding date is December for named cultivars and January 4 for the Kansas Forest Service bundles. If September 5 was a board or grant deadline rather than a nursery one, tell me and I’ll pull the order sheet forward — the plant list above is firm enough to order from today.</p>
+  </div>
+</section>
+
+<footer class="col">
+  <p>Prepared for the Northwest Kansas Agriculture Education Center, USD 269, Palco, Kansas. Plant selections are matched to USDA zone 5b–6a, 22–23″ annual precipitation, and moderately alkaline silt loam; substitute only within the same hardiness and pH tolerance. Costs are planning estimates, not quotes. Confirm the poultry harvest interval with the district’s food-safety plan before running birds under fruiting canopy.</p>
+</footer>
+
+</div>
