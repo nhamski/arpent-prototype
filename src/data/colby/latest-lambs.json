@@ -1,55 +1,55 @@
 {
   "source": "Colby Livestock Auction — operator-maintained weekly report",
-  "weekEnding": "2026-10-01",
-  "yearAgoTarget": "2025-10-01",
+  "weekEnding": "2026-10-08",
+  "yearAgoTarget": "2025-10-08",
   "unit": "$/cwt (range)",
   "lambs": [
     {
-      "low": 250,
-      "high": 335,
-      "mid": 292.5,
+      "low": 325,
+      "high": 355,
+      "mid": 340,
       "weight": "40-59#",
-      "yearAgoMid": 221,
-      "changePct": 32.4
+      "yearAgoMid": 238.5,
+      "changePct": 42.6
     },
     {
-      "low": 280,
-      "high": 300,
-      "mid": 290,
+      "low": 270,
+      "high": 345,
+      "mid": 307.5,
       "weight": "60-79#",
-      "yearAgoMid": 218.5,
-      "changePct": 32.7
+      "yearAgoMid": 239.5,
+      "changePct": 28.4
     },
     {
-      "low": 240,
-      "high": 285,
-      "mid": 262.5,
+      "low": 245,
+      "high": 320,
+      "mid": 282.5,
       "weight": "80-99#",
-      "yearAgoMid": 210,
-      "changePct": 25
+      "yearAgoMid": 212.5,
+      "changePct": 32.9
     },
     {
-      "low": 200,
-      "high": 240,
-      "mid": 220,
+      "low": 225,
+      "high": 262,
+      "mid": 243.5,
       "weight": "100+#",
-      "yearAgoMid": 191,
-      "changePct": 15.2
+      "yearAgoMid": 202,
+      "changePct": 20.5
     }
   ],
   "ewes": {
-    "low": 85,
-    "high": 147,
-    "mid": 116,
-    "yearAgoMid": 87.5,
-    "changePct": 32.6
+    "low": 100,
+    "high": 160,
+    "mid": 130,
+    "yearAgoMid": 76,
+    "changePct": 71.1
   },
   "rams": {
-    "low": 110,
-    "high": 125,
-    "mid": 117.5,
-    "yearAgoMid": 79.5,
-    "changePct": 47.8
+    "low": 90,
+    "high": 155,
+    "mid": 122.5,
+    "yearAgoMid": 105,
+    "changePct": 16.7
   },
   "slaughter12mo": {
     "weight": "100+#",
@@ -100,7 +100,7 @@
       },
       {
         "label": "Oct",
-        "avg": 220
+        "avg": 231.75
       }
     ]
   }
