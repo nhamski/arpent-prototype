@@ -1,55 +1,63 @@
 {
   "source": "Colby Livestock Auction — operator-maintained weekly report",
-  "weekEnding": "2026-10-08",
-  "yearAgoTarget": "2025-10-08",
+  "weekEnding": "2026-10-15",
+  "yearAgoTarget": "2025-10-15",
   "unit": "$/cwt (range)",
   "lambs": [
     {
-      "low": 325,
-      "high": 355,
-      "mid": 340,
+      "low": 335,
+      "high": 405,
+      "mid": 370,
+      "weight": "20-39#",
+      "yearAgoMid": 302.5,
+      "changePct": 22.3
+    },
+    {
+      "low": 315,
+      "high": 390,
+      "mid": 352.5,
       "weight": "40-59#",
-      "yearAgoMid": 238.5,
-      "changePct": 42.6
+      "yearAgoMid": 231,
+      "changePct": 52.6
     },
     {
-      "low": 270,
-      "high": 345,
-      "mid": 307.5,
+      "low": 295,
+      "high": 362,
+      "mid": 328.5,
       "weight": "60-79#",
-      "yearAgoMid": 239.5,
-      "changePct": 28.4
+      "yearAgoMid": 227.5,
+      "changePct": 44.4
     },
     {
-      "low": 245,
+      "low": 265,
       "high": 320,
-      "mid": 282.5,
+      "mid": 292.5,
       "weight": "80-99#",
-      "yearAgoMid": 212.5,
-      "changePct": 32.9
+      "yearAgoMid": 197.5,
+      "changePct": 48.1
     },
     {
-      "low": 225,
-      "high": 262,
-      "mid": 243.5,
+      "low": 200,
+      "high": 265,
+      "mid": 232.5,
       "weight": "100+#",
-      "yearAgoMid": 202,
-      "changePct": 20.5
+      "yearAgoMid": 167.5,
+      "changePct": 38.8
     }
   ],
   "ewes": {
-    "low": 100,
-    "high": 160,
-    "mid": 130,
-    "yearAgoMid": 76,
-    "changePct": 71.1
+    "low": 115,
+    "high": 180,
+    "mid": 147.5,
+    "yearAgoMid": 97.5,
+    "changePct": 51.3
   },
   "rams": {
-    "low": 90,
-    "high": 155,
+    "low": 100,
+    "high": 145,
     "mid": 122.5,
-    "yearAgoMid": 105,
-    "changePct": 16.7
+    "yearAgoMid": 80,
+    "changePct": 53.1
   },
   "slaughter12mo": {
     "weight": "100+#",
@@ -100,7 +108,7 @@
       },
       {
         "label": "Oct",
-        "avg": 231.75
+        "avg": 232
       }
     ]
   }

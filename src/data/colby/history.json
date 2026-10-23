@@ -15013,6 +15013,165 @@
           "mid": 120
         }
       ]
+    },
+    {
+      "weekEnding": "2026-10-15",
+      "prices": [
+        {
+          "category": "STRS",
+          "weight": "200-399#",
+          "low": 355,
+          "high": 380,
+          "mid": 367.5
+        },
+        {
+          "category": "STRS",
+          "weight": "400-599#",
+          "low": 305,
+          "high": 360,
+          "mid": 332.5
+        },
+        {
+          "category": "STRS",
+          "weight": null,
+          "low": 1000,
+          "high": 1000,
+          "mid": 1000
+        },
+        {
+          "category": "HFRS",
+          "weight": "200-399#",
+          "low": 357,
+          "high": 405,
+          "mid": 381
+        },
+        {
+          "category": "HFRS",
+          "weight": null,
+          "low": 1000,
+          "high": 1000,
+          "mid": 1000
+        },
+        {
+          "category": "FAT HOGS",
+          "weight": "150-350#",
+          "low": 61,
+          "high": 82,
+          "mid": 71.5
+        },
+        {
+          "category": "EWES",
+          "weight": null,
+          "low": 115,
+          "high": 180,
+          "mid": 147.5
+        },
+        {
+          "category": "RAMS",
+          "weight": null,
+          "low": 100,
+          "high": 145,
+          "mid": 122.5
+        },
+        {
+          "category": "LAMBS",
+          "weight": "20-39#",
+          "low": 335,
+          "high": 405,
+          "mid": 370
+        },
+        {
+          "category": "LAMBS",
+          "weight": "40-59#",
+          "low": 315,
+          "high": 390,
+          "mid": 352.5
+        },
+        {
+          "category": "LAMBS",
+          "weight": "60-79#",
+          "low": 295,
+          "high": 362,
+          "mid": 328.5
+        },
+        {
+          "category": "LAMBS",
+          "weight": "80-99#",
+          "low": 265,
+          "high": 320,
+          "mid": 292.5
+        },
+        {
+          "category": "LAMBS",
+          "weight": "100+#",
+          "low": 200,
+          "high": 265,
+          "mid": 232.5
+        },
+        {
+          "category": "BILLIES",
+          "weight": null,
+          "low": 150,
+          "high": 230,
+          "mid": 190
+        },
+        {
+          "category": "NANNIES",
+          "weight": null,
+          "low": 125,
+          "high": 205,
+          "mid": 165
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "20-39#",
+          "low": 255,
+          "high": 455,
+          "mid": 355
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "40-59#",
+          "low": 250,
+          "high": 440,
+          "mid": 345
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "60-79#",
+          "low": 250,
+          "high": 365,
+          "mid": 307.5
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "80-99#",
+          "low": 235,
+          "high": 340,
+          "mid": 287.5
+        },
+        {
+          "category": "FEEDER PIGS",
+          "weight": null,
+          "low": 55,
+          "high": 82,
+          "mid": 68.5
+        },
+        {
+          "category": "BABY KID GOATS",
+          "weight": null,
+          "low": 25,
+          "high": 105,
+          "mid": 65
+        },
+        {
+          "category": "LLAMA/ALPACA",
+          "weight": null,
+          "low": 410,
+          "high": 410,
+          "mid": 410
+        }
+      ]
     }
   ]
 }
