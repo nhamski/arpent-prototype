@@ -22,10 +22,10 @@
     {
       "region": "San Angelo, TX",
       "slug": 2014,
-      "weekEnding": "2026-10-20",
-      "pricePerCwt": 347.64,
-      "headCount": 1401,
-      "trailing12moAvg": 343.96
+      "weekEnding": "2026-10-27",
+      "pricePerCwt": 365.28,
+      "headCount": 1155,
+      "trailing12moAvg": 344.81
     }
   ]
 }
