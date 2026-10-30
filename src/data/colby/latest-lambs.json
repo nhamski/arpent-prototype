@@ -1,63 +1,55 @@
 {
   "source": "Colby Livestock Auction — operator-maintained weekly report",
-  "weekEnding": "2026-10-15",
-  "yearAgoTarget": "2025-10-15",
+  "weekEnding": "2026-10-22",
+  "yearAgoTarget": "2025-10-22",
   "unit": "$/cwt (range)",
   "lambs": [
     {
-      "low": 335,
-      "high": 405,
-      "mid": 370,
-      "weight": "20-39#",
-      "yearAgoMid": 302.5,
-      "changePct": 22.3
-    },
-    {
-      "low": 315,
-      "high": 390,
-      "mid": 352.5,
-      "weight": "40-59#",
-      "yearAgoMid": 231,
-      "changePct": 52.6
-    },
-    {
-      "low": 295,
+      "low": 300,
       "high": 362,
-      "mid": 328.5,
+      "mid": 331,
+      "weight": "40-59#",
+      "yearAgoMid": 311,
+      "changePct": 6.4
+    },
+    {
+      "low": 300,
+      "high": 350,
+      "mid": 325,
       "weight": "60-79#",
-      "yearAgoMid": 227.5,
-      "changePct": 44.4
+      "yearAgoMid": 278.5,
+      "changePct": 16.7
     },
     {
-      "low": 265,
-      "high": 320,
-      "mid": 292.5,
+      "low": 297,
+      "high": 325,
+      "mid": 311,
       "weight": "80-99#",
-      "yearAgoMid": 197.5,
-      "changePct": 48.1
+      "yearAgoMid": 240,
+      "changePct": 29.6
     },
     {
-      "low": 200,
-      "high": 265,
-      "mid": 232.5,
+      "low": 285,
+      "high": 307,
+      "mid": 296,
       "weight": "100+#",
-      "yearAgoMid": 167.5,
-      "changePct": 38.8
+      "yearAgoMid": 225,
+      "changePct": 31.6
     }
   ],
   "ewes": {
-    "low": 115,
-    "high": 180,
-    "mid": 147.5,
-    "yearAgoMid": 97.5,
-    "changePct": 51.3
+    "low": 120,
+    "high": 170,
+    "mid": 145,
+    "yearAgoMid": 101,
+    "changePct": 43.6
   },
   "rams": {
-    "low": 100,
-    "high": 145,
-    "mid": 122.5,
-    "yearAgoMid": 80,
-    "changePct": 53.1
+    "low": 105,
+    "high": 185,
+    "mid": 145,
+    "yearAgoMid": 121,
+    "changePct": 19.8
   },
   "slaughter12mo": {
     "weight": "100+#",
@@ -108,7 +100,7 @@
       },
       {
         "label": "Oct",
-        "avg": 232
+        "avg": 248
       }
     ]
   }
