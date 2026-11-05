@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { evaluate } from '../engine/maxBid.js';
-import { makeLot, saleTotals, budgetState, lotMargin, underCeiling } from '../engine/sale.js';
+import { makeLot, saleTotals, budgetState, lotMargin, underCeiling, archiveSale, historySummary } from '../engine/sale.js';
 import { fetchColbyResults, parseColbyResults, avgPriceByClass } from '../data/colbyScraper.js';
 import { useStore } from '../hooks/useStore.js';
 import { useStoredState } from '../hooks/useStoredState.js';
@@ -48,6 +48,8 @@ export default function AuctionPanel({ zip, onZipChange }) {
   const [setups, setSetups] = useStoredState('arpent.bidSetups', DEFAULT_SETUPS);
   const [activeSetup, setActiveSetup] = useStoredState('arpent.activeSetup', 0);
   const { items: lots, add: addLot, remove: removeLot, clear: clearLots } = useStore('arpent.lots');
+  const [history, setHistory] = useStoredState('arpent.saleHistory', []);
+  const [openSale, setOpenSale] = useState(null);
   const [budget, setBudget] = useStoredState('arpent.budget', 50000);
   const [currentBid, setCurrentBid] = useState(168);
   const [showSetupForm, setShowSetupForm] = useState(false);
@@ -91,6 +93,13 @@ export default function AuctionPanel({ zip, onZipChange }) {
 
   const budgetInfo = useMemo(() => budgetState(lots, budget), [lots, budget]);
   const totals = useMemo(() => saleTotals(lots), [lots]);
+  const histInfo = useMemo(() => historySummary(history), [history]);
+
+  const closeSale = () => {
+    if (!lots.length) return;
+    setHistory((prev) => [archiveSale(lots, Date.now(), setup.name), ...prev]);
+    clearLots();
+  };
 
   const startNewSetup = () => {
     setSetupDraft({
@@ -421,6 +430,58 @@ export default function AuctionPanel({ zip, onZipChange }) {
           >
             Clear All Purchases
           </button>
+          <button
+            className="act-btn"
+            style={{ width: '100%', justifyContent: 'center', marginTop: 8 }}
+            onClick={closeSale}
+          >
+            Close Sale &amp; Save to History
+          </button>
+        </>
+      )}
+
+      {history.length > 0 && (
+        <>
+          <div style={{ borderTop: '1px solid var(--line)', margin: '24px 0 0' }} />
+          <div className="sh">Bid History</div>
+          <div className="tiles" style={{ marginBottom: 16 }}>
+            <div className="tile"><div className="tl">Sales</div><div className="tv">{histInfo.sales}</div></div>
+            <div className="tile"><div className="tl">Head</div><div className="tv">{histInfo.head}</div></div>
+            <div className="tile"><div className="tl">Avg $/head</div><div className="tv">{fmt(histInfo.avgPerHead)}</div></div>
+            <div className="tile">
+              <div className="tl">Held Ceiling</div>
+              <div className="tv">{histInfo.disciplinePct == null ? '—' : `${Math.round(histInfo.disciplinePct)}%`}</div>
+            </div>
+          </div>
+          {history.map((s) => (
+            <div key={s.id} className="lot-card">
+              <div className="lot-head">
+                <span className="lot-num">{new Date(s.ts).toLocaleDateString()}{s.label ? ` · ${s.label}` : ''}</span>
+                <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                  {s.judged > 0 && (
+                    <span className={`pill ${s.overCeiling ? 'pill-bad' : 'pill-ok'}`}>
+                      {s.judged - s.overCeiling}/{s.judged} under
+                    </span>
+                  )}
+                  <button
+                    style={{ background: 'none', border: 'none', color: 'var(--ink3)', fontSize: 18, cursor: 'pointer', padding: '2px 6px' }}
+                    onClick={() => setHistory((prev) => prev.filter((x) => x.id !== s.id))}
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+              <div className="lot-detail" style={{ cursor: 'pointer' }} onClick={() => setOpenSale(openSale === s.id ? null : s.id)}>
+                {s.head} head · {s.lots.length} lots · {fmt(s.spent)} · {fmt(s.avgPerHead)}/head {openSale === s.id ? '▾' : '▸'}
+              </div>
+              {openSale === s.id && s.lots.map((l) => (
+                <div key={l.id} className="lot-detail" style={{ marginTop: 4 }}>
+                  {l.lotNo || 'Lot'}: {l.head} hd · {l.weight} lb · {fmtCwt(l.weight > 0 ? l.pricePerHead / (l.weight / 100) : 0)}/cwt
+                  {l.ceiling != null ? ` · ceiling ${fmt(l.ceiling)}/hd` : ''}
+                </div>
+              ))}
+            </div>
+          ))}
         </>
       )}
     </section>
