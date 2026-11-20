@@ -15719,6 +15719,144 @@
           "mid": 65
         }
       ]
+    },
+    {
+      "weekEnding": "2026-11-12",
+      "prices": [
+        {
+          "category": "STRS",
+          "weight": "200-399#",
+          "low": 380,
+          "high": 425,
+          "mid": 402.5
+        },
+        {
+          "category": "STRS",
+          "weight": "400-599#",
+          "low": 305,
+          "high": 403,
+          "mid": 354
+        },
+        {
+          "category": "STRS",
+          "weight": null,
+          "low": 1000,
+          "high": 1000,
+          "mid": 1000
+        },
+        {
+          "category": "HFRS",
+          "weight": "200-399#",
+          "low": 360,
+          "high": 450,
+          "mid": 405
+        },
+        {
+          "category": "HFRS",
+          "weight": null,
+          "low": 1000,
+          "high": 1000,
+          "mid": 1000
+        },
+        {
+          "category": "SOWS",
+          "weight": null,
+          "low": 25,
+          "high": 29,
+          "mid": 27
+        },
+        {
+          "category": "FAT HOGS",
+          "weight": "150-350#",
+          "low": 65,
+          "high": 70,
+          "mid": 67.5
+        },
+        {
+          "category": "EWES",
+          "weight": null,
+          "low": 80,
+          "high": 170,
+          "mid": 125
+        },
+        {
+          "category": "RAMS",
+          "weight": null,
+          "low": 115,
+          "high": 160,
+          "mid": 137.5
+        },
+        {
+          "category": "LAMBS",
+          "weight": "40-59#",
+          "low": 340,
+          "high": 402,
+          "mid": 371
+        },
+        {
+          "category": "LAMBS",
+          "weight": "60-79#",
+          "low": 285,
+          "high": 380,
+          "mid": 332.5
+        },
+        {
+          "category": "LAMBS",
+          "weight": "80-99#",
+          "low": 285,
+          "high": 325,
+          "mid": 305
+        },
+        {
+          "category": "LAMBS",
+          "weight": "100+#",
+          "low": 260,
+          "high": 300,
+          "mid": 280
+        },
+        {
+          "category": "BILLIES",
+          "weight": null,
+          "low": 150,
+          "high": 235,
+          "mid": 192.5
+        },
+        {
+          "category": "NANNIES",
+          "weight": null,
+          "low": 100,
+          "high": 190,
+          "mid": 145
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "20-39#",
+          "low": 355,
+          "high": 442,
+          "mid": 398.5
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "40-59#",
+          "low": 300,
+          "high": 422,
+          "mid": 361
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "60-79#",
+          "low": 270,
+          "high": 385,
+          "mid": 327.5
+        },
+        {
+          "category": "KID GOATS",
+          "weight": "80-99#",
+          "low": 250,
+          "high": 332,
+          "mid": 291
+        }
+      ]
     }
   ]
 }
