@@ -50,3 +50,34 @@ export function makeLot({ lotNo, head, className, species, weight, pricePerHead,
     setupName: setupName || '',
   };
 }
+
+export function archiveSale(lots, now, label = '') {
+  const t = saleTotals(lots);
+  return {
+    id: `sale-${now}`,
+    ts: now,
+    label: label || '',
+    lots,
+    head: t.head,
+    spent: t.spent,
+    avgPerHead: t.avgPerHead,
+    overCeiling: t.overCeiling,
+    judged: lots.filter((l) => l.ceiling != null).length,
+    underBy: t.underBy,
+  };
+}
+
+export function historySummary(sales) {
+  const head = sales.reduce((a, s) => a + s.head, 0);
+  const spent = sales.reduce((a, s) => a + s.spent, 0);
+  const judged = sales.reduce((a, s) => a + s.judged, 0);
+  const over = sales.reduce((a, s) => a + s.overCeiling, 0);
+  return {
+    sales: sales.length,
+    head,
+    spent,
+    avgPerHead: head > 0 ? spent / head : 0,
+    disciplinePct: judged > 0 ? ((judged - over) / judged) * 100 : null,
+    underBy: sales.reduce((a, s) => a + s.underBy, 0),
+  };
+}
